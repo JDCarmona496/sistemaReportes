@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | BIOLAB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .nav-item.active {
+            background-color: #1e40af;
+            border-left: 4px solid #60a5fa;
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans text-gray-800 h-screen flex overflow-hidden">
+
+    <aside class="w-64 bg-blue-900 text-white flex flex-col shadow-xl z-20">
+        <div class="h-16 flex items-center justify-center border-b border-blue-800 font-bold text-xl tracking-wider">
+            <i class="fa-solid fa-dna mr-2"></i> BIOLAB
+        </div>
+
+        <nav class="flex-1 py-4 overflow-y-auto">
+            <p class="px-6 text-xs text-blue-400 uppercase font-bold mb-2">Operación</p>
+            <a onclick="loadView('home')" id="nav-home"
+                class="nav-item block px-6 py-3 hover:bg-blue-800 cursor-pointer transition text-sm flex items-center gap-3">
+                <i class="fa-solid fa-chart-line w-5"></i> Resumen
+            </a>
+            <a onclick="loadView('generator')" id="nav-generator"
+                class="nav-item block px-6 py-3 hover:bg-blue-800 cursor-pointer transition text-sm flex items-center gap-3">
+                <i class="fa-solid fa-print w-5"></i> Generar Reportes
+            </a>
+
+            <p class="px-6 text-xs text-blue-400 uppercase font-bold mt-6 mb-2">Administración</p>
+            <a onclick="loadView('admin-reports')" id="nav-admin-reports"
+                class="nav-item block px-6 py-3 hover:bg-blue-800 cursor-pointer transition text-sm flex items-center gap-3">
+                <i class="fa-solid fa-database w-5"></i> Config. Reportes
+            </a>
+            <a onclick="loadView('users')" id="nav-users"
+                class="nav-item block px-6 py-3 hover:bg-blue-800 cursor-pointer transition text-sm flex items-center gap-3">
+                <i class="fa-solid fa-users w-5"></i> Usuarios
+            </a>
+
+            <p class="px-6 text-xs text-blue-400 uppercase font-bold mt-6 mb-2">Sistema</p>
+            <a onclick="loadView('monitor')" id="nav-monitor"
+                class="nav-item block px-6 py-3 hover:bg-blue-800 cursor-pointer transition text-sm flex items-center gap-3">
+                <i class="fa-solid fa-heart-pulse w-5"></i> Monitor (Flower)
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-blue-800">
+            <button onclick="logout()"
+                class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded text-sm transition shadow">
+                <i class="fa-solid fa-sign-out-alt"></i> Salir
+            </button>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col relative h-full">
+        <header class="h-16 bg-white shadow flex items-center justify-between px-6 z-10">
+            <h2 id="page-title" class="text-xl font-bold text-gray-700">Dashboard</h2>
+            <div class="flex items-center gap-3">
+                <span class="text-sm font-medium text-gray-600">Admin</span>
+                <div class="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-6 bg-gray-100 relative">
+
+            <div id="view-home" class="view-section fade-in hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div
+                        class="bg-white p-6 rounded-lg shadow border-l-4 border-blue-500 flex justify-between items-center">
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase font-bold">Total Reportes</p>
+                            <h3 class="text-2xl font-bold text-gray-800" id="stat-total-reports">-</h3>
+                        </div>
+                        <i class="fa-solid fa-file-contract text-3xl text-blue-200"></i>
+                    </div>
+                    <div
+                        class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500 flex justify-between items-center">
+                        <div>
+                            <p class="text-gray-500 text-xs uppercase font-bold">Estado API</p>
+                            <h3 class="text-2xl font-bold text-green-600">En Línea</h3>
+                        </div>
+                        <i class="fa-solid fa-server text-3xl text-green-200"></i>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-gray-700 mb-4 border-b pb-2">Historial Reciente</h3>
+                    <div id="dashboard-history" class="text-sm text-gray-600">Cargando...</div>
+                </div>
+            </div>
+
+            <div id="view-generator" class="view-section fade-in hidden">
+                <div class="bg-white p-8 rounded-lg shadow max-w-3xl mx-auto">
+                    <h3 class="text-lg font-bold mb-4 text-gray-700 border-b pb-2">Generar Nuevo Reporte</h3>
+
+                    <div class="mb-5">
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Seleccione Reporte</label>
+                        <select id="reportSelect" onchange="cargarFormularioDinamico()"
+                            class="w-full border p-2 rounded outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></select>
+                    </div>
+
+                    <div id="dynamicForm" class="grid grid-cols-1 gap-4 mb-6"></div>
+
+                    <div class="flex gap-4 mb-6">
+                        <label
+                            class="flex-1 border p-3 rounded cursor-pointer hover:bg-gray-50 flex items-center gap-2">
+                            <input type="radio" name="formato" value="PDF" checked>
+                            <i class="fa-solid fa-file-pdf text-red-600"></i> <span class="font-medium">PDF
+                                (Adobe)</span>
+                        </label>
+                        <label
+                            class="flex-1 border p-3 rounded cursor-pointer hover:bg-gray-50 flex items-center gap-2">
+                            <input type="radio" name="formato" value="CSV">
+                            <i class="fa-solid fa-file-csv text-green-600"></i> <span class="font-medium">CSV
+                                (Excel)</span>
+                        </label>
+                    </div>
+
+                    <button onclick="generarReporte()"
+                        class="w-full bg-blue-700 text-white font-bold py-3 rounded hover:bg-blue-800 transition shadow-lg transform active:scale-95">
+                        <i class="fa-solid fa-play mr-2"></i> Ejecutar Reporte
+                    </button>
+
+                    <div id="statusArea" class="hidden mt-6 text-center bg-blue-50 p-4 rounded border border-blue-100">
+                        <i class="fa-solid fa-circle-notch fa-spin text-blue-600 text-2xl mb-2"></i>
+                        <p id="statusText" class="font-bold text-blue-800">Procesando...</p>
+                        <div id="downloadLink" class="mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-admin-reports" class="view-section fade-in hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-lg font-bold text-gray-700">Gestión de Consultas SQL</h3>
+                    <button onclick="abrirModalReporte()"
+                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow flex items-center gap-2 transition">
+                        <i class="fa-solid fa-plus"></i> Nuevo Reporte
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-gray-100 text-gray-600 uppercase text-xs font-bold">
+                            <tr>
+                                <th class="px-6 py-3 border-b">ID</th>
+                                <th class="px-6 py-3 border-b">Título</th>
+                                <th class="px-6 py-3 border-b">Params</th>
+                                <th class="px-6 py-3 border-b text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-reports-table" class="text-sm divide-y divide-gray-200">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="view-monitor" class="view-section fade-in hidden h-full">
+                <div class="bg-white p-2 rounded shadow h-full flex flex-col">
+                    <iframe src="http://localhost:5555" class="flex-1 w-full border-none rounded"></iframe>
+                </div>
+            </div>
+
+            <div id="view-users" class="view-section fade-in hidden text-center pt-20">
+                <i class="fa-solid fa-person-digging text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-500">Módulo de Usuarios en Construcción</h3>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="modal-reporte"
+        class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl transform transition-all scale-100">
+            <div class="bg-blue-900 text-white p-4 rounded-t-xl flex justify-between items-center">
+                <h3 class="font-bold text-lg" id="modal-title">Configurar Reporte</h3>
+                <button onclick="cerrarModal()" class="hover:text-gray-300"><i
+                        class="fa-solid fa-times text-xl"></i></button>
+            </div>
+
+            <div class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
+                <input type="hidden" id="edit-report-id">
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Título del Reporte</label>
+                    <input type="text" id="edit-title"
+                        class="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                        placeholder="Ej: Listado de Pacientes">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Consulta SQL</label>
+                    <textarea id="edit-query" rows="5"
+                        class="w-full border border-gray-300 p-2 rounded font-mono text-sm bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"
+                        placeholder="SELECT * FROM tabla WHERE campo = :parametro"></textarea>
+                    <p class="text-xs text-gray-400 mt-1">Use <code>:nombre_param</code> para parámetros dinámicos.</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Configuración de Parámetros (JSON)</label>
+                    <textarea id="edit-params" rows="5"
+                        class="w-full border border-gray-300 p-2 rounded font-mono text-xs bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                    <p class="text-xs text-gray-500 mt-1">
+                        Ejemplo: <code>[{"name": "fecha", "label": "Fecha Inicio", "type": "date"}]</code>
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-4 border-t bg-gray-50 rounded-b-xl flex justify-end gap-3">
+                <button onclick="cerrarModal()"
+                    class="px-4 py-2 text-gray-600 hover:bg-gray-200 rounded font-medium">Cancelar</button>
+                <button onclick="guardarReporte()"
+                    class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded font-bold shadow">Guardar
+                    Cambios</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "http://127.0.0.1:8000/api/v1";
+        const token = localStorage.getItem('access_token');
+        let reportesCache = []; // Almacen local para evitar llamadas extra
+
+        // GUARDIA DE SEGURIDAD
+        if (!token) window.location.href = "/";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadView('home');
+            cargarDatosIniciales();
+        });
+
+        // --- SISTEMA DE VISTAS ---
+        function loadView(viewName) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+            const target = document.getElementById(`view-${viewName}`);
+            if (target) target.classList.remove('hidden');
+
+            const nav = document.getElementById(`nav-${viewName}`);
+            if (nav) nav.classList.add('active');
+
+            const titulos = {
+                'home': 'Resumen General',
+                'generator': 'Generador de Reportes',
+                'admin-reports': 'Configuración de Reportes',
+                'monitor': 'Monitor del Sistema',
+                'users': 'Usuarios'
+            };
+            document.getElementById('page-title').innerText = titulos[viewName] || 'Dashboard';
+
+            // Carga perezosa de datos según la vista
+            if (viewName === 'admin-reports') cargarTablaAdmin();
+        }
+
+        async function cargarDatosIniciales() {
+            try {
+                // Traer reportes para el select del generador
+                const res = await fetch(`${API_URL}/reports/?skip=0&limit=100`, { headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.status === 401) logout();
+
+                reportesCache = await res.json();
+
+                // Actualizar Stats Home
+                document.getElementById('stat-total-reports').innerText = reportesCache.length;
+
+                // Actualizar Select Generador
+                const select = document.getElementById('reportSelect');
+                select.innerHTML = '<option value="">-- Seleccione --</option>';
+                reportesCache.forEach(r => {
+                    select.innerHTML += `<option value="${r.id}">${r.title}</option>`;
+                });
+
+                cargarHistorial();
+            } catch (e) { console.error(e); }
+        }
+
+        // ================= GENERADOR =================
+        function cargarFormularioDinamico() {
+            const id = document.getElementById('reportSelect').value;
+            const container = document.getElementById('dynamicForm');
+            container.innerHTML = '';
+
+            if (!id) return;
+            const reporte = reportesCache.find(r => r.id == id);
+
+            if (!reporte.params_config || reporte.params_config.length === 0) {
+                container.innerHTML = '<p class="text-gray-400 text-sm italic p-2 bg-blue-50 rounded">Este reporte no requiere parámetros.</p>';
+                return;
+            }
+
+            reporte.params_config.forEach(p => {
+                let html = `<div><label class="block text-xs font-bold text-gray-500 uppercase mb-1">${p.label}</label>`;
+                html += `<input type="${p.type}" name="${p.name}" class="param-input w-full border border-gray-300 p-2 rounded outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">`;
+                if (p.name === 'lista_pacientes') html += `<span class="text-xs text-blue-400">Separe IDs con comas (Ej: 101, 102)</span>`;
+                html += `</div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        async function generarReporte() {
+            const reportId = document.getElementById('reportSelect').value;
+            if (!reportId) return Swal.fire('Atención', 'Seleccione un reporte primero', 'warning');
+
+            const params = {};
+            document.querySelectorAll('.param-input').forEach(i => {
+                let val = i.value;
+                if (i.name === 'lista_pacientes' || val.includes(',')) val = val.split(',').filter(x => x.trim() !== '');
+                params[i.name] = val;
+            });
+
+            const formato = document.querySelector('input[name="formato"]:checked').value;
+
+            // UI Loading
+            const statusArea = document.getElementById('statusArea');
+            statusArea.classList.remove('hidden');
+            document.getElementById('statusText').innerText = "Iniciando Worker...";
+            document.getElementById('statusText').className = "font-bold text-blue-800";
+            document.getElementById('downloadLink').innerHTML = '';
+
+            try {
+                const res = await fetch(`${API_URL}/reports/generar-background`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ reporte_id: parseInt(reportId), params: params, formato: formato })
+                });
+
+                const data = await res.json();
+                if (data.error) throw new Error(data.error);
+
+                pollStatus(data.task_id);
+
+            } catch (e) {
+                Swal.fire('Error', e.message, 'error');
+                statusArea.classList.add('hidden');
+            }
+        }
+
+        async function pollStatus(taskId) {
+            const statusText = document.getElementById('statusText');
+            statusText.innerText = "Consultando base de datos...";
+
+            const interval = setInterval(async () => {
+                try {
+                    const res = await fetch(`${API_URL}/reports/task/${taskId}`, { headers: { 'Authorization': `Bearer ${token}` } });
+                    const data = await res.json();
+
+                    if (data.estado === 'SUCCESS') {
+                        clearInterval(interval);
+                        statusText.innerText = "¡Completado con Éxito!";
+                        statusText.className = "font-bold text-green-600";
+
+                        const url = data.resultado.url_descarga;
+                        const total = data.resultado.total_registros;
+                        const colorBtn = data.resultado.formato === 'PDF' ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700';
+
+                        document.getElementById('downloadLink').innerHTML = `
+                            <p class="text-xs text-gray-500 mb-2">${total} registros encontrados</p>
+                            <a href="${url}" target="_blank" class="inline-flex items-center gap-2 ${colorBtn} text-white px-6 py-2 rounded font-bold shadow transition transform hover:scale-105">
+                                <i class="fa-solid fa-download"></i> Descargar Archivo
+                            </a>`;
+                        cargarHistorial();
+                    } else if (data.estado === 'FAILURE') {
+                        clearInterval(interval);
+                        statusText.innerText = "Error en el proceso";
+                        statusText.className = "font-bold text-red-600";
+                        document.getElementById('downloadLink').innerHTML = `<p class="text-red-500 text-sm mt-2">${data.error || 'Error desconocido'}</p>`;
+                    }
+                } catch (e) { clearInterval(interval); }
+            }, 1500);
+        }
+
+        // ================= CRUD ADMIN =================
+        function cargarTablaAdmin() {
+            const tbody = document.getElementById('admin-reports-table');
+            tbody.innerHTML = '';
+
+            reportesCache.forEach(r => {
+                const badge = r.params_config.length > 0
+                    ? `<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-bold">${r.params_config.length} Params</span>`
+                    : `<span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded-full">Estático</span>`;
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-50 border-b last:border-0";
+                tr.innerHTML = `
+                    <td class="px-6 py-4 font-mono text-xs text-gray-500">${r.id}</td>
+                    <td class="px-6 py-4 font-medium text-gray-900">${r.title}</td>
+                    <td class="px-6 py-4">${badge}</td>
+                    <td class="px-6 py-4 text-right space-x-3">
+                        <button onclick='editarReporte(${JSON.stringify(r)})' class="text-blue-600 hover:text-blue-900 transition" title="Editar">
+                            <i class="fa-solid fa-pen-to-square text-lg"></i>
+                        </button>
+                        <button onclick="eliminarReporte(${r.id})" class="text-red-600 hover:text-red-900 transition" title="Eliminar">
+                            <i class="fa-solid fa-trash text-lg"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function abrirModalReporte(isEdit = false) {
+            document.getElementById('modal-title').innerText = isEdit ? "Editar Reporte" : "Nuevo Reporte SQL";
+            document.getElementById('modal-reporte').classList.remove('hidden');
+
+            if (!isEdit) {
+                // Limpiar formulario para nuevo
+                document.getElementById('edit-report-id').value = '';
+                document.getElementById('edit-title').value = '';
+                document.getElementById('edit-query').value = '';
+                document.getElementById('edit-params').value = '[]';
+            }
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-reporte').classList.add('hidden');
+        }
+
+        function editarReporte(reporte) {
+            abrirModalReporte(true);
+            document.getElementById('edit-report-id').value = reporte.id;
+            document.getElementById('edit-title').value = reporte.title;
+            document.getElementById('edit-query').value = reporte.sql_query;
+            document.getElementById('edit-params').value = JSON.stringify(reporte.params_config, null, 4); // Pretty print JSON
+        }
+
+        async function guardarReporte() {
+            const id = document.getElementById('edit-report-id').value;
+            const title = document.getElementById('edit-title').value;
+            const query = document.getElementById('edit-query').value;
+            const paramsStr = document.getElementById('edit-params').value;
+
+            try {
+                // Validar JSON
+                let paramsJson = [];
+                try {
+                    paramsJson = JSON.parse(paramsStr);
+                } catch (e) { throw new Error("El JSON de parámetros es inválido."); }
+
+                const payload = {
+                    title: title,
+                    sql_query: query,
+                    params_config: paramsJson
+                };
+
+                const method = id ? 'PUT' : 'POST';
+                const url = id ? `${API_URL}/reports/${id}` : `${API_URL}/reports/`;
+
+                const res = await fetch(url, {
+                    method: method,
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!res.ok) throw new Error("Error guardando reporte");
+
+                Swal.fire('Éxito', 'Reporte guardado correctamente', 'success');
+                cerrarModal();
+                cargarDatosIniciales().then(() => cargarTablaAdmin()); // Recargar datos
+
+            } catch (e) {
+                Swal.fire('Error', e.message, 'error');
+            }
+        }
+
+        async function eliminarReporte(id) {
+            const result = await Swal.fire({
+                title: '¿Estás seguro?',
+                text: "No podrás revertir esto.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar'
+            });
+
+            if (result.isConfirmed) {
+                try {
+                    const res = await fetch(`${API_URL}/reports/${id}`, {
+                        method: 'DELETE',
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    if (!res.ok) throw new Error("Error al eliminar");
+
+                    Swal.fire('Eliminado', 'El reporte ha sido borrado.', 'success');
+                    cargarDatosIniciales().then(() => cargarTablaAdmin());
+                } catch (e) {
+                    Swal.fire('Error', e.message, 'error');
+                }
+            }
+        }
+
+        // --- HELPERS ---
+        async function cargarHistorial() {
+            try {
+                const res = await fetch(`http://127.0.0.1:8000/historial`, { headers: { 'Authorization': `Bearer ${token}` } });
+                const data = await res.json();
+                const div = document.getElementById('dashboard-history');
+
+                if (data.ultimos_eventos && data.ultimos_eventos.length > 0) {
+                    let html = '<ul class="divide-y divide-gray-200">';
+                    data.ultimos_eventos.forEach(ev => {
+                        html += `<li class="py-2 flex justify-between">
+                            <span class="font-medium text-blue-700">${ev.reporte || 'Reporte'}</span>
+                            <span class="text-xs text-gray-400">${ev.hora}</span>
+                        </li>`;
+                    });
+                    html += '</ul>';
+                    div.innerHTML = html;
+                } else { div.innerHTML = 'Sin actividad reciente.'; }
+            } catch (e) { }
+        }
+
+        function logout() {
+            localStorage.removeItem('access_token');
+            window.location.href = "/";
+        }
+    </script>
+</body>
+
+</html>

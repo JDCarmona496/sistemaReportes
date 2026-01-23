@@ -1,8 +1,8 @@
 from fastapi import APIRouter
-from app.api.v1.endpoints import login, users, reports # <--- Importar reports
+from app.api.v1.endpoints import login, users, reports
 
 api_router = APIRouter()
-
-api_router.include_router(login.router, tags=["login"])
+# Aquí añadimos /login
+api_router.include_router(login.router, prefix="/login", tags=["login"])
 api_router.include_router(users.router, prefix="/users", tags=["users"])
-api_router.include_router(reports.router, prefix="/reports", tags=["reports"]) # <--- Conectar
+api_router.include_router(reports.router, prefix="/reports", tags=["reports"])

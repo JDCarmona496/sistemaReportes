@@ -1,0 +1,588 @@
+2026-01-22 10:37:52,741 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-22 10:37:52,749 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-22 10:37:53,775 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-22 10:37:53,811 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-01-22 10:40:29,282 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-22 10:40:29,290 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-22 10:40:30,324 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-22 10:40:30,366 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-01-22 10:40:33,958 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-01-22 10:41:11,996 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2026-01-22 10:42:04,470 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2026-01-22 10:42:19,968 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2026-01-22 10:44:12,125 - celery.worker.consumer.consumer - WARNING - consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\retry.py", line 116, in call_with_retry
+    return do()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 973, in <lambda>
+    lambda: command(*args, **kwargs),
+            ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 996, in try_read
+    return conn.read_response(disconnect_on_error=False, push_request=True)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 1133, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 346, in start
+    blueprint.start(self)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+    ~~~~~~~~~~^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 788, in start
+    c.loop(*c.loop_args())
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\loops.py", line 136, in synloop
+    _loop_cycle()
+    ~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\loops.py", line 125, in _loop_cycle
+    connection.drain_events(timeout=2.0)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\connection.py", line 343, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\virtual\base.py", line 997, in drain_events
+    get(self._deliver, timeout=timeout)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 601, in get
+    ret = self.handle_event(fileno, event)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 583, in handle_event
+    return self.on_readable(fileno), self
+           ~~~~~~~~~~~~~~~~^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 579, in on_readable
+    chan.handlers[type]()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 931, in _receive
+    ret.append(self._receive_one(c))
+               ~~~~~~~~~~~~~~~~~^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 941, in _receive_one
+    response = c.parse_response()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 998, in parse_response
+    response = self._execute(conn, try_read)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 972, in _execute
+    response = conn.retry.call_with_retry(
+        lambda: command(*args, **kwargs),
+        lambda _: self._reconnect(conn),
+    )
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\retry.py", line 121, in call_with_retry
+    fail(error)
+    ~~~~^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 974, in <lambda>
+    lambda _: self._reconnect(conn),
+              ~~~~~~~~~~~~~~~^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 958, in _reconnect
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 846, in connect
+    self.connect_check_health(check_health=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 869, in connect_check_health
+    self.on_connect_check_health(check_health=check_health)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 994, in on_connect_check_health
+    self.read_response()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 1133, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+2026-01-22 10:44:12,280 - py.warnings - WARNING - D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py:397: CPendingDeprecationWarning: 
+In Celery 5.1 we introduced an optional breaking change which
+on connection loss cancels all currently executed tasks with late acknowledgement enabled.
+These tasks cannot be acknowledged as the connection is gone, and the tasks are automatically redelivered
+back to the queue. You can enable this behavior using the worker_cancel_long_running_tasks_on_connection_loss
+setting. In Celery 5.1 it is set to False by default. The setting will be set to True by default in Celery 6.0.
+
+  warnings.warn(CANCEL_TASKS_BY_DEFAULT, CPendingDeprecationWarning)
+
+2026-01-22 10:44:12,289 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-22 10:44:12,293 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-22 10:44:13,305 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-22 10:44:15,560 - celery.worker.consumer.consumer - WARNING - consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\retry.py", line 116, in call_with_retry
+    return do()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 973, in <lambda>
+    lambda: command(*args, **kwargs),
+            ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 996, in try_read
+    return conn.read_response(disconnect_on_error=False, push_request=True)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 1133, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 346, in start
+    blueprint.start(self)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+    ~~~~~~~~~~^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 788, in start
+    c.loop(*c.loop_args())
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\loops.py", line 136, in synloop
+    _loop_cycle()
+    ~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\loops.py", line 125, in _loop_cycle
+    connection.drain_events(timeout=2.0)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\connection.py", line 343, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\virtual\base.py", line 997, in drain_events
+    get(self._deliver, timeout=timeout)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 601, in get
+    ret = self.handle_event(fileno, event)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 583, in handle_event
+    return self.on_readable(fileno), self
+           ~~~~~~~~~~~~~~~~^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 579, in on_readable
+    chan.handlers[type]()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 931, in _receive
+    ret.append(self._receive_one(c))
+               ~~~~~~~~~~~~~~~~~^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 941, in _receive_one
+    response = c.parse_response()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 998, in parse_response
+    response = self._execute(conn, try_read)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 972, in _execute
+    response = conn.retry.call_with_retry(
+        lambda: command(*args, **kwargs),
+        lambda _: self._reconnect(conn),
+    )
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\retry.py", line 121, in call_with_retry
+    fail(error)
+    ~~~~^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 974, in <lambda>
+    lambda _: self._reconnect(conn),
+              ~~~~~~~~~~~~~~~^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 958, in _reconnect
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 846, in connect
+    self.connect_check_health(check_health=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 869, in connect_check_health
+    self.on_connect_check_health(check_health=check_health)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 994, in on_connect_check_health
+    self.read_response()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 1133, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+2026-01-22 10:44:15,569 - py.warnings - WARNING - D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py:397: CPendingDeprecationWarning: 
+In Celery 5.1 we introduced an optional breaking change which
+on connection loss cancels all currently executed tasks with late acknowledgement enabled.
+These tasks cannot be acknowledged as the connection is gone, and the tasks are automatically redelivered
+back to the queue. You can enable this behavior using the worker_cancel_long_running_tasks_on_connection_loss
+setting. In Celery 5.1 it is set to False by default. The setting will be set to True by default in Celery 6.0.
+
+  warnings.warn(CANCEL_TASKS_BY_DEFAULT, CPendingDeprecationWarning)
+
+2026-01-22 10:44:15,580 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Connection closed by server..
+Trying again in 2.00 seconds... (1/100)
+
+2026-01-22 10:44:17,590 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-22 10:44:17,601 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-22 10:44:18,621 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-22 10:46:49,113 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[a1c01187-a533-4b3e-a3e2-1f5c84562dd1] received
+2026-01-22 10:46:49,116 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 10:46:49,365 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007070', ' 80007071', ' 80007075', ' 80007072'), 'ultimo_id': '1'}
+2026-01-22 10:46:49,447 - app.core.lis - INFO - ✅ Se obtuvieron 1 filas del LIS.
+2026-01-22 10:46:49,447 - app.worker - INFO - 📊 Datos obtenidos del LIS: 1 registros
+2026-01-22 10:46:49,452 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 10:46:49,458 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[a1c01187-a533-4b3e-a3e2-1f5c84562dd1] succeeded in 0.34254569999757223s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 1, 'formato': 'CSV', 'datos_preview': [{'id': 2, 'noingreso': '80007070', 'nombre': 'ESTEFANY ANDREINA  MARTINEZ TABARES', 'fechanac': '2007-01-17', 'tipodocum': 'PPT', 'numdocum': '4669266', 'edad': Decimal('18'), 'estadocivil': 'Indeterminado', 'direccionresidencia': 'CALLE 58A 44 135 MOLINO CONFANDI', 'genero': 'M', 'email': 'tavrescarolina98@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}]}
+2026-01-22 10:48:14,339 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-22 10:48:14,345 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-22 10:48:15,376 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-22 10:48:15,408 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-01-22 10:48:16,558 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-01-22 10:48:50,846 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[fededff1-573d-497d-ab74-ef081c71e003] received
+2026-01-22 10:48:50,848 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: PDF
+2026-01-22 10:48:51,126 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007070', '80007071', '80007075', '80007072'), 'ultimo_id': '1'}
+2026-01-22 10:48:51,185 - app.core.lis - INFO - ✅ Se obtuvieron 4 filas del LIS.
+2026-01-22 10:48:51,185 - app.worker - INFO - 📊 Datos obtenidos del LIS: 4 registros
+2026-01-22 10:48:51,218 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).pdf
+2026-01-22 10:48:51,240 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[fededff1-573d-497d-ab74-ef081c71e003] succeeded in 0.3915495999972336s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).pdf', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).pdf', 'total_registros': 4, 'formato': 'PDF', 'datos_preview': [{'id': 2, 'noingreso': '80007070', 'nombre': 'ESTEFANY ANDREINA  MARTINEZ TABARES', 'fechanac': '2007-01-17', 'tipodocum': 'PPT', 'numdocum': '4669266', 'edad': Decimal('18'), 'estadocivil': 'Casado', 'direccionresidencia': 'CALLE 58A 44 135 MOLINO CONFANDI', 'genero': 'M', 'email': 'tavrescarolina98@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}, {'id': 3, 'noingreso': '80007071', 'nombre': 'PAOLA ANDREA BUSTAMANTE ULCUE', 'fechanac': '1979-12-15', 'tipodocum': 'CC', 'numdocum': '66931680', 'edad': Decimal('46'), 'estadocivil': 'Soltero', 'direccionresidencia': 'MZ 12 CA 3', 'genero': 'F', 'email': 'radicacion.biolab@biolabfiagnos...', ...}]}
+2026-01-22 11:58:35,031 - celery.worker.consumer.consumer - WARNING - consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\retry.py", line 116, in call_with_retry
+    return do()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 973, in <lambda>
+    lambda: command(*args, **kwargs),
+            ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 996, in try_read
+    return conn.read_response(disconnect_on_error=False, push_request=True)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 1133, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 346, in start
+    blueprint.start(self)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+    ~~~~~~~~~~^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 788, in start
+    c.loop(*c.loop_args())
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\loops.py", line 136, in synloop
+    _loop_cycle()
+    ~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\loops.py", line 125, in _loop_cycle
+    connection.drain_events(timeout=2.0)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\connection.py", line 343, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\virtual\base.py", line 997, in drain_events
+    get(self._deliver, timeout=timeout)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 601, in get
+    ret = self.handle_event(fileno, event)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 583, in handle_event
+    return self.on_readable(fileno), self
+           ~~~~~~~~~~~~~~~~^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 579, in on_readable
+    chan.handlers[type]()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 931, in _receive
+    ret.append(self._receive_one(c))
+               ~~~~~~~~~~~~~~~~~^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 941, in _receive_one
+    response = c.parse_response()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 998, in parse_response
+    response = self._execute(conn, try_read)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 972, in _execute
+    response = conn.retry.call_with_retry(
+        lambda: command(*args, **kwargs),
+        lambda _: self._reconnect(conn),
+    )
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\retry.py", line 121, in call_with_retry
+    fail(error)
+    ~~~~^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 974, in <lambda>
+    lambda _: self._reconnect(conn),
+              ~~~~~~~~~~~~~~~^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 958, in _reconnect
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 846, in connect
+    self.connect_check_health(check_health=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 869, in connect_check_health
+    self.on_connect_check_health(check_health=check_health)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 994, in on_connect_check_health
+    self.read_response()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 1133, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+2026-01-22 11:58:35,312 - py.warnings - WARNING - D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py:397: CPendingDeprecationWarning: 
+In Celery 5.1 we introduced an optional breaking change which
+on connection loss cancels all currently executed tasks with late acknowledgement enabled.
+These tasks cannot be acknowledged as the connection is gone, and the tasks are automatically redelivered
+back to the queue. You can enable this behavior using the worker_cancel_long_running_tasks_on_connection_loss
+setting. In Celery 5.1 it is set to False by default. The setting will be set to True by default in Celery 6.0.
+
+  warnings.warn(CANCEL_TASKS_BY_DEFAULT, CPendingDeprecationWarning)
+
+2026-01-22 11:58:35,340 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-22 11:58:35,350 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-22 11:58:36,383 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-22 12:18:20,753 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-22 12:18:20,762 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-22 12:18:21,802 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-22 12:18:21,867 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-01-22 12:18:22,512 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-01-22 12:20:48,295 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[8af71028-6897-4a88-a3c0-e5e029ecf195] received
+2026-01-22 12:20:48,300 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: PDF
+2026-01-22 12:20:48,678 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007070', '80007071', '80007075', '80007072'), 'ultimo_id': '1'}
+2026-01-22 12:20:48,748 - app.core.lis - INFO - ✅ Se obtuvieron 4 filas del LIS.
+2026-01-22 12:20:48,749 - app.worker - INFO - 📊 Datos obtenidos del LIS: 4 registros
+2026-01-22 12:20:48,837 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).pdf
+2026-01-22 12:20:48,865 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[8af71028-6897-4a88-a3c0-e5e029ecf195] succeeded in 0.5649024000158533s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).pdf', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).pdf', 'total_registros': 4, 'formato': 'PDF', 'datos_preview': [{'id': 2, 'noingreso': '80007070', 'nombre': 'ESTEFANY ANDREINA  MARTINEZ TABARES', 'fechanac': '2007-01-17', 'tipodocum': 'PPT', 'numdocum': '4669266', 'edad': Decimal('18'), 'estadocivil': 'Indeterminado', 'direccionresidencia': 'CALLE 58A 44 135 MOLINO CONFANDI', 'genero': 'M', 'email': 'tavrescarolina98@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}, {'id': 3, 'noingreso': '80007071', 'nombre': 'PAOLA ANDREA BUSTAMANTE ULCUE', 'fechanac': '1979-12-15', 'tipodocum': 'CC', 'numdocum': '66931680', 'edad': Decimal('46'), 'estadocivil': 'Indeterminado', 'direccionresidencia': 'MZ 12 CA 3', 'genero': 'F', 'email': 'radicacion.biolab@...', ...}]}
+2026-01-22 12:26:57,490 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[1a7d5611-ba81-439c-bba0-3c173140268c] received
+2026-01-22 12:26:57,503 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 12:26:57,672 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007070', '80007071', '80007075', '80007072'), 'ultimo_id': '1'}
+2026-01-22 12:26:57,751 - app.core.lis - INFO - ✅ Se obtuvieron 4 filas del LIS.
+2026-01-22 12:26:57,752 - app.worker - INFO - 📊 Datos obtenidos del LIS: 4 registros
+2026-01-22 12:26:57,818 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 12:26:57,827 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[1a7d5611-ba81-439c-bba0-3c173140268c] succeeded in 0.32476740001584403s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 4, 'formato': 'CSV', 'datos_preview': [{'id': 2, 'noingreso': '80007070', 'nombre': 'ESTEFANY ANDREINA MARTINEZ TABARES', 'fechanac': '2007-01-17', 'tipodocum': 'PT', 'numdocum': '4669266', 'edad': Decimal('18'), 'estadocivil': 'Casado', 'direccionresidencia': 'CALLE 58A 44 135 MOLINO CONFANDI', 'genero': 'M', 'email': 'tavrescarolina98@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}, {'id': 3, 'noingreso': '80007071', 'nombre': 'PAOLA ANDREA BUSTAMANTE ULCUE', 'fechanac': '1979-12-15', 'tipodocum': 'CC', 'numdocum': '66931680', 'edad': Decimal('46'), 'estadocivil': 'Soltero', 'direccionresidencia': 'MZ 12 CA 3', 'genero': 'F', 'email': 'radicacion.biolab@biolabfiagnosti...', ...}]}
+2026-01-22 13:04:34,330 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f7273df3-8836-4b87-bb66-6eacc185b474] received
+2026-01-22 13:04:34,337 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: PDF
+2026-01-22 13:04:34,476 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007070', '80007071', '80007075', '80007072'), 'ultimo_id': '1'}
+2026-01-22 13:04:34,555 - app.core.lis - INFO - ✅ Se obtuvieron 4 filas del LIS.
+2026-01-22 13:04:34,556 - app.worker - INFO - 📊 Datos obtenidos del LIS: 4 registros
+2026-01-22 13:04:34,582 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).pdf
+2026-01-22 13:04:34,587 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f7273df3-8836-4b87-bb66-6eacc185b474] succeeded in 0.2511563999869395s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).pdf', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).pdf', 'total_registros': 4, 'formato': 'PDF', 'datos_preview': [{'id': 2, 'noingreso': '80007070', 'nombre': 'ESTEFANY ANDREINA MARTINEZ TABARES', 'fechanac': '2007-01-17', 'tipodocum': 'PT', 'numdocum': '4669266', 'edad': Decimal('18'), 'estadocivil': 'Casado', 'direccionresidencia': 'CALLE 58A 44 135 MOLINO CONFANDI', 'genero': 'M', 'email': 'tavrescarolina98@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}, {'id': 3, 'noingreso': '80007071', 'nombre': 'PAOLA ANDREA BUSTAMANTE ULCUE', 'fechanac': '1979-12-15', 'tipodocum': 'CC', 'numdocum': '66931680', 'edad': Decimal('46'), 'estadocivil': 'Soltero', 'direccionresidencia': 'MZ 12 CA 3', 'genero': 'F', 'email': 'radicacion.biolab@biolabfiagnosti...', ...}]}
+2026-01-22 13:05:13,250 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[24652ff7-70be-44a1-ae6c-06669f5beef7] received
+2026-01-22 13:05:13,254 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 13:05:13,422 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007070', '80007071', '80007075', '80007072'), 'ultimo_id': '1'}
+2026-01-22 13:05:13,496 - app.core.lis - INFO - ✅ Se obtuvieron 4 filas del LIS.
+2026-01-22 13:05:13,496 - app.worker - INFO - 📊 Datos obtenidos del LIS: 4 registros
+2026-01-22 13:05:13,497 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 13:05:13,500 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[24652ff7-70be-44a1-ae6c-06669f5beef7] succeeded in 0.24659599998267367s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 4, 'formato': 'CSV', 'datos_preview': [{'id': 2, 'noingreso': '80007070', 'nombre': 'ESTEFANY ANDREINA MARTINEZ TABARES', 'fechanac': '2007-01-17', 'tipodocum': 'PT', 'numdocum': '4669266', 'edad': Decimal('18'), 'estadocivil': 'Soltero', 'direccionresidencia': 'CALLE 58A 44 135 MOLINO CONFANDI', 'genero': 'M', 'email': 'tavrescarolina98@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}, {'id': 3, 'noingreso': '80007071', 'nombre': 'PAOLA ANDREA BUSTAMANTE ULCUE', 'fechanac': '1979-12-15', 'tipodocum': 'CC', 'numdocum': '66931680', 'edad': Decimal('46'), 'estadocivil': 'Casado', 'direccionresidencia': 'MZ 12 CA 3', 'genero': 'F', 'email': 'radicacion.biolab@biolabfiagnosti...', ...}]}
+2026-01-22 13:06:02,041 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-22 13:06:02,052 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-22 13:06:04,077 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-22 13:06:04,101 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-01-22 13:06:04,106 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[0c55c302-91a0-4178-9b5c-7f5ed6719442] received
+2026-01-22 13:06:04,106 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 13:06:04,301 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007070', '80007071', '80007075', '80007072'), 'ultimo_id': '1'}
+2026-01-22 13:06:04,374 - app.core.lis - INFO - ✅ Se obtuvieron 4 filas del LIS.
+2026-01-22 13:06:04,375 - app.worker - INFO - 📊 Datos obtenidos del LIS: 4 registros
+2026-01-22 13:06:04,378 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 13:06:04,407 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[0c55c302-91a0-4178-9b5c-7f5ed6719442] succeeded in 0.30069589999038726s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 4, 'formato': 'CSV', 'datos_preview': [{'id': 2, 'noingreso': '80007070', 'nombre': 'ESTEFANY ANDREINA MARTINEZ TABARES', 'fechanac': '2007-01-17', 'tipodocum': 'PT', 'numdocum': '4669266', 'edad': Decimal('18'), 'estadocivil': 'Casado', 'direccionresidencia': 'CALLE 58A 44 135 MOLINO CONFANDI', 'genero': 'M', 'email': 'tavrescarolina98@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}, {'id': 3, 'noingreso': '80007071', 'nombre': 'PAOLA ANDREA BUSTAMANTE ULCUE', 'fechanac': '1979-12-15', 'tipodocum': 'CC', 'numdocum': '66931680', 'edad': Decimal('46'), 'estadocivil': 'Indeterminado', 'direccionresidencia': 'MZ 12 CA 3', 'genero': 'F', 'email': 'radicacion.biolab@biolabfia...', ...}]}
+2026-01-22 13:06:06,005 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-01-22 18:29:49,434 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[0280125a-4e6c-458a-bc6a-603808025717] received
+2026-01-22 18:29:49,446 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 18:29:49,580 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007393', ' 80007396', ' 80007397', ' 80007398', ' 80007399', ' 80007400', ' 80007401', ' 8000740', ' 80007403', ' 80007404', ' 80007407', ' 80007405', ' 80007409', ' 80007406', ' 80007410', ' 80007413', ' 80007414', ' 80007408', ' 80007412', ' 80007415', ' 800074173', ' 80007416', ' 80007420', ' 80007422', ' 80007419', ' 80007418', ' 80007421', ' 80007423', ' 80007425', ' 80007426', ' 80007424', ' 80007427', ' 80007430', ' 80007428', ' 80007432', ' 80007431', ' 80007433', ' 80007434', ' 80007435', ' 80007436', ' 80007438', ' 80007437', ' 80007439', ' 80007440', ' 80007443', ' 80007442', ' 80007445', ' 80007447', ' 80007444', ' 80007441', ' 80007446', ' 80007448', ' 80007452', ' 80007449', ' 80007450', ' 80007451', ' 80007453', ' 80007458', ' 80007454', ' 80007455', ' 80007457'), 'ultimo_id': '1'}
+2026-01-22 18:29:49,635 - app.core.lis - INFO - ✅ Se obtuvieron 1 filas del LIS.
+2026-01-22 18:29:49,636 - app.worker - INFO - 📊 Datos obtenidos del LIS: 1 registros
+2026-01-22 18:29:49,638 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 18:29:49,645 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[0280125a-4e6c-458a-bc6a-603808025717] succeeded in 0.20070590000250377s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 1, 'formato': 'CSV', 'datos_preview': [{'id': 2, 'noingreso': '80007393', 'nombre': 'KELLY YAZMIN CELADA BETANCOURT', 'fechanac': '1999-03-07', 'tipodocum': 'CC', 'numdocum': '1113696458', 'edad': Decimal('26'), 'estadocivil': 'Casado', 'direccionresidencia': 'AV 4 7 410 PALMASECA', 'genero': 'F', 'email': 'kellycelada941@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}]}
+2026-01-22 18:30:24,095 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[fd6cdbb8-782a-4fbf-b307-c9cbabba9270] received
+2026-01-22 18:30:24,099 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 18:30:24,192 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007393', ' 80007396', ' 80007397', ' 80007398', ' 80007399', ' 80007400', ' 80007401', ' 8000740', ' 80007403', ' 80007404', ' 80007407', ' 80007405', ' 80007409', ' 80007406', ' 80007410', ' 80007413', ' 80007414', ' 80007408', ' 80007412', ' 80007415', ' 800074173', ' 80007416', ' 80007420', ' 80007422', ' 80007419', ' 80007418', ' 80007421', ' 80007423', ' 80007425', ' 80007426', ' 80007424', ' 80007427', ' 80007430', ' 80007428', ' 80007432', ' 80007431', ' 80007433', ' 80007434', ' 80007435', ' 80007436', ' 80007438', ' 80007437', ' 80007439', ' 80007440', ' 80007443', ' 80007442', ' 80007445', ' 80007447', ' 80007444', ' 80007441', ' 80007446', ' 80007448', ' 80007452', ' 80007449', ' 80007450', ' 80007451', ' 80007453', ' 80007458', ' 80007454', ' 80007455', ' 80007457'), 'ultimo_id': '1'}
+2026-01-22 18:30:24,247 - app.core.lis - INFO - ✅ Se obtuvieron 1 filas del LIS.
+2026-01-22 18:30:24,248 - app.worker - INFO - 📊 Datos obtenidos del LIS: 1 registros
+2026-01-22 18:30:24,248 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 18:30:24,251 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[fd6cdbb8-782a-4fbf-b307-c9cbabba9270] succeeded in 0.15289599998504855s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 1, 'formato': 'CSV', 'datos_preview': [{'id': 2, 'noingreso': '80007393', 'nombre': 'KELLY YAZMIN CELADA BETANCOURT', 'fechanac': '1999-03-07', 'tipodocum': 'CC', 'numdocum': '1113696458', 'edad': Decimal('26'), 'estadocivil': 'Indeterminado', 'direccionresidencia': 'AV 4 7 410 PALMASECA', 'genero': 'F', 'email': 'kellycelada941@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}]}
+2026-01-22 18:30:47,338 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-22 18:30:47,343 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-22 18:30:48,390 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-22 18:30:48,431 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-01-22 18:30:51,011 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-01-22 18:31:22,076 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[a1652025-bb57-4cdd-9b23-08f065cd7584] received
+2026-01-22 18:31:22,079 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 18:31:22,331 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007393', ' 80007396', ' 80007397', ' 80007398', ' 80007399', ' 80007400', ' 80007401', ' 8000740', ' 80007403', ' 80007404', ' 80007407', ' 80007405', ' 80007409', ' 80007406', ' 80007410', ' 80007413', ' 80007414', ' 80007408', ' 80007412', ' 80007415', ' 800074173', ' 80007416', ' 80007420', ' 80007422', ' 80007419', ' 80007418', ' 80007421', ' 80007423', ' 80007425', ' 80007426', ' 80007424', ' 80007427', ' 80007430', ' 80007428', ' 80007432', ' 80007431', ' 80007433', ' 80007434', ' 80007435', ' 80007436', ' 80007438', ' 80007437', ' 80007439', ' 80007440', ' 80007443', ' 80007442', ' 80007445', ' 80007447', ' 80007444', ' 80007441', ' 80007446', ' 80007448', ' 80007452', ' 80007449', ' 80007450', ' 80007451', ' 80007453', ' 80007458', ' 80007454', ' 80007455', ' 80007457'), 'ultimo_id': '1'}
+2026-01-22 18:31:22,387 - app.core.lis - INFO - ✅ Se obtuvieron 1 filas del LIS.
+2026-01-22 18:31:22,388 - app.worker - INFO - 📊 Datos obtenidos del LIS: 1 registros
+2026-01-22 18:31:22,400 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 18:31:22,426 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[a1652025-bb57-4cdd-9b23-08f065cd7584] succeeded in 0.3471566000080202s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 1, 'formato': 'CSV', 'datos_preview': [{'id': 2, 'noingreso': '80007393', 'nombre': 'KELLY YAZMIN CELADA BETANCOURT', 'fechanac': '1999-03-07', 'tipodocum': 'CC', 'numdocum': '1113696458', 'edad': Decimal('26'), 'estadocivil': 'Soltero', 'direccionresidencia': 'AV 4 7 410 PALMASECA', 'genero': 'F', 'email': 'kellycelada941@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}]}
+2026-01-22 18:31:45,436 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[32dd3f9e-7b03-42a5-a456-ef860aa12531] received
+2026-01-22 18:31:45,439 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 18:31:45,531 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007393', '80007396', ' 80007397', ' 80007398', ' 80007399', ' 80007400', ' 80007401', ' 8000740', ' 80007403', ' 80007404', ' 80007407', ' 80007405', ' 80007409', ' 80007406', ' 80007410', ' 80007413', ' 80007414', ' 80007408', ' 80007412', ' 80007415', ' 800074173', ' 80007416', ' 80007420', ' 80007422', ' 80007419', ' 80007418', ' 80007421', ' 80007423', ' 80007425', ' 80007426', ' 80007424', ' 80007427', ' 80007430', ' 80007428', ' 80007432', ' 80007431', ' 80007433', ' 80007434', ' 80007435', ' 80007436', ' 80007438', ' 80007437', ' 80007439', ' 80007440', ' 80007443', ' 80007442', ' 80007445', ' 80007447', ' 80007444', ' 80007441', ' 80007446', ' 80007448', ' 80007452', ' 80007449', ' 80007450', ' 80007451', ' 80007453', ' 80007458', ' 80007454', ' 80007455', ' 80007457'), 'ultimo_id': '1'}
+2026-01-22 18:31:45,586 - app.core.lis - INFO - ✅ Se obtuvieron 2 filas del LIS.
+2026-01-22 18:31:45,586 - app.worker - INFO - 📊 Datos obtenidos del LIS: 2 registros
+2026-01-22 18:31:45,587 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 18:31:45,590 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[32dd3f9e-7b03-42a5-a456-ef860aa12531] succeeded in 0.15161050000460818s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 2, 'formato': 'CSV', 'datos_preview': [{'id': 2, 'noingreso': '80007393', 'nombre': 'KELLY YAZMIN CELADA BETANCOURT', 'fechanac': '1999-03-07', 'tipodocum': 'CC', 'numdocum': '1113696458', 'edad': Decimal('26'), 'estadocivil': 'Soltero', 'direccionresidencia': 'AV 4 7 410 PALMASECA', 'genero': 'F', 'email': 'kellycelada941@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}, {'id': 3, 'noingreso': '80007396', 'nombre': 'TOBIAS ALBERTO RIVADENEIRA GARCIA', 'fechanac': '1956-02-05', 'tipodocum': 'CC', 'numdocum': '16855043', 'edad': Decimal('69'), 'estadocivil': 'Soltero', 'direccionresidencia': 'CRA  6  6 38 ESTRELLA', 'genero': 'M', 'email': 'amaliarivadeneira2@gmail.com', , ...}]}
+2026-01-22 18:34:00,523 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[4f5d1336-dd54-4a96-b647-733b6787770f] received
+2026-01-22 18:34:00,525 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: PDF
+2026-01-22 18:34:00,618 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007393', '80007396', '80007397', '80007398', ' 80007399', '80007400', ' 80007401', ' 8000740', ' 80007403', ' 80007404', ' 80007407', ' 80007405', ' 80007409', ' 80007406', ' 80007410', ' 80007413', ' 80007414', ' 80007408', ' 80007412', ' 80007415', ' 800074173', ' 80007416', ' 80007420', ' 80007422', ' 80007419', ' 80007418', ' 80007421', ' 80007423', ' 80007425', ' 80007426', ' 80007424', ' 80007427', ' 80007430', ' 80007428', ' 80007432', ' 80007431', ' 80007433', ' 80007434', ' 80007435', ' 80007436', ' 80007438', ' 80007437', ' 80007439', ' 80007440', ' 80007443', ' 80007442', ' 80007445', ' 80007447', ' 80007444', ' 80007441', ' 80007446', ' 80007448', ' 80007452', ' 80007449', ' 80007450', ' 80007451', ' 80007453', ' 80007458', ' 80007454', ' 80007455', ' 80007457'), 'ultimo_id': ''}
+2026-01-22 18:34:00,683 - app.core.lis - ERROR - ❌ Error consultando el LIS: la sintaxis de entrada no es válida para tipo bigint: «»
+LINE 3: ...OW_NUMBER() OVER (ORDER BY pa.paciente_cod ASC) + '') AS id,
+                                                             ^
+
+2026-01-22 18:34:00,684 - app.worker - ERROR - ❌ Excepción crítica en worker: la sintaxis de entrada no es válida para tipo bigint: «»
+LINE 3: ...OW_NUMBER() OVER (ORDER BY pa.paciente_cod ASC) + '') AS id,
+                                                             ^
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\app\worker.py", line 39, in generar_reporte_pesado_task
+    datos = ejecutar_consulta_lis(sql_query, params)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\app\core\lis.py", line 64, in ejecutar_consulta_lis
+    raise e
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\app\core\lis.py", line 50, in ejecutar_consulta_lis
+    cursor.execute(sql_query, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: la sintaxis de entrada no es válida para tipo bigint: «»
+LINE 3: ...OW_NUMBER() OVER (ORDER BY pa.paciente_cod ASC) + '') AS id,
+                                                             ^
+
+2026-01-22 18:34:00,732 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[4f5d1336-dd54-4a96-b647-733b6787770f] succeeded in 0.2070831999881193s: {'error': 'la sintaxis de entrada no es válida para tipo bigint: «»
+LINE 3: ...OW_NUMBER() OVER (ORDER BY pa.paciente_cod ASC) + \'\') AS id,
+                                                             ^
+'}
+2026-01-22 18:37:38,902 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[fd022559-2278-45bf-a54a-2b0aee0812f8] received
+2026-01-22 18:37:38,904 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 18:37:39,002 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007070', '80007071', '80007075', '80007072'), 'ultimo_id': '0'}
+2026-01-22 18:37:39,053 - app.core.lis - INFO - ✅ Se obtuvieron 4 filas del LIS.
+2026-01-22 18:37:39,054 - app.worker - INFO - 📊 Datos obtenidos del LIS: 4 registros
+2026-01-22 18:37:39,055 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 18:37:39,056 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[fd022559-2278-45bf-a54a-2b0aee0812f8] succeeded in 0.15221579998615198s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 4, 'formato': 'CSV', 'datos_preview': [{'id': 1, 'noingreso': '80007070', 'nombre': 'ESTEFANY ANDREINA MARTINEZ TABARES', 'fechanac': '2007-01-17', 'tipodocum': 'PT', 'numdocum': '4669266', 'edad': Decimal('18'), 'estadocivil': 'Soltero', 'direccionresidencia': 'CALLE 58A 44 135 MOLINO CONFANDI', 'genero': 'M', 'email': 'tavrescarolina98@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}, {'id': 2, 'noingreso': '80007071', 'nombre': 'PAOLA ANDREA BUSTAMANTE ULCUE', 'fechanac': '1979-12-15', 'tipodocum': 'CC', 'numdocum': '66931680', 'edad': Decimal('46'), 'estadocivil': 'Soltero', 'direccionresidencia': 'MZ 12 CA 3', 'genero': 'F', 'email': 'radicacion.biolab@biolabfiagnost...', ...}]}
+2026-01-22 18:37:50,864 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[a9b0ab96-c12e-463e-b374-33b94bf8f776] received
+2026-01-22 18:37:50,866 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 18:37:50,959 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007393', ' 80007396', ' 80007397', ' 80007398', ' 80007399', ' 80007400', ' 80007401', ' 8000740', ' 80007403', ' 80007404', ' 80007407', ' 80007405', ' 80007409', ' 80007406', ' 80007410', ' 80007413', ' 80007414', ' 80007408', ' 80007412', ' 80007415', ' 800074173', ' 80007416', ' 80007420', ' 80007422', ' 80007419', ' 80007418', ' 80007421', ' 80007423', ' 80007425', ' 80007426', ' 80007424', ' 80007427', ' 80007430', ' 80007428', ' 80007432', ' 80007431', ' 80007433', ' 80007434', ' 80007435', ' 80007436', ' 80007438', ' 80007437', ' 80007439', ' 80007440', ' 80007443', ' 80007442', ' 80007445', ' 80007447', ' 80007444', ' 80007441', ' 80007446', ' 80007448', ' 80007452', ' 80007449', ' 80007450', ' 80007451', ' 80007453', ' 80007458', ' 80007454', ' 80007455', ' 80007457', ' 12312'), 'ultimo_id': '0'}
+2026-01-22 18:37:51,013 - app.core.lis - INFO - ✅ Se obtuvieron 1 filas del LIS.
+2026-01-22 18:37:51,014 - app.worker - INFO - 📊 Datos obtenidos del LIS: 1 registros
+2026-01-22 18:37:51,015 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 18:37:51,016 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[a9b0ab96-c12e-463e-b374-33b94bf8f776] succeeded in 0.15001489999121986s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 1, 'formato': 'CSV', 'datos_preview': [{'id': 1, 'noingreso': '80007393', 'nombre': 'KELLY YAZMIN CELADA BETANCOURT', 'fechanac': '1999-03-07', 'tipodocum': 'CC', 'numdocum': '1113696458', 'edad': Decimal('26'), 'estadocivil': 'Soltero', 'direccionresidencia': 'AV 4 7 410 PALMASECA', 'genero': 'F', 'email': 'kellycelada941@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}]}
+2026-01-22 18:38:25,105 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[3a3a8220-ed84-4ead-8a84-7dea5bc63209] received
+2026-01-22 18:38:25,107 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 18:38:25,200 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007393', '80007396', '80007397', '80007398', '80007399', '80007400', '80007401', '8000740', '80007403', '80007404'), 'ultimo_id': '0'}
+2026-01-22 18:38:25,256 - app.core.lis - INFO - ✅ Se obtuvieron 9 filas del LIS.
+2026-01-22 18:38:25,257 - app.worker - INFO - 📊 Datos obtenidos del LIS: 9 registros
+2026-01-22 18:38:25,261 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 18:38:25,269 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[3a3a8220-ed84-4ead-8a84-7dea5bc63209] succeeded in 0.16207680001389235s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 9, 'formato': 'CSV', 'datos_preview': [{'id': 1, 'noingreso': '80007393', 'nombre': 'KELLY YAZMIN CELADA BETANCOURT', 'fechanac': '1999-03-07', 'tipodocum': 'CC', 'numdocum': '1113696458', 'edad': Decimal('26'), 'estadocivil': 'Indeterminado', 'direccionresidencia': 'AV 4 7 410 PALMASECA', 'genero': 'F', 'email': 'kellycelada941@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}, {'id': 2, 'noingreso': '80007396', 'nombre': 'TOBIAS ALBERTO RIVADENEIRA GARCIA', 'fechanac': '1956-02-05', 'tipodocum': 'CC', 'numdocum': '16855043', 'edad': Decimal('69'), 'estadocivil': 'Casado', 'direccionresidencia': 'CRA  6  6 38 ESTRELLA', 'genero': 'M', 'email': 'amaliarivadeneira2@gmail.co...', ...}]}
+2026-01-22 18:44:38,628 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-22 18:44:38,633 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-22 18:44:39,667 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-22 18:44:39,694 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-01-22 18:44:50,551 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-01-22 18:45:27,714 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[8119752e-3124-449f-8221-dbf9a277361c] received
+2026-01-22 18:45:27,717 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 18:45:27,863 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007393', '80007396', '80007397', '80007398', '80007399', '80007400', '80007401', '8000740', '80007403', '80007404', '80007407', '80007405', '80007409', '80007406', '80007410', '80007413', '80007414', '80007408', '80007412', '80007415', '800074173', '80007416', '80007420', '80007422', '80007419', '80007418', '80007421', '80007423', '80007425', '80007426', '80007424', '80007427', '80007430', '80007428', '80007432', '80007431', '80007433', '80007434', '80007435', '80007436', '80007438', '80007437', '80007439', '80007440', '80007443', '80007442', '80007445', '80007447', '80007444', '80007441', '80007446', '80007448', '80007452', '80007449', '80007450', '80007451', '80007453', '80007458', '80007454', '80007455', '80007457'), 'ultimo_id': '0'}
+2026-01-22 18:45:27,968 - app.core.lis - INFO - ✅ Se obtuvieron 59 filas del LIS.
+2026-01-22 18:45:27,969 - app.worker - INFO - 📊 Datos obtenidos del LIS: 59 registros
+2026-01-22 18:45:27,982 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 18:45:28,009 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[8119752e-3124-449f-8221-dbf9a277361c] succeeded in 0.2920919999887701s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 59, 'formato': 'CSV', 'datos_preview': [{'id': 1, 'noingreso': '80007393', 'nombre': 'KELLY YAZMIN CELADA BETANCOURT', 'fechanac': '1999-03-07', 'tipodocum': 'CC', 'numdocum': '1113696458', 'edad': Decimal('26'), 'estadocivil': 'Soltero', 'direccionresidencia': 'AV 4 7 410 PALMASECA', 'genero': 'F', 'email': 'kellycelada941@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}, {'id': 2, 'noingreso': '80007396', 'nombre': 'TOBIAS ALBERTO RIVADENEIRA GARCIA', 'fechanac': '1956-02-05', 'tipodocum': 'CC', 'numdocum': '16855043', 'edad': Decimal('69'), 'estadocivil': 'Indeterminado', 'direccionresidencia': 'CRA  6  6 38 ESTRELLA', 'genero': 'M', 'email': 'amaliarivadeneira2@gmail....', ...}]}
+2026-01-22 21:59:13,233 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[4f7aa10d-200d-4779-b430-9212cb16eaa1] received
+2026-01-22 21:59:13,241 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 21:59:23,267 - app.core.lis - ERROR - ❌ Error consultando el LIS: connection to server at "192.168.61.27", port 5432 failed: timeout expired
+
+2026-01-22 21:59:23,269 - app.worker - ERROR - ❌ Excepción crítica en worker: connection to server at "192.168.61.27", port 5432 failed: timeout expired
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\app\worker.py", line 39, in generar_reporte_pesado_task
+    datos = ejecutar_consulta_lis(sql_query, params)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\app\core\lis.py", line 64, in ejecutar_consulta_lis
+    raise e
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\app\core\lis.py", line 31, in ejecutar_consulta_lis
+    connection = psycopg2.connect(**LIS_CONFIG)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "192.168.61.27", port 5432 failed: timeout expired
+
+2026-01-22 21:59:23,283 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[4f7aa10d-200d-4779-b430-9212cb16eaa1] succeeded in 10.043384600023273s: {'error': 'connection to server at "192.168.61.27", port 5432 failed: timeout expired
+'}
+2026-01-22 21:59:44,669 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[493b2b3c-e47f-46ca-a061-9393c418db3c] received
+2026-01-22 21:59:44,671 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-22 21:59:44,781 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007070', '80007071', '80007075', '80007072'), 'ultimo_id': '0'}
+2026-01-22 21:59:45,082 - app.core.lis - INFO - ✅ Se obtuvieron 4 filas del LIS.
+2026-01-22 21:59:45,083 - app.worker - INFO - 📊 Datos obtenidos del LIS: 4 registros
+2026-01-22 21:59:45,091 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 21:59:45,097 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[493b2b3c-e47f-46ca-a061-9393c418db3c] succeeded in 0.4260939999949187s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 4, 'formato': 'CSV', 'datos_preview': [{'id': 1, 'noingreso': '80007070', 'nombre': 'ESTEFANY ANDREINA MARTINEZ TABARES', 'fechanac': '2007-01-17', 'tipodocum': 'PT', 'numdocum': '4669266', 'edad': Decimal('18'), 'estadocivil': 'Soltero', 'direccionresidencia': 'CALLE 58A 44 135 MOLINO CONFANDI', 'genero': 'M', 'email': 'tavrescarolina98@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}, {'id': 2, 'noingreso': '80007071', 'nombre': 'PAOLA ANDREA BUSTAMANTE ULCUE', 'fechanac': '1979-12-15', 'tipodocum': 'CC', 'numdocum': '66931680', 'edad': Decimal('46'), 'estadocivil': 'Casado', 'direccionresidencia': 'MZ 12 CA 3', 'genero': 'F', 'email': 'radicacion.biolab@biolabfiagnosti...', ...}]}
+2026-01-22 22:34:23,002 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[39474229-3db9-4093-b6ab-9240de1a37a5] received
+2026-01-22 22:34:23,005 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 5. Formato: CSV
+2026-01-22 22:34:33,023 - app.core.lis - ERROR - ❌ Error consultando el LIS: connection to server at "192.168.61.27", port 5432 failed: timeout expired
+
+2026-01-22 22:34:33,023 - app.worker - ERROR - ❌ Excepción crítica en worker: connection to server at "192.168.61.27", port 5432 failed: timeout expired
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\app\worker.py", line 39, in generar_reporte_pesado_task
+    datos = ejecutar_consulta_lis(sql_query, params)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\app\core\lis.py", line 64, in ejecutar_consulta_lis
+    raise e
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\app\core\lis.py", line 31, in ejecutar_consulta_lis
+    connection = psycopg2.connect(**LIS_CONFIG)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "192.168.61.27", port 5432 failed: timeout expired
+
+2026-01-22 22:34:33,028 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[39474229-3db9-4093-b6ab-9240de1a37a5] succeeded in 10.022677400003886s: {'error': 'connection to server at "192.168.61.27", port 5432 failed: timeout expired
+'}
+2026-01-22 22:34:39,983 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[2a67d20b-ba6c-4179-8728-c449cce26ad0] received
+2026-01-22 22:34:39,985 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 5. Formato: CSV
+2026-01-22 22:34:40,075 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007070', '80007071', '80007075', '80007072', '80007076', '80007077', '80007079', '80007079', '80007078', '80007090', '80007080', '80007086', '80007085', '80007091', '80007092', '80007035', '80007097', '80007094', '80007095', '80007099', '80007107', '80007108', '80007105', '80007111', '80007110', '80007113', '80007116', '80007115', '80007178', '80007117', '80007112', '80007104', '80007099', '80007089', '80007087', '80007120', '80007119', '80007088', '80007051', '80007084', '80007122', '80007121', '80007125', '80007124', '80007127', '80007130', '80007131', '80007132', '80007133', '80007135', '80007136', '80007137', '80007138', '80007141', '80007140', '80007143', '80007142', '80007145', '80007144', '80007147', '80007146', '80007173', '80007172', '80007174', '80007175', '80007176', '80007177', '80007178', '80007179', '80007181', '80007180', '80007182', '80007183', '80007185', '80007184', '80007188', '80007187', '80007186', '80007191', '80007189', '80007082', '80007079', '80007190', '80007192', '80007193', '80007194', '80007195', '80007196', '80007197', '80007200', '80007199', '80007198', '80007206', '80007205', '80007201', '80007210', '80007204', '80007202', '80007207', '80007203', '80007209', '80007208', '80007211', '80007212', '80007213', '80007215', '80007214', '80007216', '80007217', '80007218', '80007219', '80007220', '80007222', '80007224', '80007225', '80007223', '80007227', '80007228', '80007229', '80007234', '80007235', '80007236', '80007237', '80007238', '80007240', '80007239', '80007241', '80004243', '80007242', '80007245', '80007244', '80007246', '80007248', '80007250', '80007251', '80007252', '80007253', '80007255', '80007254', '80007256', '80007257', '80007258', '80007259', '80007262', '80007261', '80007263', '80007266', '80007265', '80007273', '80007274', '80007275', '80007276', '80007277', '80007278', '80007279', '80007280', '80007281', '80007282', '80007283', '80007284', '80007286', '80007287', '80007285', '80007288', '80007289', '80007290', '80007292', '80007293', '80007294', '80007290', '80007291', '80007295', '80007296', '80007298', '80007299', '80007300', '80007301', '80007302', '80007304', '80007303', '80007302', '80007306', '80007308', '80007309', '80007310', '80007312', '80007311', '80007313', '80007315', '80007314', '80007316', '80007317', '80007318', '80007319', '80007322', '80007321', '80007323', '80007324', '80007326', '80007327', '80007328', '80007330', '80007325', '80007332', '80007329', '80007334', '80007331', '80007333', '80007336', '80007335', '80007337', '80007339', '80007340', '80007341', '80007342', '80007343', '80007344', '80007345', '80007346', '80007347', '80007349', '80007350', '80007351', '80007352', '80007354', '80007356', '80007353', '80007358', '80007362', '80007360', '80007367', '80007361', '80007363', '80007365', '80007364', '80007366', '80007368', '80007369', '80007368', '80007370', '80007372', '80007373', '80007371', '80007374', '80007376', '80007375', '80007378', '80007379', '80007380', '80007383', '80007381', '80007382', '80007386', '80007385', '80007388', '80007387', '80007389', '80007390', '80007392', '80007391', '80007393', '80007396', '80007397', '80007398', '80007399', '80007400', '80007401', '80007140', '80007403', '80007404', '80007407', '80007405', '80007409', '80007406', '80007410', '80007413', '80007414', '80007408', '80007412', '80007415', '80007173', '80007416', '80007420', '80007422', '80007419', '80007418', '80007421', '80007423', '80007425', '80007426', '80007424', '80007427', '80007430', '80007428', '80007432', '80007431', '80007433', '80007434', '80007435', '80007436', '80007438', '80007437', '80007439', '80007440', '80007443', '80007442', '80007445', '80007447', '80007444', '80007441', '80007446', '80007448', '80007452', '80007449', '80007450', '80007451', '80007453', '80007458', '80007454', '80007455', '80007457'), 'ultimo_id': '0'}
+2026-01-22 22:34:40,125 - app.core.lis - ERROR - ❌ Error consultando el LIS: no existe la columna pa.genero
+LINE 19:     WHEN pa.genero = 'M' THEN 'Masculino'
+                  ^
+
+2026-01-22 22:34:40,126 - app.worker - ERROR - ❌ Excepción crítica en worker: no existe la columna pa.genero
+LINE 19:     WHEN pa.genero = 'M' THEN 'Masculino'
+                  ^
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\app\worker.py", line 39, in generar_reporte_pesado_task
+    datos = ejecutar_consulta_lis(sql_query, params)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\app\core\lis.py", line 64, in ejecutar_consulta_lis
+    raise e
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\app\core\lis.py", line 50, in ejecutar_consulta_lis
+    cursor.execute(sql_query, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\psycopg2\extras.py", line 236, in execute
+    return super().execute(query, vars)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+psycopg2.errors.UndefinedColumn: no existe la columna pa.genero
+LINE 19:     WHEN pa.genero = 'M' THEN 'Masculino'
+                  ^
+
+2026-01-22 22:34:40,131 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[2a67d20b-ba6c-4179-8728-c449cce26ad0] succeeded in 0.14654190000146627s: {'error': 'no existe la columna pa.genero
+LINE 19:     WHEN pa.genero = \'M\' THEN \'Masculino\'
+                  ^
+'}

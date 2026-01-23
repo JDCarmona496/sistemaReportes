@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso | BIOLAB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gradient-to-br from-gray-900 to-blue-900 h-screen flex items-center justify-center">
+
+    <div class="bg-white p-10 rounded-2xl shadow-2xl w-96">
+        <div class="text-center mb-8">
+            <i class="fa-solid fa-flask text-5xl text-blue-600 mb-4"></i>
+            <h2 class="text-3xl font-extrabold text-gray-800">BIOLAB LIS</h2>
+            <p class="text-gray-500 text-sm">Sistema de Reportes</p>
+        </div>
+
+        <form onsubmit="event.preventDefault(); login();" class="space-y-6">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Usuario</label>
+                <div class="relative">
+                    <span class="absolute left-3 top-3 text-gray-400"><i class="fa-solid fa-envelope"></i></span>
+                    <input type="text" id="email" class="w-full pl-10 p-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500" value="admin@example.com">
+                </div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                <div class="relative">
+                    <span class="absolute left-3 top-3 text-gray-400"><i class="fa-solid fa-lock"></i></span>
+                    <input type="password" id="password" class="w-full pl-10 p-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500" value="admin">
+                </div>
+            </div>
+            <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition shadow-lg">
+                INICIAR SESIÓN
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Si ya tengo token, me voy directo al dashboard
+        if(localStorage.getItem('access_token')) {
+            window.location.href = "/dashboard";
+        }
+
+        async function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const API_URL = "http://127.0.0.1:8000/api/v1";
+
+            const formData = new URLSearchParams();
+            formData.append('username', email);
+            formData.append('password', password);
+
+            try {
+                const res = await fetch(`${API_URL}/login/access-token`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData
+                });
+
+                if (!res.ok) throw new Error("Credenciales inválidas");
+
+                const data = await res.json();
+                localStorage.setItem('access_token', data.access_token);
+                
+                // Redirección exitosa
+                window.location.href = "/dashboard";
+
+            } catch (err) {
+                Swal.fire('Error', err.message, 'error');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+2026-01-21 09:57:35,611 - flower.command - INFO - Visit me at http://0.0.0.0:5555
+2026-01-21 09:57:35,627 - flower.command - INFO - Broker: redis://localhost:6379/0
+2026-01-21 09:57:35,630 - flower.command - INFO - Registered tasks: 
+['app.worker.generar_reporte_pesado_task',
+ 'app.worker.limpiar_reportes_antiguos_task',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+2026-01-21 09:57:35,644 - kombu.mixins - INFO - Connected to redis://localhost:6379/0
+2026-01-21 09:57:46,469 - flower.command - INFO - Visit me at http://0.0.0.0:5555
+2026-01-21 09:57:46,488 - flower.command - INFO - Broker: redis://localhost:6379/0
+2026-01-21 09:57:46,491 - flower.command - INFO - Registered tasks: 
+['app.worker.generar_reporte_pesado_task',
+ 'app.worker.limpiar_reportes_antiguos_task',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+2026-01-21 09:57:46,510 - kombu.mixins - INFO - Connected to redis://localhost:6379/0
+2026-01-21 10:05:22,842 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-21 10:05:22,847 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-21 10:05:23,873 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-21 10:05:23,910 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-01-21 10:05:26,497 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-01-21 10:05:57,002 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[1ebb68e8-f11c-4689-bd08-1f628812c096] received
+2026-01-21 10:05:57,004 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 4. Formato: CSV
+2026-01-21 10:05:57,184 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007070',), 'ultimo_id': '1'}
+2026-01-21 10:05:57,240 - app.core.lis - INFO - ✅ Se obtuvieron 1 filas del LIS.
+2026-01-21 10:05:57,240 - app.worker - INFO - 📊 Datos obtenidos del LIS: 1 registros
+2026-01-21 10:05:57,244 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-21 10:05:57,250 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[1ebb68e8-f11c-4689-bd08-1f628812c096] succeeded in 0.24577330000465736s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 1, 'formato': 'CSV', 'datos_preview': [{'id': 2, 'noingreso': '80007070', 'nombre': 'ESTEFANY ANDREINA  MARTINEZ TABARES', 'fechanac': '2007-01-17', 'tipodocum': 'PPT', 'numdocum': '4669266', 'edad': Decimal('18'), 'estadocivil': 'Casado', 'direccionresidencia': 'CALLE 58A 44 135 MOLINO CONFANDI', 'genero': 'M', 'email': 'tavrescarolina98@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}]}

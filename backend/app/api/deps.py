@@ -12,7 +12,8 @@ from app.schemas.token import TokenPayload
 
 # Esto le dice a FastAPI que el token viene en la URL "/login/access-token"
 reusable_oauth2 = OAuth2PasswordBearer(
-    tokenUrl=f"{settings.API_V1_STR}/login/access-token"
+    # Debe coincidir con: /api/v1 + /login + /access-token
+    tokenUrl=f"{settings.API_V1_STR}/login/access-token" 
 )
 
 def get_current_user(
