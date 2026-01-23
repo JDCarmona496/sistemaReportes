@@ -599,3 +599,23 @@ LINE 19:     WHEN pa.genero = \'M\' THEN \'Masculino\'
 2026-01-22 22:36:34,547 - app.core.lis - INFO - ✅ Se obtuvieron 0 filas del LIS.
 2026-01-22 22:36:34,547 - app.worker - INFO - 📊 Datos obtenidos del LIS: 0 registros
 2026-01-22 22:36:34,549 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[a81c18e7-5ccb-4633-90ee-5999a4f6b389] succeeded in 0.16186729999026284s: {'archivo': 'Vacio.txt', 'mensaje': 'Sin datos'}
+2026-01-22 22:52:19,428 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[df0ad906-d157-4227-9db8-8867be70f2d9] received
+2026-01-22 22:52:19,430 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 6. Formato: CSV
+2026-01-22 22:52:19,550 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007051',), 'ultimo_id': '0'}
+2026-01-22 22:52:19,600 - app.core.lis - INFO - ✅ Se obtuvieron 0 filas del LIS.
+2026-01-22 22:52:19,600 - app.worker - INFO - 📊 Datos obtenidos del LIS: 0 registros
+2026-01-22 22:52:19,602 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[df0ad906-d157-4227-9db8-8867be70f2d9] succeeded in 0.17206749998149462s: {'archivo': 'Vacio.txt', 'mensaje': 'Sin datos'}
+2026-01-22 22:52:36,532 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[efaf2c50-f674-45de-b81a-2cfa60477e96] received
+2026-01-22 22:52:36,535 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 6. Formato: CSV
+2026-01-22 22:52:36,626 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007151',), 'ultimo_id': '0'}
+2026-01-22 22:52:36,679 - app.core.lis - INFO - ✅ Se obtuvieron 1 filas del LIS.
+2026-01-22 22:52:36,680 - app.worker - INFO - 📊 Datos obtenidos del LIS: 1 registros
+2026-01-22 22:52:36,683 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 22:52:36,691 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[efaf2c50-f674-45de-b81a-2cfa60477e96] succeeded in 0.15598189999582246s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 1, 'formato': 'CSV', 'datos_preview': [{'id': 1, 'noingreso': '80007151', 'nombre': 'LEYDI JAHANNA LENIS BELALCAZAR', 'fechanac': '1990-07-14', 'tipodocum': 'CC', 'numdocum': '1006429614', 'edad': Decimal('35'), 'estadocivil': 'Casado', 'direccionresidencia': 'BUGA', 'genero': 'Femenino', 'email': '.', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}]}
+2026-01-22 22:52:37,657 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[6bec2572-7c64-4830-aec4-3d20bed304fb] received
+2026-01-22 22:52:37,660 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 6. Formato: CSV
+2026-01-22 22:52:37,750 - app.core.lis - INFO - 🔌 Ejecutando query en LIS con params: {'lista_pacientes': ('80007151',), 'ultimo_id': '0'}
+2026-01-22 22:52:37,801 - app.core.lis - INFO - ✅ Se obtuvieron 1 filas del LIS.
+2026-01-22 22:52:37,802 - app.worker - INFO - 📊 Datos obtenidos del LIS: 1 registros
+2026-01-22 22:52:37,803 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-22 22:52:37,805 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[6bec2572-7c64-4830-aec4-3d20bed304fb] succeeded in 0.14475949999177828s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 1, 'formato': 'CSV', 'datos_preview': [{'id': 1, 'noingreso': '80007151', 'nombre': 'LEYDI JAHANNA LENIS BELALCAZAR', 'fechanac': '1990-07-14', 'tipodocum': 'CC', 'numdocum': '1006429614', 'edad': Decimal('35'), 'estadocivil': 'Divorciado', 'direccionresidencia': 'BUGA', 'genero': 'Femenino', 'email': '.', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}]}

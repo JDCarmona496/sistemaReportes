@@ -1,3 +1,5 @@
 venv/
 __pycache__/
 .env
+sembrar_reporte.py
+test_lis_connection.py
