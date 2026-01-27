@@ -2,8 +2,9 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 import logging
 import os
-from dotenv import load_dotenv  # Necesario para leer el archivo .env
+from dotenv import load_dotenv
 from typing import Any
+import re  # <--- 1. NUEVO: Importamos Regex para la traducción
 
 # Cargar variables del archivo .env
 load_dotenv()
@@ -20,12 +21,15 @@ LIS_CONFIG = {
     "connect_timeout": 10,
 }
 
+
 def ejecutar_consulta_lis(sql_query: str, params: Any = None):
     """
     Se conecta al LIS, ejecuta una consulta y devuelve una lista de diccionarios.
     Maneja la apertura y cierre de conexión automáticamente.
+    Traduce sintaxis :param a %(param)s para compatibilidad con Psycopg2.
     """
     connection = None
+    cursor = None  # Inicializamos cursor para evitar errores en finally
     try:
         # 1. Conectar
         connection = psycopg2.connect(**LIS_CONFIG)
@@ -33,23 +37,30 @@ def ejecutar_consulta_lis(sql_query: str, params: Any = None):
         # 2. Cursor que devuelve diccionarios
         cursor = connection.cursor(cursor_factory=RealDictCursor)
 
-        # --- PARCHE DE COMPATIBILIDAD (LISTA -> TUPLA) ---
-        # Psycopg2 requiere TUPLAS para cláusulas 'IN %(lista)s', 
-        # pero JSON/Python suelen enviar LISTAS []. Aquí lo corregimos.
+        # --- 3. PARCHE DE TRADUCCIÓN SQL (:param -> %(param)s) ---
+        # Psycopg2 requiere %(nombre)s, pero el Dashboard envía :nombre
+        if params and isinstance(params, dict):
+            # Busca palabras que empiecen con : y las reemplaza por %(palabra)s
+            # Ejemplo: transformamos ":nit" en "%(nit)s"
+            sql_query = re.sub(r":([a-zA-Z0-9_]+)", r"%(\1)s", sql_query)
+
+        # --- 4. PARCHE DE COMPATIBILIDAD (LISTA -> TUPLA) ---
+        # Psycopg2 requiere TUPLAS para cláusulas 'IN %(lista)s',
         if params and isinstance(params, dict):
             for k, v in params.items():
                 if isinstance(v, list):
                     params[k] = tuple(v)
 
-        # 3. Ejecutar
+        # 5. Ejecutar
         if params:
-            logger.info(f"🔌 Ejecutando query en LIS con params: {params}")
+            logger.info(f"🔌 Ejecutando query en LIS: {sql_query}")
+            logger.info(f"🔌 Params: {params}")
         else:
             logger.info(f"🔌 Ejecutando query simple en LIS...")
 
         cursor.execute(sql_query, params)
 
-        # 4. Obtener resultados
+        # 6. Obtener resultados
         resultados = cursor.fetchall()
 
         # Convertir a lista normal
@@ -64,7 +75,8 @@ def ejecutar_consulta_lis(sql_query: str, params: Any = None):
         raise e
 
     finally:
-        # 5. Siempre cerrar la conexión
-        if connection:
+        # 7. Siempre cerrar la conexión
+        if cursor:
             cursor.close()
+        if connection:
             connection.close()

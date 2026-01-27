@@ -9,3 +9,4 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     is_active = Column(Boolean, default=True)
     full_name = Column(String, nullable=True)
+    is_superuser = Column(Boolean(), default=False)

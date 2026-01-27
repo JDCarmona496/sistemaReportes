@@ -1,29 +1,37 @@
-# Este script crea un usuario admin inicial
 from app.database import SessionLocal
 from app.models.user import User
 from app.core.security import get_password_hash
 
-def init_db():
-    db = SessionLocal()
-    
-    # Verificamos si ya existe el usuario para no duplicarlo
-    user = db.query(User).filter(User.email == "admin@example.com").first()
-    if user:
-        print("El usuario admin ya existe.")
-        return
 
-    print("Creando usuario administrador...")
+def crear_superusuario():
+    db = SessionLocal()
+
+    email = "admin@example.com"
+    password = "admin"
+
+    # Verificar si existe
+    user = db.query(User).filter(User.email == email).first()
+    if user:
+        print(f"⚠️ El usuario {email} ya existe. Borrando y recreando...")
+        db.delete(user)
+        db.commit()
+
+    # Crear nuevo Admin
     admin_user = User(
-        email="admin@example.com",
-        hashed_password=get_password_hash("admin123"), # La contraseña será admin123
+        email=email,
+        hashed_password=get_password_hash(password),
         full_name="Administrador del Sistema",
-        is_active=True
+        is_active=True,
+        is_superuser=True,  # <--- CRÍTICO: Esto te da los poderes
     )
-    
+
     db.add(admin_user)
     db.commit()
-    print("Usuario creado exitosamente: admin@example.com / admin123")
+    print("✅ Superusuario creado exitosamente.")
+    print(f"📧 User: {email}")
+    print(f"🔑 Pass: {password}")
     db.close()
 
+
 if __name__ == "__main__":
-    init_db()
+    crear_superusuario()

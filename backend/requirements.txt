@@ -14,3 +14,5 @@ uvicorn[standard]
 flower
 python-multipart
 email-validator
+bcrypt==4.0.1
+alembic

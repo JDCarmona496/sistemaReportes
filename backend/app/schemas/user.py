@@ -1,18 +1,30 @@
+from typing import Optional
 from pydantic import BaseModel, EmailStr
 
-# Propiedades compartidas
+
+# 1. Base compartida (campos comunes)
 class UserBase(BaseModel):
-    email: EmailStr
-    is_active: bool = True
-    full_name: str | None = None
+    email: Optional[EmailStr] = None
+    is_active: Optional[bool] = True
+    is_superuser: bool = False
+    full_name: Optional[str] = None
 
-# Propiedades para crear un usuario (lo usaremos luego)
+
+# 2. Para CREAR (Password obligatorio)
 class UserCreate(UserBase):
+    email: EmailStr | None = None 
     password: str
+    full_name: str  | None = None
 
-# Propiedades para devolver al cliente (¡SIN PASSWORD!)
+
+# 3. Para ACTUALIZAR (Password opcional) <--- ESTA ES LA QUE TE FALTA
+class UserUpdate(UserBase):
+    password: Optional[str] = None
+
+
+# 4. Para LEER/RESPONDER (Sin password)
 class User(UserBase):
     id: int
 
     class Config:
-        from_attributes = True # Antes se llamaba orm_mode
+        from_attributes = True

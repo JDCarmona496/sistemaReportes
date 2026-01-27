@@ -23,10 +23,11 @@ class ReporteRequest(BaseModel):
 
 
 # =========================================================
-# 1. RUTAS ESPECÍFICAS (Celery / Generación)
+# 1. RUTAS DE USO GENERAL (Operadores y Admins)
 # =========================================================
 
 
+# --- GENERAR REPORTE (Cualquier usuario logueado) ---
 @router.post("/generar-background")
 def iniciar_generacion_reporte(
     request: ReporteRequest,
@@ -52,6 +53,7 @@ def iniciar_generacion_reporte(
     }
 
 
+# --- CONSULTAR ESTADO (Cualquier usuario logueado) ---
 @router.get("/task/{task_id}")
 def obtener_estado_tarea(task_id: str, current_user=Depends(deps.get_current_user)):
     """
@@ -69,37 +71,49 @@ def obtener_estado_tarea(task_id: str, current_user=Depends(deps.get_current_use
     }
 
 
-# =========================================================
-# 2. RUTAS CRUD (Gestión de Reportes)
-# =========================================================
-
-
-# --- LISTAR TODOS (GET /) ---
+# --- LISTAR TODOS (Necesario para el dropdown del Operador) ---
 @router.get("/", response_model=List[report_schema.Report])
 def read_reports(
     db: Session = Depends(get_db),
     skip: int = 0,
     limit: int = 100,
-    current_user=Depends(deps.get_current_user),
+    current_user=Depends(deps.get_current_user),  # Acceso: Todos los logueados
 ):
     reports = db.query(Report).offset(skip).limit(limit).all()
     return reports
 
 
-# --- CREAR NUEVO (POST /) ---
+# --- LEER UNO SOLO (Necesario para cargar el formulario dinámico) ---
+@router.get("/{report_id}", response_model=report_schema.Report)
+def read_report(
+    *,
+    db: Session = Depends(get_db),
+    report_id: int,
+    current_user=Depends(deps.get_current_user),  # Acceso: Todos los logueados
+):
+    report = db.query(Report).filter(Report.id == report_id).first()
+    if not report:
+        raise HTTPException(status_code=404, detail="Reporte no encontrado")
+    return report
+
+
+# =========================================================
+# 2. RUTAS ADMINISTRATIVAS (Solo Superuser 🛡️)
+# =========================================================
+
+
+# --- CREAR NUEVO (Solo Admin) ---
 @router.post("/", response_model=report_schema.Report)
 def create_report(
     *,
     db: Session = Depends(get_db),
     report_in: report_schema.ReportCreate,
-    current_user=Depends(
-        deps.get_current_user
-    ),  # Idealmente usar get_current_active_superuser
+    # 🛡️ CAMBIO CRÍTICO: Solo Superuser
+    current_user=Depends(deps.get_current_active_superuser),
 ):
     """
     Crea un nuevo reporte en la base de datos.
     """
-    # Convertimos el modelo Pydantic a Diccionario para SQLAlchemy
     report_data = report_in.dict()
     db_report = Report(**report_data)
 
@@ -109,23 +123,23 @@ def create_report(
     return db_report
 
 
-# --- ACTUALIZAR (PUT /{id}) ---
+# --- ACTUALIZAR (Solo Admin) ---
 @router.put("/{report_id}", response_model=report_schema.Report)
 def update_report(
     *,
     db: Session = Depends(get_db),
     report_id: int,
     report_in: report_schema.ReportUpdate,
-    current_user=Depends(deps.get_current_user),
+    # 🛡️ CAMBIO CRÍTICO: Solo Superuser
+    current_user=Depends(deps.get_current_active_superuser),
 ):
     """
-    Actualiza un reporte existente (Título, SQL o Parámetros).
+    Actualiza un reporte existente.
     """
     report = db.query(Report).filter(Report.id == report_id).first()
     if not report:
         raise HTTPException(status_code=404, detail="Reporte no encontrado")
 
-    # Actualización parcial (solo lo que viene en el JSON)
     update_data = report_in.dict(exclude_unset=True)
 
     for field, value in update_data.items():
@@ -137,13 +151,14 @@ def update_report(
     return report
 
 
-# --- ELIMINAR (DELETE /{id}) ---
+# --- ELIMINAR (Solo Admin) ---
 @router.delete("/{report_id}", response_model=report_schema.Report)
 def delete_report(
     *,
     db: Session = Depends(get_db),
     report_id: int,
-    current_user=Depends(deps.get_current_user),
+    # 🛡️ CAMBIO CRÍTICO: Solo Superuser
+    current_user=Depends(deps.get_current_active_superuser),
 ):
     """
     Elimina un reporte de la base de datos.
@@ -154,19 +169,4 @@ def delete_report(
 
     db.delete(report)
     db.commit()
-    return report
-
-
-# --- LEER UNO SOLO (GET /{id}) ---
-# (Debe ir al final para no ocultar las rutas anteriores)
-@router.get("/{report_id}", response_model=report_schema.Report)
-def read_report(
-    *,
-    db: Session = Depends(get_db),
-    report_id: int,
-    current_user=Depends(deps.get_current_user),
-):
-    report = db.query(Report).filter(Report.id == report_id).first()
-    if not report:
-        raise HTTPException(status_code=404, detail="Reporte no encontrado")
     return report

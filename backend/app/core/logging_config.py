@@ -1,47 +1,43 @@
-import logging
-import sys
-from logging.handlers import TimedRotatingFileHandler
 import os
-
-# Nombre de la carpeta de logs
-LOG_DIR = "logs"
+import logging
+from logging.handlers import RotatingFileHandler # Usaremos este o FileHandler simple
 
 def configure_logging():
-    # 1. Crear carpeta de logs si no existe
-    if not os.path.exists(LOG_DIR):
-        os.makedirs(LOG_DIR)
+    log_dir = "logs"
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+    
+    # Archivo de log principal
+    log_file = os.path.join(log_dir, "app.log")
 
-    # 2. Configurar el formato (Fecha - Nivel - Mensaje)
-    log_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    formatter = logging.Formatter(log_format)
-
-    # 3. Handler de Consola (Para ver en pantalla mientras desarrollas)
-    console_handler = logging.StreamHandler(sys.stdout)
-    console_handler.setFormatter(formatter)
-
-    # 4. Handler de Archivo (Rotativo diario)
-    # Crea un archivo nuevo cada medianoche y guarda historial de 30 días
-    file_handler = TimedRotatingFileHandler(
-        filename=os.path.join(LOG_DIR, "app.log"),
-        when="midnight",
-        interval=1,
-        backupCount=30, # Guardar logs de un mes
+    # --- CAMBIO AQUÍ ---
+    # En lugar de TimedRotatingFileHandler (que rompe en Windows por fechas)
+    # Usamos RotatingFileHandler basado en tamaño (ej: 10MB) que es más seguro
+    # O simplemente FileHandler.
+    
+    file_handler = RotatingFileHandler(
+        log_file, 
+        maxBytes=10*1024*1024, # 10 MB
+        backupCount=5,
         encoding="utf-8"
     )
+    
+    # Formato del log
+    formatter = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
     file_handler.setFormatter(formatter)
-    file_handler.suffix = "%Y-%m-%d" # El archivo viejo se llamará app.log.2026-01-21
 
-    # 5. Aplicar configuración al Logger Raíz
-    root_logger = logging.getLogger()
-    root_logger.setLevel(logging.INFO) # Capturar INFO, WARNING, ERROR, CRITICAL
+    # Configuración básica
+    logging.basicConfig(
+        level=logging.INFO,
+        handlers=[
+            logging.StreamHandler(), # Salida por consola
+            file_handler             # Salida a archivo (Seguro para Windows)
+        ]
+    )
     
-    # Evitar duplicar handlers si se recarga la app
-    if not root_logger.handlers:
-        root_logger.addHandler(console_handler)
-        root_logger.addHandler(file_handler)
+    # Reducir ruido de librerías externas
+    logging.getLogger("watchfiles").setLevel(logging.WARNING)
     
-    # Silenciar un poco los logs ruidosos de librerías externas
-    logging.getLogger("multipart").setLevel(logging.WARNING)
-    logging.getLogger("uvicorn.access").setLevel(logging.WARNING)
-
-    print("✅ Sistema de Logging Iniciado. Los registros se guardarán en /logs")
+    print(f"✅ Sistema de Logging Iniciado. (Modo Seguro Windows)")

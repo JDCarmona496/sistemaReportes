@@ -3,15 +3,14 @@ import logging
 import os
 from app.core.celery_app import celery_app
 from app.core.lis import ejecutar_consulta_lis
-from app.core.pdf_generator import crear_pdf_generico
+
+# Importamos la función MAESTRA que decide el diseño
+from app.core.pdf_generator import generar_pdf_universal
 from app.core.csv_generator import crear_csv_generico
 from app.database import SessionLocal
 from app.models.report import Report
 
-# NOTA: Ya no importamos 'configure_logging' aquí,
-# porque 'celery_app.py' se encarga de inyectarlo al arrancar.
-
-# Inicializamos el logger para este archivo
+# Inicializamos el logger
 logger = logging.getLogger(__name__)
 
 
@@ -35,6 +34,10 @@ def generar_reporte_pesado_task(
         sql_query = str(reporte_db.sql_query)
         titulo = str(reporte_db.title)
 
+        # OBTENEMOS EL LAYOUT DE LA BD (Si es nulo, usamos 'tabla' por defecto)
+        # Esto permite que unos reportes salgan como Ficha y otros como Tabla
+        tipo_layout = getattr(reporte_db, "layout", "tabla") or "tabla"
+
         # Consultar LIS
         datos = ejecutar_consulta_lis(sql_query, params)
         logger.info(f"📊 Datos obtenidos del LIS: {len(datos)} registros")
@@ -48,7 +51,12 @@ def generar_reporte_pesado_task(
         if formato.upper() == "CSV":
             url_archivo = crear_csv_generico(datos, titulo, usuario_id)
         else:
-            url_archivo = crear_pdf_generico(datos, titulo, usuario_id)
+            # --- CAMBIO CLAVE AQUÍ ---
+            # Usamos la función universal y le pasamos el layout de la BD
+            logger.info(f"🎨 Generando PDF con diseño: {tipo_layout}")
+            url_archivo = generar_pdf_universal(
+                datos, titulo, usuario_id, layout_type=tipo_layout
+            )
 
         if not url_archivo:
             logger.error("❌ La función generadora devolvió None.")
