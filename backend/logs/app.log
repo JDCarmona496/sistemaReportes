@@ -1693,3 +1693,878 @@ setting. In Celery 5.1 it is set to False by default. The setting will be set to
 2026-02-07 20:03:00,143 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
 2026-02-07 20:03:00,144 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
 2026-02-07 20:03:00,146 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[289531d8-3293-455f-9d03-ba1ec6f707a5] succeeded in 0.003502400009892881s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:04:00,040 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:04:00,046 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[bd907ea3-0868-44b1-b189-80fd3c2f7478] received
+2026-02-07 20:04:00,050 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:04:00,051 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:04:00,056 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[bd907ea3-0868-44b1-b189-80fd3c2f7478] succeeded in 0.006116399978054687s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:05:00,028 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:05:00,032 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[fef4d2f8-2d2e-4d06-810d-3d2a36cf5284] received
+2026-02-07 20:05:00,035 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:05:00,036 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:05:00,039 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[fef4d2f8-2d2e-4d06-810d-3d2a36cf5284] succeeded in 0.003980600013164803s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:05:45,428 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:06:00,027 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:06:00,031 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[840c21df-1001-42c3-a948-bbf393c5cfaf] received
+2026-02-07 20:06:00,033 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:06:00,035 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:06:00,037 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[840c21df-1001-42c3-a948-bbf393c5cfaf] succeeded in 0.003400699992198497s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:07:00,045 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:07:00,050 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[dc37f127-3490-4cd8-88b4-cbee00ea8dfe] received
+2026-02-07 20:07:00,054 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:07:00,057 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:07:00,060 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[dc37f127-3490-4cd8-88b4-cbee00ea8dfe] succeeded in 0.006307900010142475s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:08:00,055 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:08:00,059 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[b3aaaa2c-5d4d-4abe-95fc-c91e7aca938e] received
+2026-02-07 20:08:00,061 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:08:00,062 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:08:00,064 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[b3aaaa2c-5d4d-4abe-95fc-c91e7aca938e] succeeded in 0.003494100004900247s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:08:45,654 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:09:00,055 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:09:00,058 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[b845ae1a-5949-46fa-848c-5d79b53cb096] received
+2026-02-07 20:09:00,060 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:09:00,062 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:09:00,064 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[b845ae1a-5949-46fa-848c-5d79b53cb096] succeeded in 0.0036991000233683735s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:10:00,036 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:10:00,039 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[a0502178-0ccb-4ac4-8210-a83b1825efe0] received
+2026-02-07 20:10:00,041 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:10:00,042 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:10:00,044 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[a0502178-0ccb-4ac4-8210-a83b1825efe0] succeeded in 0.003566100000170991s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:11:00,035 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:11:00,039 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[06cf8bfe-e15f-4e3f-a767-4e75c6839d80] received
+2026-02-07 20:11:00,041 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:11:00,043 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:11:00,046 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[06cf8bfe-e15f-4e3f-a767-4e75c6839d80] succeeded in 0.004704800026956946s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:11:50,861 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:12:00,036 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:12:00,040 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[4db96e39-0ea8-41b0-b787-7f33140a96ac] received
+2026-02-07 20:12:00,042 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:12:00,043 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:12:00,045 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[4db96e39-0ea8-41b0-b787-7f33140a96ac] succeeded in 0.003269699984230101s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:13:00,032 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:13:00,036 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[77d1d722-20f3-4e0d-abda-f06fe9dfaeb4] received
+2026-02-07 20:13:00,038 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:13:00,039 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:13:00,042 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[77d1d722-20f3-4e0d-abda-f06fe9dfaeb4] succeeded in 0.004000099987024441s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:14:00,170 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:14:00,173 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[7b11cc93-5f9c-4c4d-8663-36cbca10da2c] received
+2026-02-07 20:14:00,176 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:14:00,177 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:14:00,179 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[7b11cc93-5f9c-4c4d-8663-36cbca10da2c] succeeded in 0.0034712000051513314s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:14:55,950 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:15:00,026 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:15:00,030 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[a63a5141-40f5-41a4-9688-c9917325785b] received
+2026-02-07 20:15:00,032 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:15:00,033 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:15:00,035 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[a63a5141-40f5-41a4-9688-c9917325785b] succeeded in 0.0038360000180546194s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:16:00,040 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:16:00,043 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[e99c6337-7964-44c3-beff-d6e76d5392fe] received
+2026-02-07 20:16:00,045 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:16:00,047 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:16:00,049 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[e99c6337-7964-44c3-beff-d6e76d5392fe] succeeded in 0.004017700004624203s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:17:00,041 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:17:00,045 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f4d34071-6efb-4a16-886d-52aee40042a2] received
+2026-02-07 20:17:00,047 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:17:00,049 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:17:00,051 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f4d34071-6efb-4a16-886d-52aee40042a2] succeeded in 0.0037951999984215945s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:17:59,990 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:18:00,353 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:18:00,356 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f55d6733-52b8-491c-9f07-8833b5178de4] received
+2026-02-07 20:18:00,358 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:18:00,360 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:18:00,362 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f55d6733-52b8-491c-9f07-8833b5178de4] succeeded in 0.0034328000037930906s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:19:00,049 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:19:00,053 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[e2c7b30d-ef1b-46cd-b850-d34c7a78362b] received
+2026-02-07 20:19:00,055 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:19:00,057 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:19:00,058 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[e2c7b30d-ef1b-46cd-b850-d34c7a78362b] succeeded in 0.003251499991165474s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:20:00,161 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:20:00,166 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[1f5e7956-30a8-4501-bbd1-8d38bf532c1d] received
+2026-02-07 20:20:00,168 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:20:00,169 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:20:00,171 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[1f5e7956-30a8-4501-bbd1-8d38bf532c1d] succeeded in 0.0029993000207468867s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:21:00,028 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:21:00,031 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[e20b5912-0fc1-4235-ba1c-55e35dbefdf9] received
+2026-02-07 20:21:00,033 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:21:00,035 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:21:00,037 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[e20b5912-0fc1-4235-ba1c-55e35dbefdf9] succeeded in 0.0035515000054147094s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:21:05,067 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:22:00,163 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:22:00,173 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[999800bf-e546-478f-be2d-c26792bd4f05] received
+2026-02-07 20:22:00,175 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:22:00,177 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:22:00,179 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[999800bf-e546-478f-be2d-c26792bd4f05] succeeded in 0.00377810001373291s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:23:00,033 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:23:00,037 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[fb8f00f3-b004-49c1-8cc4-07041d1f5253] received
+2026-02-07 20:23:00,040 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:23:00,041 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:23:00,044 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[fb8f00f3-b004-49c1-8cc4-07041d1f5253] succeeded in 0.004954000003635883s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:24:00,036 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:24:00,039 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[a6351f1b-41ec-447e-a07c-01a2b41c6347] received
+2026-02-07 20:24:00,041 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:24:00,043 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:24:00,045 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[a6351f1b-41ec-447e-a07c-01a2b41c6347] succeeded in 0.0036853000055998564s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:24:10,113 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:25:00,039 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:25:00,043 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[9600de12-321f-4453-bfa6-463f5c76621d] received
+2026-02-07 20:25:00,044 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:25:00,045 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:25:00,047 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[9600de12-321f-4453-bfa6-463f5c76621d] succeeded in 0.003142200002912432s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:26:00,026 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:26:00,030 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[198486a7-e16b-49e7-a4f4-9f75322870b5] received
+2026-02-07 20:26:00,032 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:26:00,034 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:26:00,036 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[198486a7-e16b-49e7-a4f4-9f75322870b5] succeeded in 0.003445599984843284s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:27:00,027 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:27:00,031 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[380d06f2-1a0c-4bcd-88a6-6e205d05164f] received
+2026-02-07 20:27:00,033 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:27:00,034 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:27:00,036 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[380d06f2-1a0c-4bcd-88a6-6e205d05164f] succeeded in 0.0038135999930091202s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:27:15,169 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:28:00,037 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:28:00,041 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[fb8038f1-84ee-40aa-9954-04f6600bcb55] received
+2026-02-07 20:28:00,043 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:28:00,045 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:28:00,048 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[fb8038f1-84ee-40aa-9954-04f6600bcb55] succeeded in 0.004413399990880862s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:29:00,025 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:29:00,028 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f878f42c-fb71-4b7d-aee4-a0e216d3b477] received
+2026-02-07 20:29:00,030 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:29:00,032 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:29:00,034 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f878f42c-fb71-4b7d-aee4-a0e216d3b477] succeeded in 0.0037546999810729176s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:30:00,044 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:30:00,047 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[cf1f6ec9-9455-4914-b4f4-a233176ef7de] received
+2026-02-07 20:30:00,049 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:30:00,051 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:30:00,053 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[cf1f6ec9-9455-4914-b4f4-a233176ef7de] succeeded in 0.0035859000054188073s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:30:20,240 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:31:00,029 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:31:00,032 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[caaadfee-f1f7-4038-bb7d-4c611d674a7e] received
+2026-02-07 20:31:00,035 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:31:00,036 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:31:00,039 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[caaadfee-f1f7-4038-bb7d-4c611d674a7e] succeeded in 0.0039459999825339764s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:32:00,123 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:32:00,126 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[16187afe-5117-4485-bd83-0ab695be4a80] received
+2026-02-07 20:32:00,128 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:32:00,129 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:32:00,132 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[16187afe-5117-4485-bd83-0ab695be4a80] succeeded in 0.0036985000187996775s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:33:00,025 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:33:00,029 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[c834d63b-ddb0-45dd-8d5d-2c58d948c234] received
+2026-02-07 20:33:00,031 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:33:00,032 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:33:00,034 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[c834d63b-ddb0-45dd-8d5d-2c58d948c234] succeeded in 0.003635100001702085s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:33:25,312 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:34:00,028 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:34:00,031 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[ab5b9b40-bfba-4f53-82d6-420f81079b83] received
+2026-02-07 20:34:00,033 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:34:00,035 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:34:00,037 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[ab5b9b40-bfba-4f53-82d6-420f81079b83] succeeded in 0.003987100004451349s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:35:00,036 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:35:00,040 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f4d7a4af-8240-45d7-8234-6e25fef49af8] received
+2026-02-07 20:35:00,043 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:35:00,045 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:35:00,047 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f4d7a4af-8240-45d7-8234-6e25fef49af8] succeeded in 0.004083000007085502s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:36:00,024 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:36:00,028 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[4eb48d05-ffb3-4634-bc5f-bfd1fe28ab34] received
+2026-02-07 20:36:00,031 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:36:00,032 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:36:00,034 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[4eb48d05-ffb3-4634-bc5f-bfd1fe28ab34] succeeded in 0.003601599979447201s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:36:30,248 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:37:00,162 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:37:00,166 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[e9a0b853-a02b-4010-b7be-469ceddfc93c] received
+2026-02-07 20:37:00,168 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:37:00,169 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:37:00,171 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[e9a0b853-a02b-4010-b7be-469ceddfc93c] succeeded in 0.003100100002484396s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:38:00,029 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:38:00,033 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[54f9cbcf-9092-478d-a1f3-0353edc67c13] received
+2026-02-07 20:38:00,035 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:38:00,037 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:38:00,039 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[54f9cbcf-9092-478d-a1f3-0353edc67c13] succeeded in 0.0033933999948203564s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:39:00,044 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:39:00,050 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[29206459-d3c1-4c1d-93a4-5fd281ae7ed7] received
+2026-02-07 20:39:00,053 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:39:00,055 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:39:00,059 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[29206459-d3c1-4c1d-93a4-5fd281ae7ed7] succeeded in 0.005778699996881187s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:39:35,431 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:40:00,028 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:40:00,031 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f3bfa38b-4e42-4c00-8cae-afbf35e086df] received
+2026-02-07 20:40:00,033 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:40:00,035 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:40:00,036 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f3bfa38b-4e42-4c00-8cae-afbf35e086df] succeeded in 0.0033094999962486327s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:41:00,026 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:41:00,030 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[2c8b9d9d-9eed-4e53-acf9-2f932125a18b] received
+2026-02-07 20:41:00,032 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:41:00,033 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:41:00,035 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[2c8b9d9d-9eed-4e53-acf9-2f932125a18b] succeeded in 0.003652899991720915s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:42:00,039 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:42:00,043 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[e78fd5d8-59fc-46d7-9243-899b8898523b] received
+2026-02-07 20:42:00,045 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:42:00,046 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:42:00,048 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[e78fd5d8-59fc-46d7-9243-899b8898523b] succeeded in 0.003488099988317117s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:42:40,644 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:43:00,037 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:43:00,050 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[cbe1697a-0337-4eeb-ae67-88901ac4cb1c] received
+2026-02-07 20:43:00,052 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:43:00,054 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:43:00,055 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[cbe1697a-0337-4eeb-ae67-88901ac4cb1c] succeeded in 0.003320399991935119s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:44:00,041 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:44:00,045 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[e02d1387-d4c2-4666-9082-b6aa2af1a6bf] received
+2026-02-07 20:44:00,047 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:44:00,048 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:44:00,050 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[e02d1387-d4c2-4666-9082-b6aa2af1a6bf] succeeded in 0.0032875000033527613s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:45:00,029 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:45:00,033 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[dc539c05-3900-4df1-814e-ea4a8744d3a2] received
+2026-02-07 20:45:00,035 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:45:00,037 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:45:00,038 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[dc539c05-3900-4df1-814e-ea4a8744d3a2] succeeded in 0.003769800008740276s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:45:45,476 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:46:00,148 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:46:00,152 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[177287a0-0926-4251-9ffb-94f9532d8f78] received
+2026-02-07 20:46:00,154 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:46:00,155 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:46:00,157 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[177287a0-0926-4251-9ffb-94f9532d8f78] succeeded in 0.0036370999878272414s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:47:00,044 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:47:00,048 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[8c416a93-3b18-43ea-aabf-37967b1fc8e0] received
+2026-02-07 20:47:00,050 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:47:00,051 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:47:00,053 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[8c416a93-3b18-43ea-aabf-37967b1fc8e0] succeeded in 0.0031260999967344105s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:48:00,043 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:48:00,046 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[6c8a5912-1f11-4a0a-9235-fa3e4e3e3fde] received
+2026-02-07 20:48:00,048 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:48:00,050 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:48:00,052 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[6c8a5912-1f11-4a0a-9235-fa3e4e3e3fde] succeeded in 0.003624300006777048s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:48:45,568 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:49:00,033 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:49:00,036 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[8d2b4264-773b-4766-a664-cffe2b29a93c] received
+2026-02-07 20:49:00,037 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:49:00,039 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:49:00,041 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[8d2b4264-773b-4766-a664-cffe2b29a93c] succeeded in 0.0032350999827031046s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:50:00,035 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:50:00,038 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[1a9cced3-ed8a-44e0-9924-1efc45495ee8] received
+2026-02-07 20:50:00,040 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:50:00,041 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:50:00,043 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[1a9cced3-ed8a-44e0-9924-1efc45495ee8] succeeded in 0.0031651999743189663s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:51:00,058 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:51:00,062 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[c209fcb5-6844-4d4b-8869-cfd1d1f6142b] received
+2026-02-07 20:51:00,065 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:51:00,066 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:51:00,068 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[c209fcb5-6844-4d4b-8869-cfd1d1f6142b] succeeded in 0.0033577000140212476s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:51:50,770 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:52:00,027 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:52:00,031 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[118ff15a-3168-4d0b-9dae-6b129e0315e9] received
+2026-02-07 20:52:00,034 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:52:00,035 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:52:00,037 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[118ff15a-3168-4d0b-9dae-6b129e0315e9] succeeded in 0.0033164999913424253s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:53:00,039 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:53:00,042 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[ad8b7e58-4805-401a-afb3-f6e3a42fa905] received
+2026-02-07 20:53:00,044 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:53:00,046 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:53:00,048 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[ad8b7e58-4805-401a-afb3-f6e3a42fa905] succeeded in 0.0032578999816905707s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:54:00,036 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:54:00,039 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[be788b94-b63d-4524-b411-bc3a3e97fd42] received
+2026-02-07 20:54:00,041 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:54:00,043 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:54:00,044 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[be788b94-b63d-4524-b411-bc3a3e97fd42] succeeded in 0.0032321999897249043s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:54:55,694 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:55:00,035 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:55:00,039 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[d2a483a5-932f-44b8-916b-d2d71a77e30f] received
+2026-02-07 20:55:00,041 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:55:00,042 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:55:00,044 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[d2a483a5-932f-44b8-916b-d2d71a77e30f] succeeded in 0.003394800005480647s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:56:00,055 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:56:00,059 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[14200e1f-4e09-41c6-9e94-991e23156fc1] received
+2026-02-07 20:56:00,061 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:56:00,063 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:56:00,065 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[14200e1f-4e09-41c6-9e94-991e23156fc1] succeeded in 0.0031923999777063727s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:08:31,139 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 21:08:31,390 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:08:35,246 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[169e3c04-45d3-4f32-92f6-8f305e80ad61] received
+2026-02-07 21:08:35,249 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:08:35,252 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:08:35,255 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[169e3c04-45d3-4f32-92f6-8f305e80ad61] succeeded in 0.0058360999973956496s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:09:00,027 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:09:00,030 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[c88ca21b-1320-445f-a005-a694fe67ed51] received
+2026-02-07 21:09:00,032 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:09:00,034 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:09:00,036 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[c88ca21b-1320-445f-a005-a694fe67ed51] succeeded in 0.0037345000018831342s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:10:00,029 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:10:00,032 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[1c83440e-f756-4ae8-87a8-4e3fb96fae66] received
+2026-02-07 21:10:00,034 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:10:00,035 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:10:00,038 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[1c83440e-f756-4ae8-87a8-4e3fb96fae66] succeeded in 0.003425200004130602s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:11:00,078 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:11:00,082 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f069fa1d-cc4c-49c0-9217-811038627406] received
+2026-02-07 21:11:00,084 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:11:00,085 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:11:00,087 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f069fa1d-cc4c-49c0-9217-811038627406] succeeded in 0.003201299987267703s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:11:35,554 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 21:12:00,025 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:12:00,030 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[5a1cd648-f353-4314-9079-b1da9986ad2b] received
+2026-02-07 21:12:00,032 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:12:00,033 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:12:00,035 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[5a1cd648-f353-4314-9079-b1da9986ad2b] succeeded in 0.0033796000061556697s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:13:00,039 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:13:00,043 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[0b9e2d61-345f-4fd7-849a-cf1efa604cef] received
+2026-02-07 21:13:00,045 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:13:00,047 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:13:00,049 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[0b9e2d61-345f-4fd7-849a-cf1efa604cef] succeeded in 0.004328899987740442s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:14:00,170 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:14:00,174 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[c34b152a-db1e-4af3-898d-22f2ddedec79] received
+2026-02-07 21:14:00,177 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:14:00,178 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:14:00,180 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[c34b152a-db1e-4af3-898d-22f2ddedec79] succeeded in 0.0038142999983392656s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:14:40,604 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 21:15:00,148 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:15:00,151 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[5e2d9861-ada8-4884-a7a2-e5bcd8619622] received
+2026-02-07 21:15:00,153 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:15:00,155 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:15:00,157 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[5e2d9861-ada8-4884-a7a2-e5bcd8619622] succeeded in 0.0034651999885682017s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:16:00,049 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:16:00,052 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[ded57ea9-7670-4ef4-be05-316f926cf8d7] received
+2026-02-07 21:16:00,054 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:16:00,056 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:16:00,058 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[ded57ea9-7670-4ef4-be05-316f926cf8d7] succeeded in 0.0033066000032704324s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:17:00,038 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:17:00,041 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[6ccd974c-76f1-42e3-b11f-04e19c94df7b] received
+2026-02-07 21:17:00,044 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:17:00,045 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:17:00,047 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[6ccd974c-76f1-42e3-b11f-04e19c94df7b] succeeded in 0.0034948000102303922s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:17:45,645 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 21:18:00,041 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:18:00,045 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[08cb2b17-31ed-43b9-afa6-f65dd9c61a3b] received
+2026-02-07 21:18:00,047 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:18:00,049 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:18:00,050 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[08cb2b17-31ed-43b9-afa6-f65dd9c61a3b] succeeded in 0.0033224000071641058s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:19:00,039 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:19:00,043 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[c6166551-3b3e-4bbb-b0b5-e0b888ef6c6a] received
+2026-02-07 21:19:00,045 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:19:00,046 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:19:00,048 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[c6166551-3b3e-4bbb-b0b5-e0b888ef6c6a] succeeded in 0.0029249999788589776s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:20:00,132 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:20:00,135 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[35b3aa6e-192a-49eb-9db0-7d33e74e55d5] received
+2026-02-07 21:20:00,136 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:20:00,138 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:20:00,140 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[35b3aa6e-192a-49eb-9db0-7d33e74e55d5] succeeded in 0.003290499997092411s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:20:50,701 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 21:21:00,029 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:21:00,032 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[9491c560-cf1f-44e6-8be2-d85cdb851332] received
+2026-02-07 21:21:00,034 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:21:00,036 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:21:00,038 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[9491c560-cf1f-44e6-8be2-d85cdb851332] succeeded in 0.003427699994063005s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:22:00,044 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:22:00,048 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f6ebca45-fdfc-45f1-8347-dbb0ead7bee3] received
+2026-02-07 21:22:00,050 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:22:00,051 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:22:00,053 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f6ebca45-fdfc-45f1-8347-dbb0ead7bee3] succeeded in 0.0035102000110782683s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:23:00,038 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:23:00,042 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[fce84e41-3456-44e9-9c3b-3797de22d606] received
+2026-02-07 21:23:00,044 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:23:00,045 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:23:00,047 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[fce84e41-3456-44e9-9c3b-3797de22d606] succeeded in 0.0031239000090863556s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:23:55,536 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 21:24:00,044 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:24:00,047 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[ad768138-3801-4583-bb73-b7adec6eb21c] received
+2026-02-07 21:24:00,050 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:24:00,051 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:24:00,054 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[ad768138-3801-4583-bb73-b7adec6eb21c] succeeded in 0.0039018999959807843s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:25:00,039 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:25:00,042 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[ab4249b9-c588-468f-8e23-104e2c4a4149] received
+2026-02-07 21:25:00,045 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:25:00,047 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:25:00,049 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[ab4249b9-c588-468f-8e23-104e2c4a4149] succeeded in 0.0037728000024799258s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:26:00,165 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:26:00,168 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[8c4ddf4c-f236-4113-9249-8a55186cb98e] received
+2026-02-07 21:26:00,171 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:26:00,172 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:26:00,174 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[8c4ddf4c-f236-4113-9249-8a55186cb98e] succeeded in 0.0032288000220432878s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:26:56,155 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 21:27:00,039 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:27:00,043 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[0a466eff-3957-40e0-83f8-24e6b94dc895] received
+2026-02-07 21:27:00,045 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:27:00,047 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:27:00,049 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[0a466eff-3957-40e0-83f8-24e6b94dc895] succeeded in 0.0039724999805912375s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:28:00,038 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:28:00,042 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[b7d502c4-c3b8-481c-9439-8fa0f458e8c2] received
+2026-02-07 21:28:00,044 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:28:00,046 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:28:00,047 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[b7d502c4-c3b8-481c-9439-8fa0f458e8c2] succeeded in 0.0032150000042747706s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:29:00,027 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:29:00,031 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[839eebef-f13d-49f8-bd81-cc39ed7583c5] received
+2026-02-07 21:29:00,033 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:29:00,035 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:29:00,037 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[839eebef-f13d-49f8-bd81-cc39ed7583c5] succeeded in 0.0040191999869421124s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:29:59,990 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 21:30:00,100 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:30:00,103 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[ca8dc9ab-2e99-4700-be8e-0145a50d5366] received
+2026-02-07 21:30:00,105 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:30:00,106 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:30:00,108 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[ca8dc9ab-2e99-4700-be8e-0145a50d5366] succeeded in 0.003339199989568442s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:31:00,025 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:31:00,029 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[93415ffb-659a-4d0c-a35e-f7b610675abc] received
+2026-02-07 21:31:00,031 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:31:00,033 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:31:00,035 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[93415ffb-659a-4d0c-a35e-f7b610675abc] succeeded in 0.0033774999901652336s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:32:00,039 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:32:00,042 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[0dd8575f-323f-4f93-a509-7e20e24fa97d] received
+2026-02-07 21:32:00,044 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:32:00,046 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:32:00,048 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[0dd8575f-323f-4f93-a509-7e20e24fa97d] succeeded in 0.0038314000121317804s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:33:00,034 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:33:00,038 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f2e585d1-effd-4b16-9f99-5cc93d2fd964] received
+2026-02-07 21:33:00,040 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:33:00,041 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:33:00,043 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f2e585d1-effd-4b16-9f99-5cc93d2fd964] succeeded in 0.0033867000020109117s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:33:05,072 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 21:34:00,025 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:34:00,028 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[eb33bd5a-de8e-4686-b001-2e6c2812fbf2] received
+2026-02-07 21:34:00,031 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:34:00,033 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:34:00,035 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[eb33bd5a-de8e-4686-b001-2e6c2812fbf2] succeeded in 0.0038326999929267913s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:35:00,149 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:35:00,152 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[c817fdfb-5f6c-4b21-8015-e07749bc1850] received
+2026-02-07 21:35:00,154 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:35:00,155 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:35:00,157 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[c817fdfb-5f6c-4b21-8015-e07749bc1850] succeeded in 0.00296320000779815s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:36:00,035 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:36:00,039 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[54374c22-b979-41ab-b8ba-ef2df0529956] received
+2026-02-07 21:36:00,042 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:36:00,043 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:36:00,045 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[54374c22-b979-41ab-b8ba-ef2df0529956] succeeded in 0.00350099999923259s: {'error': 'Reporte no encontrado'}
+2026-02-07 21:36:10,127 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 21:37:00,035 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 21:37:00,038 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[e8062411-c214-47f0-b608-0ecfdb62434e] received
+2026-02-07 21:37:00,040 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 21:37:00,041 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 21:37:00,043 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[e8062411-c214-47f0-b608-0ecfdb62434e] succeeded in 0.003130199998850003s: {'error': 'Reporte no encontrado'}
+2026-02-08 00:37:31,232 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 00:37:31,510 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 00:37:34,280 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[b008c1b3-afc5-4195-945b-54406b232b38] received
+2026-02-08 00:37:34,289 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 00:37:34,292 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 00:37:34,296 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[b008c1b3-afc5-4195-945b-54406b232b38] succeeded in 0.006986099993810058s: {'error': 'Reporte no encontrado'}
+2026-02-08 00:37:34,325 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 00:37:34,349 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[cdd44d01-89e0-4771-baf3-749ffc01588c] received
+2026-02-08 00:37:34,354 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 00:37:34,356 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 00:37:34,358 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[cdd44d01-89e0-4771-baf3-749ffc01588c] succeeded in 0.003875399997923523s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:31:10,643 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 18:31:11,748 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:31:12,056 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[27542df9-24a5-4a23-a2b3-28f78755df19] received
+2026-02-08 18:31:12,059 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:31:12,062 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:31:12,069 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:31:12,073 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[27542df9-24a5-4a23-a2b3-28f78755df19] succeeded in 0.013880199985578656s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:31:12,078 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[bbbc331c-4474-4e3f-b894-e3b9180a9993] received
+2026-02-08 18:31:12,080 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:31:12,081 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:31:12,083 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[bbbc331c-4474-4e3f-b894-e3b9180a9993] succeeded in 0.0034983999794349074s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:31:12,147 - celery.beat - INFO - Scheduler: Sending due task Mantenimiento: Limpieza Archivos (app.worker.limpiar_reportes_antiguos_task)
+2026-02-08 18:31:12,444 - celery.worker.strategy - INFO - Task app.worker.limpiar_reportes_antiguos_task[b5782c1e-1bd1-479e-abc3-1d285f6e95d4] received
+2026-02-08 18:31:13,237 - app.worker - INFO - 🧹 [MANTENIMIENTO] Configuración dinámica cargada: Borrar mayores a 24 horas.
+2026-02-08 18:31:13,540 - app.worker - INFO - 🧹 [MANTENIMIENTO] Iniciando limpieza de archivos antiguos...
+2026-02-08 18:31:13,568 - app.worker - INFO - 🗑️ Eliminado por antigüedad: Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-02-08 18:31:13,734 - app.worker - INFO - 🗑️ Eliminado por antigüedad: {}_2_Reporte_por_Lista_(PDFCSV).pdf
+2026-02-08 18:31:13,983 - app.worker - INFO - 🗑️ Eliminado por antigüedad: {}_4_Reporte_por_Lista_(PDFCSV).pdf
+2026-02-08 18:31:14,029 - app.worker - INFO - ✅ Limpieza terminada. Eliminados: 3. Errores: 0.
+2026-02-08 18:31:14,142 - celery.app.trace - INFO - Task app.worker.limpiar_reportes_antiguos_task[b5782c1e-1bd1-479e-abc3-1d285f6e95d4] succeeded in 1.689587600005325s: '✅ Limpieza terminada. Eliminados: 3. Errores: 0.'
+2026-02-08 18:32:00,026 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:32:00,030 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[cae7fea3-09ef-4ff7-9797-843d07b0af2a] received
+2026-02-08 18:32:00,041 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:32:00,042 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:32:00,044 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[cae7fea3-09ef-4ff7-9797-843d07b0af2a] succeeded in 0.003576299990527332s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:32:00,164 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:32:00,166 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[b4438e7c-30f7-4618-898d-a6eaca238c58] received
+2026-02-08 18:32:00,168 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:32:00,169 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:32:00,171 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[b4438e7c-30f7-4618-898d-a6eaca238c58] succeeded in 0.003014099958818406s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:33:00,029 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:33:00,032 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[c45b6d06-3044-4c1e-900d-1d6d45007cd8] received
+2026-02-08 18:33:00,034 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:33:00,035 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:33:00,037 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[c45b6d06-3044-4c1e-900d-1d6d45007cd8] succeeded in 0.0032667999621480703s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:33:00,172 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:33:00,175 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[3967ef4e-3047-467a-9286-de3805bb66ce] received
+2026-02-08 18:33:00,177 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:33:00,179 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:33:00,180 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[3967ef4e-3047-467a-9286-de3805bb66ce] succeeded in 0.003186299989465624s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:34:00,044 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:34:00,047 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[ba863d8f-b953-47dd-9b9f-08c02dc88671] received
+2026-02-08 18:34:00,049 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:34:00,051 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:34:00,053 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[ba863d8f-b953-47dd-9b9f-08c02dc88671] succeeded in 0.0036707999533973634s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:34:00,082 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:34:00,085 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[0eea8288-7f13-4a6a-a2c8-f68eee7be135] received
+2026-02-08 18:34:00,088 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:34:00,089 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:34:00,091 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[0eea8288-7f13-4a6a-a2c8-f68eee7be135] succeeded in 0.0030700000352226198s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:34:15,231 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 18:35:00,033 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:35:00,037 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[79568b05-0043-4586-95e4-8b9f6a099ac1] received
+2026-02-08 18:35:00,039 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:35:00,041 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:35:00,043 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[79568b05-0043-4586-95e4-8b9f6a099ac1] succeeded in 0.0033375999773852527s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:35:00,071 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:35:00,074 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[6bc2a1c2-329a-4b27-9167-7b3c875b00a9] received
+2026-02-08 18:35:00,077 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:35:00,079 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:35:00,081 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[6bc2a1c2-329a-4b27-9167-7b3c875b00a9] succeeded in 0.004470700048841536s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:36:00,027 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:36:00,030 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[2878f06b-bc39-4cfd-9660-aa514ff6d3d6] received
+2026-02-08 18:36:00,032 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:36:00,034 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:36:00,036 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[2878f06b-bc39-4cfd-9660-aa514ff6d3d6] succeeded in 0.0040123999933712184s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:36:00,187 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:36:00,189 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[213d466e-1513-44fb-ba26-fea4a02265fb] received
+2026-02-08 18:36:00,192 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:36:00,193 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:36:00,195 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[213d466e-1513-44fb-ba26-fea4a02265fb] succeeded in 0.0031500000040978193s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:37:00,145 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:37:00,148 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[dc4d43ca-08bf-4c82-b261-e6103ba24335] received
+2026-02-08 18:37:00,150 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:37:00,152 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:37:00,154 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[dc4d43ca-08bf-4c82-b261-e6103ba24335] succeeded in 0.0033786999993026257s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:37:00,188 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:37:00,190 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f685c259-26d0-4a7b-8c27-2df16ce6dfdd] received
+2026-02-08 18:37:00,193 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:37:00,194 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:37:00,196 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f685c259-26d0-4a7b-8c27-2df16ce6dfdd] succeeded in 0.0033665000228211284s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:37:20,396 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 18:38:00,024 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:38:00,027 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[6789e303-3552-4fe5-b6c4-dd4dc76b3e0a] received
+2026-02-08 18:38:00,030 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:38:00,031 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:38:00,034 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[6789e303-3552-4fe5-b6c4-dd4dc76b3e0a] succeeded in 0.004274100007023662s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:38:00,065 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:38:00,068 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[5c44ad73-b857-466c-8d48-54bb6f980eea] received
+2026-02-08 18:38:00,069 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:38:00,071 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:38:00,073 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[5c44ad73-b857-466c-8d48-54bb6f980eea] succeeded in 0.003158799954690039s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:39:00,026 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:39:00,030 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[798faf64-4900-40f4-953e-1cc2c2448140] received
+2026-02-08 18:39:00,032 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:39:00,033 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:39:00,035 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[798faf64-4900-40f4-953e-1cc2c2448140] succeeded in 0.0036924000014550984s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:39:00,065 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:39:00,068 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[d56e5e3d-e6bc-4d46-a752-4c75dbea8940] received
+2026-02-08 18:39:00,070 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:39:00,071 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:39:00,073 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[d56e5e3d-e6bc-4d46-a752-4c75dbea8940] succeeded in 0.0032442999654449522s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:40:00,139 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:40:00,142 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[dd76ce0f-c680-4238-a2b5-3a865cba164e] received
+2026-02-08 18:40:00,144 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:40:00,146 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:40:00,149 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[dd76ce0f-c680-4238-a2b5-3a865cba164e] succeeded in 0.004542800015769899s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:40:00,181 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:40:00,184 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[199655e4-cf1e-4986-b1f3-da3626f1ea5c] received
+2026-02-08 18:40:00,186 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:40:00,187 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:40:00,189 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[199655e4-cf1e-4986-b1f3-da3626f1ea5c] succeeded in 0.003435300022829324s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:40:25,487 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 18:41:00,032 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:41:00,036 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[96cbba73-d0ce-48cc-a81b-0f9000ea0d61] received
+2026-02-08 18:41:00,038 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:41:00,040 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:41:00,043 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[96cbba73-d0ce-48cc-a81b-0f9000ea0d61] succeeded in 0.004400800040457398s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:41:00,083 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:41:00,086 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[3c722696-b6e0-48cd-8feb-52ecf24702c1] received
+2026-02-08 18:41:00,088 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:41:00,090 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:41:00,092 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[3c722696-b6e0-48cd-8feb-52ecf24702c1] succeeded in 0.003994199971202761s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:42:00,050 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:42:00,055 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[2d71a9f2-7c37-4b99-98bc-5b22a098362f] received
+2026-02-08 18:42:00,057 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:42:00,059 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:42:00,060 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[2d71a9f2-7c37-4b99-98bc-5b22a098362f] succeeded in 0.0031242999830283225s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:42:00,091 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:42:00,094 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[6577e005-d7f3-484b-a926-762ec37a6d48] received
+2026-02-08 18:42:00,096 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:42:00,098 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:42:00,100 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[6577e005-d7f3-484b-a926-762ec37a6d48] succeeded in 0.004260600020643324s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:43:00,037 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:43:00,040 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[0e848255-34b6-4759-b86b-d44bd374f48b] received
+2026-02-08 18:43:00,042 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:43:00,043 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:43:00,045 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[0e848255-34b6-4759-b86b-d44bd374f48b] succeeded in 0.0033271999564021826s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:43:00,079 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:43:00,082 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[28bf1f5b-8e64-4602-a2bf-c17c27141ae7] received
+2026-02-08 18:43:00,086 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:43:00,089 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:43:00,094 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[28bf1f5b-8e64-4602-a2bf-c17c27141ae7] succeeded in 0.008282400027383119s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:43:30,338 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 18:44:00,050 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:44:00,053 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[24674c89-08c0-4697-b3eb-85de37f5c2e0] received
+2026-02-08 18:44:00,055 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:44:00,056 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:44:00,058 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[24674c89-08c0-4697-b3eb-85de37f5c2e0] succeeded in 0.0031567999976687133s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:44:00,088 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:44:00,091 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[5a0f9fde-2c9f-40b2-bfda-0304c96c8ca1] received
+2026-02-08 18:44:00,095 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:44:00,096 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:44:00,099 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[5a0f9fde-2c9f-40b2-bfda-0304c96c8ca1] succeeded in 0.003877700015436858s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:45:00,057 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:45:00,061 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[6a44df79-9264-4635-82e2-0c2f92430742] received
+2026-02-08 18:45:00,063 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:45:00,072 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:45:00,075 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[6a44df79-9264-4635-82e2-0c2f92430742] succeeded in 0.011574100004509091s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:45:00,099 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:45:00,102 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[3346c4c5-9ffc-441c-a8a8-d6b5d67a16eb] received
+2026-02-08 18:45:00,104 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:45:00,105 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:45:00,107 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[3346c4c5-9ffc-441c-a8a8-d6b5d67a16eb] succeeded in 0.0033361000241711736s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:46:00,059 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:46:00,063 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[3f00dcaa-3871-4f52-9acd-f78b409713d3] received
+2026-02-08 18:46:00,065 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:46:00,067 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:46:00,069 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[3f00dcaa-3871-4f52-9acd-f78b409713d3] succeeded in 0.003612700034864247s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:46:00,099 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:46:00,101 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[582b298b-e5e2-4b26-a499-f4294497403e] received
+2026-02-08 18:46:00,103 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:46:00,104 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:46:00,106 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[582b298b-e5e2-4b26-a499-f4294497403e] succeeded in 0.0029996000230312347s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:46:35,451 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 18:47:00,049 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:47:00,052 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[d3b0898e-ca33-47d2-9810-be4ea74ee936] received
+2026-02-08 18:47:00,055 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:47:00,056 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:47:00,058 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[d3b0898e-ca33-47d2-9810-be4ea74ee936] succeeded in 0.003451800032053143s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:47:00,089 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:47:00,092 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[0c81ea76-fef6-4b54-beb5-4c5ff487c6dc] received
+2026-02-08 18:47:00,094 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:47:00,095 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:47:00,097 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[0c81ea76-fef6-4b54-beb5-4c5ff487c6dc] succeeded in 0.003613899985793978s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:48:00,030 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:48:00,034 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[50e34834-6ab8-4001-ba27-18f82ac44983] received
+2026-02-08 18:48:00,037 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:48:00,039 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:48:00,041 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[50e34834-6ab8-4001-ba27-18f82ac44983] succeeded in 0.0037743000430054963s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:48:00,076 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:48:00,079 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[eaad069d-f63f-4092-93a1-63025887c108] received
+2026-02-08 18:48:00,081 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:48:00,083 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:48:00,085 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[eaad069d-f63f-4092-93a1-63025887c108] succeeded in 0.0039053999935276806s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:49:00,035 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:49:00,039 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[7dbf48cd-f78c-4f2e-8619-81cd11abe2c9] received
+2026-02-08 18:49:00,042 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:49:00,047 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:49:00,050 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[7dbf48cd-f78c-4f2e-8619-81cd11abe2c9] succeeded in 0.00789690000237897s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:49:00,087 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:49:00,090 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[af00baac-0576-414f-9d68-2ccdd1376bc8] received
+2026-02-08 18:49:00,092 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:49:00,094 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:49:00,097 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[af00baac-0576-414f-9d68-2ccdd1376bc8] succeeded in 0.0043338999967090786s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:49:40,558 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 18:50:00,026 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:50:00,030 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[e1449f39-2b99-4545-9555-587ef2fa9a29] received
+2026-02-08 18:50:00,031 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:50:00,033 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:50:00,035 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[e1449f39-2b99-4545-9555-587ef2fa9a29] succeeded in 0.003467799979262054s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:50:00,066 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:50:00,069 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[3d729573-9d34-4678-83f4-0e1447bb7697] received
+2026-02-08 18:50:00,072 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:50:00,073 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:50:00,075 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[3d729573-9d34-4678-83f4-0e1447bb7697] succeeded in 0.0036619000020436943s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:51:00,053 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:51:00,057 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[fbc4ad94-377b-40d7-b3bd-237ee977858f] received
+2026-02-08 18:51:00,059 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:51:00,061 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:51:00,063 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[fbc4ad94-377b-40d7-b3bd-237ee977858f] succeeded in 0.004169799969531596s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:51:00,096 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:51:00,098 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[444243c2-6678-4605-849f-2facd831aad3] received
+2026-02-08 18:51:00,100 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:51:00,102 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:51:00,103 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[444243c2-6678-4605-849f-2facd831aad3] succeeded in 0.003168500028550625s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:52:00,122 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:52:00,125 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[653dcd41-11f8-42a3-9763-f5eedd534e5a] received
+2026-02-08 18:52:00,127 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:52:00,129 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:52:00,130 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[653dcd41-11f8-42a3-9763-f5eedd534e5a] succeeded in 0.00334689998999238s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:52:00,158 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:52:00,161 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[78ada975-9926-45b0-8df6-31a28d79d684] received
+2026-02-08 18:52:00,163 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:52:00,164 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:52:00,166 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[78ada975-9926-45b0-8df6-31a28d79d684] succeeded in 0.0029779999749734998s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:52:45,576 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 18:53:00,026 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:53:00,029 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[85ae8e02-ac28-4f90-a9c7-e766e4cc5946] received
+2026-02-08 18:53:00,031 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:53:00,032 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:53:00,034 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[85ae8e02-ac28-4f90-a9c7-e766e4cc5946] succeeded in 0.0031170000438578427s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:53:00,076 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:53:00,079 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[d426aebd-a3db-4798-9d65-e480ece9f2f8] received
+2026-02-08 18:53:00,083 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:53:00,086 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:53:00,091 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[d426aebd-a3db-4798-9d65-e480ece9f2f8] succeeded in 0.00839169998653233s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:54:00,056 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:54:00,060 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[e45b3c56-0062-425d-af44-9612c6c16082] received
+2026-02-08 18:54:00,069 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:54:00,070 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:54:00,072 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[e45b3c56-0062-425d-af44-9612c6c16082] succeeded in 0.0029992000199854374s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:54:00,095 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:54:00,097 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[992a2765-f4eb-4e8b-875d-42f664dc10ae] received
+2026-02-08 18:54:00,099 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:54:00,100 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:54:00,102 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[992a2765-f4eb-4e8b-875d-42f664dc10ae] succeeded in 0.0030863999854773283s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:55:00,127 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:55:00,133 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[4d862ac6-6f83-48f4-89b7-570d67851faa] received
+2026-02-08 18:55:00,137 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:55:00,138 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:55:00,140 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[4d862ac6-6f83-48f4-89b7-570d67851faa] succeeded in 0.0034163000527769327s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:55:00,170 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:55:00,173 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f042f65e-5bd4-4bde-a176-d499dd94637a] received
+2026-02-08 18:55:00,175 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:55:00,177 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:55:00,178 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f042f65e-5bd4-4bde-a176-d499dd94637a] succeeded in 0.003807600005529821s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:55:45,748 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 18:56:00,040 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:56:00,046 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[c4725036-bea3-4752-b383-37ad9e4af939] received
+2026-02-08 18:56:00,049 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:56:00,051 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:56:00,053 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[c4725036-bea3-4752-b383-37ad9e4af939] succeeded in 0.003605599980801344s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:56:00,082 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:56:00,085 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[26806499-c761-487f-bc61-e0401e664fcd] received
+2026-02-08 18:56:00,088 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:56:00,089 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:56:00,091 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[26806499-c761-487f-bc61-e0401e664fcd] succeeded in 0.0031939000473357737s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:57:00,153 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:57:00,158 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[342f1e1b-3f91-4644-9a59-5c49249f3f20] received
+2026-02-08 18:57:00,162 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:57:00,164 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:57:00,166 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[342f1e1b-3f91-4644-9a59-5c49249f3f20] succeeded in 0.003995999984908849s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:57:00,216 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:57:00,220 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[1dffef52-b1c3-4092-89df-2106861df8d3] received
+2026-02-08 18:57:00,222 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:57:00,225 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:57:00,227 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[1dffef52-b1c3-4092-89df-2106861df8d3] succeeded in 0.004882699984591454s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:58:00,026 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:58:00,030 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[9473235c-bff0-4377-8420-7633b80ffd4b] received
+2026-02-08 18:58:00,032 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:58:00,033 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:58:00,035 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[9473235c-bff0-4377-8420-7633b80ffd4b] succeeded in 0.003679000015836209s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:58:00,064 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:58:00,067 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[47fc4205-9d80-499d-8595-b1a8ec4e72ce] received
+2026-02-08 18:58:00,069 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:58:00,070 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:58:00,072 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[47fc4205-9d80-499d-8595-b1a8ec4e72ce] succeeded in 0.0033628999954089522s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:58:50,612 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 18:59:00,045 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:59:00,050 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[22cd3ab2-977d-4eda-a04c-5021bdc637fe] received
+2026-02-08 18:59:00,053 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:59:00,055 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:59:00,057 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[22cd3ab2-977d-4eda-a04c-5021bdc637fe] succeeded in 0.004225699987728149s: {'error': 'Reporte no encontrado'}
+2026-02-08 18:59:00,191 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 18:59:00,195 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[0fe6ac82-b022-4696-ae11-c13386db86d9] received
+2026-02-08 18:59:00,198 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 18:59:00,200 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 18:59:00,202 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[0fe6ac82-b022-4696-ae11-c13386db86d9] succeeded in 0.0045078000403009355s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:00:00,046 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:00:00,049 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[6224d6e4-bdcc-4440-90d5-f871678f3eac] received
+2026-02-08 19:00:00,052 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:00:00,053 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:00:00,055 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[6224d6e4-bdcc-4440-90d5-f871678f3eac] succeeded in 0.0030894000083208084s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:00:00,087 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:00:00,090 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[e24c49c6-9df1-472d-aa4f-218e7cefca09] received
+2026-02-08 19:00:00,092 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:00:00,093 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:00:00,096 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[e24c49c6-9df1-472d-aa4f-218e7cefca09] succeeded in 0.004506099969148636s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:01:00,050 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:01:00,054 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[be3a16fa-a851-4a58-b76b-9d8150576e40] received
+2026-02-08 19:01:00,057 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:01:00,058 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:01:00,060 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[be3a16fa-a851-4a58-b76b-9d8150576e40] succeeded in 0.0034056000295095146s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:01:00,091 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:01:00,094 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[21349235-8ee2-460f-9766-7a32f9ef3bce] received
+2026-02-08 19:01:00,096 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:01:00,097 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:01:00,099 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[21349235-8ee2-460f-9766-7a32f9ef3bce] succeeded in 0.0032983000273816288s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:01:55,969 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 19:02:00,056 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:02:00,060 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[bd97692b-9fa9-4c09-a97c-0e4dbcd95335] received
+2026-02-08 19:02:00,062 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:02:00,063 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:02:00,066 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[bd97692b-9fa9-4c09-a97c-0e4dbcd95335] succeeded in 0.004304199945181608s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:02:00,097 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:02:00,099 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[df18e2c5-4ab3-4dfc-a836-de1713617f78] received
+2026-02-08 19:02:00,101 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:02:00,103 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:02:00,105 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[df18e2c5-4ab3-4dfc-a836-de1713617f78] succeeded in 0.003521400038152933s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:03:00,025 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:03:00,029 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[ad528fc4-6b2a-4fd8-b382-c6891a122594] received
+2026-02-08 19:03:00,031 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:03:00,033 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:03:00,035 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[ad528fc4-6b2a-4fd8-b382-c6891a122594] succeeded in 0.003803499974310398s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:03:00,064 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:03:00,067 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[9d5eb09a-0383-45a0-81d8-974fa4167a72] received
+2026-02-08 19:03:00,069 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:03:00,070 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:03:00,072 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[9d5eb09a-0383-45a0-81d8-974fa4167a72] succeeded in 0.0034981000353582203s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:04:00,027 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:04:00,030 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[209ede2c-f158-4777-9cff-3462a9b996ba] received
+2026-02-08 19:04:00,033 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:04:00,035 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:04:00,037 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[209ede2c-f158-4777-9cff-3462a9b996ba] succeeded in 0.003957499982789159s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:04:00,068 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:04:00,070 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[b529c286-405a-4881-b335-db53f619b621] received
+2026-02-08 19:04:00,072 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:04:00,074 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:04:00,076 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[b529c286-405a-4881-b335-db53f619b621] succeeded in 0.0035626000026240945s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:04:59,990 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 19:05:00,307 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:05:00,311 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[08791121-661e-42d5-8b27-3373d51468b4] received
+2026-02-08 19:05:00,313 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:05:00,314 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:05:00,316 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[08791121-661e-42d5-8b27-3373d51468b4] succeeded in 0.0035386999952606857s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:05:00,346 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:05:00,348 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[81b8249f-1a17-4348-81e0-360583e2a993] received
+2026-02-08 19:05:00,350 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:05:00,351 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:05:00,352 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[81b8249f-1a17-4348-81e0-360583e2a993] succeeded in 0.0028338999836705625s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:06:00,130 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:06:00,133 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[e8558681-63b7-4b8b-a530-93f71668b55b] received
+2026-02-08 19:06:00,135 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:06:00,136 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:06:00,138 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[e8558681-63b7-4b8b-a530-93f71668b55b] succeeded in 0.003152199962642044s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:06:00,168 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:06:00,170 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[874e726d-240e-46f9-a4d8-e0e335ac59f2] received
+2026-02-08 19:06:00,172 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:06:00,173 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:06:00,175 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[874e726d-240e-46f9-a4d8-e0e335ac59f2] succeeded in 0.002882600005250424s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:07:00,035 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:07:00,038 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[4fbbfdd9-bc2a-42c9-8d34-44c33e9e1440] received
+2026-02-08 19:07:00,041 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:07:00,042 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:07:00,044 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[4fbbfdd9-bc2a-42c9-8d34-44c33e9e1440] succeeded in 0.0033270999556407332s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:07:00,074 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:07:00,077 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[191a6d6f-26dc-468b-bee5-7bb12694b936] received
+2026-02-08 19:07:00,079 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:07:00,081 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:07:00,083 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[191a6d6f-26dc-468b-bee5-7bb12694b936] succeeded in 0.004358300007879734s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:08:00,026 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:08:00,029 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[a5645a55-46ea-4815-b96b-32c187fcdf41] received
+2026-02-08 19:08:00,030 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:08:00,032 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:08:00,034 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[a5645a55-46ea-4815-b96b-32c187fcdf41] succeeded in 0.0036430999753065407s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:08:00,063 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:08:00,066 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[b995251d-cfe6-404b-8c8c-79f0a01d4f69] received
+2026-02-08 19:08:00,070 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:08:00,072 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:08:00,074 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[b995251d-cfe6-404b-8c8c-79f0a01d4f69] succeeded in 0.0043178999912925065s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:08:05,108 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-08 19:09:00,043 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:09:00,047 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[5783a720-7674-4dc5-a2ee-59b2f5448dd3] received
+2026-02-08 19:09:00,049 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:09:00,050 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:09:00,052 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[5783a720-7674-4dc5-a2ee-59b2f5448dd3] succeeded in 0.0034573000157251954s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:09:00,082 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:09:00,085 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[3d324d59-90ca-4187-9099-16a6e1b9c243] received
+2026-02-08 19:09:00,087 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:09:00,089 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:09:00,091 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[3d324d59-90ca-4187-9099-16a6e1b9c243] succeeded in 0.003762400010600686s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:10:00,036 - celery.beat - INFO - Scheduler: Sending due task Reporte Mensual de Pacientes VIP (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:10:00,040 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[64f14580-a23c-4f86-94f0-bff4eabb1e53] received
+2026-02-08 19:10:00,043 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:10:00,045 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:10:00,048 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[64f14580-a23c-4f86-94f0-bff4eabb1e53] succeeded in 0.004659799975343049s: {'error': 'Reporte no encontrado'}
+2026-02-08 19:10:00,096 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-08 19:10:00,099 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[4f1264f3-3e49-4952-bcd4-0736c56fa1cc] received
+2026-02-08 19:10:00,102 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-08 19:10:00,103 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-08 19:10:00,106 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[4f1264f3-3e49-4952-bcd4-0736c56fa1cc] succeeded in 0.004328700015321374s: {'error': 'Reporte no encontrado'}
