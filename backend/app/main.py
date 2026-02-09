@@ -2,6 +2,7 @@ from fastapi import FastAPI, Depends
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from starlette.middleware.cors import CORSMiddleware
+import os
 
 # Importaciones Propias
 from app.api.v1.api import api_router
@@ -9,14 +10,14 @@ from app.core.config import settings
 from app.core.logging_config import configure_logging
 from app.core.deps import get_redis_client
 
-# Librerías estandar
+# Librerías estándar
 import json
 import asyncio
 import redis.asyncio as redis
 from datetime import datetime
 
 # ------------------------------------------------------
-# 1. CONFIGURACIÓN DE LOGS
+# 1. CONFIGURACIÓN DE LOGS (Antes de crear la app)
 # ------------------------------------------------------
 configure_logging()
 
@@ -25,7 +26,7 @@ app = FastAPI(
 )
 
 # ------------------------------------------------------
-# 2. CONFIGURACIÓN CORS
+# 2. CONFIGURACIÓN CORS (Seguridad)
 # ------------------------------------------------------
 if settings.BACKEND_CORS_ORIGINS:
     app.add_middleware(
@@ -37,9 +38,21 @@ if settings.BACKEND_CORS_ORIGINS:
     )
 
 # ------------------------------------------------------
-# 3. ARCHIVOS ESTÁTICOS
+# 3. ARCHIVOS ESTÁTICOS Y FAVICON
 # ------------------------------------------------------
+# Montar carpeta static para CSS/JS/Imágenes
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+# Evitar error 404 del navegador buscando el icono
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    # Si tienes un archivo favicon.ico en static, úsalo. Si no, retorna vacío o uno genérico.
+    file_path = "static/favicon.ico"
+    if os.path.exists(file_path):
+        return FileResponse(file_path)
+    return FileResponse("static/css/styles.css")  # Dummy response si no existe imagen
+
 
 # ------------------------------------------------------
 # 4. RUTAS DE LA API (Backend)
@@ -54,7 +67,6 @@ app.include_router(api_router, prefix=settings.API_V1_STR)
 @app.get("/")
 async def view_login():
     """Ruta raíz: Muestra el Login"""
-    # Asegúrate de haber borrado index.html y creado login.html
     return FileResponse("static/login.html")
 
 
@@ -67,20 +79,30 @@ async def view_dashboard():
 # ------------------------------------------------------
 # 6. ENDPOINTS EXTRA (Historial y Pruebas Redis)
 # ------------------------------------------------------
-MAX_HISTORIAL = 9
+MAX_HISTORIAL = 20
 
 
 @app.get("/historial")
 async def ver_historial_dashboard(
     redis_client: redis.Redis = Depends(get_redis_client),
 ):
-    """Usado por el Dashboard para mostrar actividad reciente"""
-    lista_raw = await redis_client.lrange("global_history", 0, -1)  # type: ignore
-    historial_limpio = [json.loads(item) for item in lista_raw]
+    """
+    Recupera los últimos eventos (reportes generados) desde Redis.
+    """
+    # type: ignore - Pylance no detecta bien los métodos async de redis
+    lista_raw = await redis_client.lrange("global_history", 0, -1) # type: ignore
+
+    historial_limpio = []
+    for item in lista_raw:
+        try:
+            historial_limpio.append(json.loads(item))
+        except:
+            continue
+
     return {"cantidad": len(historial_limpio), "ultimos_eventos": historial_limpio}
 
 
-# (Opcional) Endpoint de prueba para simular actividad
+# (Opcional) Endpoint de prueba para simular actividad manual sin Worker
 @app.get("/reporte-pro/{fecha}")
 async def obtener_reporte_pro(
     fecha: str, redis_client: redis.Redis = Depends(get_redis_client)
