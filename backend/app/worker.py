@@ -9,9 +9,22 @@ from app.core.pdf_generator import generar_pdf_universal
 from app.core.csv_generator import crear_csv_generico
 from app.database import SessionLocal
 from app.models.report import Report
+from app.models.config import SystemSetting  # <--- NUEVO: Para leer configuración
+
+# --- Importamos la configuración de logs ---
+from app.core.logging_config import configure_logging
+
+# Ejecutamos la configuración APENAS inicia el Worker
+configure_logging()
 
 # Inicializamos el logger
 logger = logging.getLogger(__name__)
+
+
+# Función auxiliar para leer config rápido
+def obtener_config(db, key, default):
+    setting = db.query(SystemSetting).filter(SystemSetting.key == key).first()
+    return setting.value if setting else default
 
 
 # --- TAREA 1: GENERACIÓN DE REPORTES ---
@@ -26,7 +39,7 @@ def generar_reporte_pesado_task(
 
     db = SessionLocal()
     try:
-        reporte_db = db.query(Report).filter(Report.id == reporte_id).first()
+        reporte_db = db.query(Report).filter(Report.id == reporte_id).first() # type: ignore
         if not reporte_db:
             logger.error(f"❌ Reporte {reporte_id} no encontrado en base de datos.")
             return {"error": "Reporte no encontrado"}
@@ -79,15 +92,40 @@ def generar_reporte_pesado_task(
         db.close()
 
 
-# --- TAREA 2: MANTENIMIENTO (LIMPIEZA) ---
+# --- TAREA 2: MANTENIMIENTO (LIMPIEZA DINÁMICA) ---
 @celery_app.task
 def limpiar_reportes_antiguos_task():
     """
-    Elimina archivos de la carpeta static/reports que sean más viejos de 24 horas.
+    Elimina archivos antiguos según la configuración de la base de datos.
     """
     directorio = "static/reports"
     ahora = time.time()
-    limite_tiempo = 24 * 3600  # 24 Horas
+
+    # 1. ABRIR CONEXIÓN PARA LEER CONFIGURACIÓN
+    db = SessionLocal()
+    try:
+        # Leemos las horas desde el Dashboard (Default: 24 si no existe o falla)
+        horas_str = obtener_config(db, "worker_retention_hours", "24")
+
+        # Validación de seguridad: asegurar que sea un número
+        try:
+            horas = int(str(horas_str))
+        except ValueError:
+            horas = 24
+            logger.warning(
+                f"⚠️ Valor de configuración inválido para 'worker_retention_hours': {horas_str}. Usando default 24."
+            )
+
+        logger.info(
+            f"🧹 [MANTENIMIENTO] Configuración dinámica cargada: Borrar mayores a {horas} horas."
+        )
+    except Exception as e:
+        logger.error(f"⚠️ Error leyendo config, usando default 24h: {e}")
+        horas = 24
+    finally:
+        db.close()
+
+    limite_tiempo = horas * 3600  # Convertir a segundos
 
     contador = 0
     errores = 0

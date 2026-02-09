@@ -1,6 +1,7 @@
 from fastapi import APIRouter
+
 # CORRECCIÓN: Agregamos 'stats' a la lista de imports
-from app.api.v1.endpoints import login, users, reports, config, stats 
+from app.api.v1.endpoints import login, users, reports, config, stats, scheduler, system
 
 api_router = APIRouter()
 
@@ -18,3 +19,7 @@ api_router.include_router(config.router, prefix="/config", tags=["config"])
 
 # Rutas de Estadísticas (Dashboard)
 api_router.include_router(stats.router, prefix="/stats", tags=["stats"])
+
+api_router.include_router(scheduler.router, prefix="/scheduler", tags=["scheduler"])
+
+api_router.include_router(system.router, prefix="/system", tags=["system"])

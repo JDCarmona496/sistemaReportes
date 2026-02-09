@@ -8,6 +8,8 @@ import { initGenerator } from "./modules/generator.js";
 import { initReports } from "./modules/reports.js";
 import { initUsers } from "./modules/users.js";
 import { initSettings } from "./modules/settings.js";
+import { initMonitor } from "./modules/monitor.js";
+import { initScheduler } from "./modules/scheduler.js";
 
 // 3. Exponer funciones GLOBALES para el HTML
 // (Necesario porque los módulos son privados por defecto, pero el HTML usa onclick="...")
@@ -15,12 +17,14 @@ window.logout = logout;
 window.loadView = loadView;
 
 // 4. Inicializar Módulos
-// Esto registra las funciones específicas de cada vista (ej: window.generarReporte)
+// Esto registra las funciones específicas de cada vista (ej: window.generarReporte) en el objeto window
 initHome();
 initGenerator();
 initReports();
 initUsers();
 initSettings();
+initMonitor();
+initScheduler();
 
 // 5. Lógica de Arranque
 document.addEventListener("DOMContentLoaded", () => {
@@ -28,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Primero verificamos quién es el usuario (Admin u Operador)
   verificarPermisos().then((esAdmin) => {
-    // Una vez sabemos quién es, cargamos la vista inicial
+    // Una vez sabemos quién es y tenemos permisos, cargamos la vista inicial
     loadView("home");
   });
 });

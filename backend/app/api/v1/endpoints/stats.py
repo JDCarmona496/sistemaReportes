@@ -1,6 +1,6 @@
 from typing import Any
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session # type: ignore
 import json
 from collections import Counter
 import redis.asyncio as redis
@@ -30,7 +30,7 @@ async def get_stats(
 
     # 1. Estadísticas de Usuarios (SQL)
     total_users = db.query(UserModel).count()
-    admins = db.query(UserModel).filter(UserModel.is_superuser == True).count()
+    admins = db.query(UserModel).filter(UserModel.is_superuser == True).count() # type: ignore
     operators = total_users - admins
 
     # 2. Estadísticas de Uso (Redis)

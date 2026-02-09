@@ -54,6 +54,25 @@ def init_settings():
             "description": "Título en la barra superior blanca",
             "category": "visual",
         },
+        # --- CONFIGURACIÓN DEL WORKER (CELERY) ---
+        {
+            "key": "worker_retention_hours",
+            "value": "24",
+            "description": "Tiempo (horas) para guardar reportes antes de borrarlos",
+            "category": "worker",
+        },
+        {
+            "key": "worker_max_retries",
+            "value": "3",
+            "description": "Intentos máximos si el LIS falla",
+            "category": "worker",
+        },
+        {
+            "key": "lis_query_timeout",
+            "value": "30",
+            "description": "Segundos máximos para esperar al LIS",
+            "category": "worker",
+        }
     ]
 
     for item in settings:

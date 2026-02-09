@@ -16,3 +16,6 @@ python-multipart
 email-validator
 bcrypt==4.0.1
 alembic
+celery-sqlalchemy-scheduler
+SQLAlchemy<2.0
+pytz

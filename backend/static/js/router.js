@@ -9,6 +9,8 @@ const viewLoaders = {
     window.cargarModuloReports && window.cargarModuloReports(),
   users: () => window.cargarModuloUsers && window.cargarModuloUsers(),
   settings: () => window.cargarModuloSettings && window.cargarModuloSettings(),
+  monitor: () => window.cargarModuloMonitor && window.cargarModuloMonitor(),
+  scheduler: () => window.cargarModuloScheduler && window.cargarModuloScheduler(),
 };
 
 export function loadView(viewName) {

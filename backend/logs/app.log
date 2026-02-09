@@ -519,3 +519,1177 @@ WHERE
 2026-01-27 11:02:13,392 - app.worker - INFO - 🎨 Generando PDF con diseño: {}
 2026-01-27 11:02:13,418 - app.worker - INFO - ✅ Archivo generado: /static/reports/{}_4_Reporte_por_Lista_(PDFCSV).pdf
 2026-01-27 11:02:13,422 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[41313a4c-b51d-4be0-bcd6-e992ff8f299e] succeeded in 0.19808060000650585s: {'archivo': '{}_4_Reporte_por_Lista_(PDFCSV).pdf', 'url_descarga': '/static/reports/{}_4_Reporte_por_Lista_(PDFCSV).pdf', 'total_registros': 1, 'formato': 'PDF', 'datos_preview': [{'id': 1, 'noingreso': '80007151', 'nombre': 'LEYDI JAHANNA LENIS BELALCAZAR', 'fechanac': '1990-07-14', 'tipodocum': 'CC', 'numdocum': '1006429614', 'edad': Decimal('35'), 'estadocivil': 'Soltero', 'direccionresidencia': 'BUGA', 'genero': 'Femenino', 'email': '.', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}]}
+2026-01-27 11:28:46,465 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[20395202-5eab-4718-a19e-3c3a9549939c] received
+2026-01-27 11:28:46,468 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 3. Formato: PDF
+2026-01-27 11:28:46,562 - app.core.lis - INFO - 🔌 Ejecutando query en LIS: 
+SELECT
+    (ROW_NUMBER() OVER (ORDER BY pa.paciente_cod ASC) + %(ultimo_id)s) AS id,
+    pa.paciente_cod AS noIngreso,
+    CONCAT_WS(' ', pa.nom1, pa.ape1) AS nombre,
+    COALESCE(TO_CHAR(pa.nacio, 'YYYY-MM-DD'), '2000-01-01') AS fechaNac,
+    pa.tipodcto_cod as tipoDocum,
+    pa.nit AS numDocum,
+    pa.edad,
+    CASE floor(random() * 3)
+        WHEN 0 THEN 'Soltero'
+        WHEN 1 THEN 'Casado'
+        ELSE 'Divorciado'
+    END AS estadoCivil,
+    
+    -- VALIDACIÓN DIRECCIÓN (Maneja NULL y vacíos)
+    COALESCE(NULLIF(TRIM(pa.direccion), ''), 'Cra. 27 #36-42') AS direccionResidencia,
+    CASE
+    WHEN pa.sexo = 'M' THEN 'Masculino'
+    WHEN pa.sexo = 'F' THEN 'Femenino'
+    ELSE 'Otro'
+    END AS genero,
+    
+    
+    -- VALIDACIÓN EMAIL (Maneja NULL y vacíos)
+    COALESCE(NULLIF(TRIM(pa.email), ''), 'radicacion.biolab@biolabdiagnostica.com') AS email,
+    
+    c.razon as razonSocialCliente,
+    c.nit as nitCliente,
+    c.contrato as noContratoCliente,
+    CASE 
+        WHEN c.razon = 'EMSSANAR EPS S.A.S' THEN 'Plan de beneficios en salud financiado con UPC'
+        ELSE c.razon 
+    END AS planBeneficioCliente,
+    c.nombre as regimenCliente
+FROM paciente pa
+    LEFT JOIN clientes c ON c.clte_codigo = pa.clte_codigo
+WHERE 
+    pa.paciente_cod IN %(lista_pacientes)s
+
+2026-01-27 11:28:46,563 - app.core.lis - INFO - 🔌 Params: {'lista_pacientes': ('80007151',), 'ultimo_id': '0'}
+2026-01-27 11:28:46,614 - app.core.lis - INFO - ✅ Se obtuvieron 1 filas del LIS.
+2026-01-27 11:28:46,615 - app.worker - INFO - 📊 Datos obtenidos del LIS: 1 registros
+2026-01-27 11:28:46,615 - app.worker - INFO - 🎨 Generando PDF con diseño: {}
+2026-01-27 11:28:46,636 - app.worker - INFO - ✅ Archivo generado: /static/reports/{}_2_Reporte_por_Lista_(PDFCSV).pdf
+2026-01-27 11:28:46,640 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[20395202-5eab-4718-a19e-3c3a9549939c] succeeded in 0.17205380008090287s: {'archivo': '{}_2_Reporte_por_Lista_(PDFCSV).pdf', 'url_descarga': '/static/reports/{}_2_Reporte_por_Lista_(PDFCSV).pdf', 'total_registros': 1, 'formato': 'PDF', 'datos_preview': [{'id': 1, 'noingreso': '80007151', 'nombre': 'LEYDI JAHANNA LENIS BELALCAZAR', 'fechanac': '1990-07-14', 'tipodocum': 'CC', 'numdocum': '1006429614', 'edad': Decimal('35'), 'estadocivil': 'Soltero', 'direccionresidencia': 'BUGA', 'genero': 'Femenino', 'email': '.', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}]}
+2026-01-27 11:29:01,054 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f0ee66a2-44ea-41c0-abcc-28088707833a] received
+2026-01-27 11:29:01,057 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 3. Formato: CSV
+2026-01-27 11:29:01,178 - app.core.lis - INFO - 🔌 Ejecutando query en LIS: 
+SELECT
+    (ROW_NUMBER() OVER (ORDER BY pa.paciente_cod ASC) + %(ultimo_id)s) AS id,
+    pa.paciente_cod AS noIngreso,
+    CONCAT_WS(' ', pa.nom1, pa.ape1) AS nombre,
+    COALESCE(TO_CHAR(pa.nacio, 'YYYY-MM-DD'), '2000-01-01') AS fechaNac,
+    pa.tipodcto_cod as tipoDocum,
+    pa.nit AS numDocum,
+    pa.edad,
+    CASE floor(random() * 3)
+        WHEN 0 THEN 'Soltero'
+        WHEN 1 THEN 'Casado'
+        ELSE 'Divorciado'
+    END AS estadoCivil,
+    
+    -- VALIDACIÓN DIRECCIÓN (Maneja NULL y vacíos)
+    COALESCE(NULLIF(TRIM(pa.direccion), ''), 'Cra. 27 #36-42') AS direccionResidencia,
+    CASE
+    WHEN pa.sexo = 'M' THEN 'Masculino'
+    WHEN pa.sexo = 'F' THEN 'Femenino'
+    ELSE 'Otro'
+    END AS genero,
+    
+    
+    -- VALIDACIÓN EMAIL (Maneja NULL y vacíos)
+    COALESCE(NULLIF(TRIM(pa.email), ''), 'radicacion.biolab@biolabdiagnostica.com') AS email,
+    
+    c.razon as razonSocialCliente,
+    c.nit as nitCliente,
+    c.contrato as noContratoCliente,
+    CASE 
+        WHEN c.razon = 'EMSSANAR EPS S.A.S' THEN 'Plan de beneficios en salud financiado con UPC'
+        ELSE c.razon 
+    END AS planBeneficioCliente,
+    c.nombre as regimenCliente
+FROM paciente pa
+    LEFT JOIN clientes c ON c.clte_codigo = pa.clte_codigo
+WHERE 
+    pa.paciente_cod IN %(lista_pacientes)s
+
+2026-01-27 11:29:01,179 - app.core.lis - INFO - 🔌 Params: {'lista_pacientes': ('80007151',), 'ultimo_id': '0'}
+2026-01-27 11:29:01,232 - app.core.lis - INFO - ✅ Se obtuvieron 1 filas del LIS.
+2026-01-27 11:29:01,232 - app.worker - INFO - 📊 Datos obtenidos del LIS: 1 registros
+2026-01-27 11:29:01,245 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-01-27 11:29:01,248 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f0ee66a2-44ea-41c0-abcc-28088707833a] succeeded in 0.1908097000559792s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 1, 'formato': 'CSV', 'datos_preview': [{'id': 1, 'noingreso': '80007151', 'nombre': 'LEYDI JAHANNA LENIS BELALCAZAR', 'fechanac': '1990-07-14', 'tipodocum': 'CC', 'numdocum': '1006429614', 'edad': Decimal('35'), 'estadocivil': 'Divorciado', 'direccionresidencia': 'BUGA', 'genero': 'Femenino', 'email': '.', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}]}
+2026-01-27 12:27:22,907 - celery.worker.consumer.consumer - WARNING - consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\retry.py", line 116, in call_with_retry
+    return do()
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\client.py", line 973, in <lambda>
+    lambda: command(*args, **kwargs),
+            ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\client.py", line 996, in try_read
+    return conn.read_response(disconnect_on_error=False, push_request=True)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\connection.py", line 1133, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\_parsers\socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\celery\worker\consumer\consumer.py", line 346, in start
+    blueprint.start(self)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+    ~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\celery\worker\consumer\consumer.py", line 788, in start
+    c.loop(*c.loop_args())
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\celery\worker\loops.py", line 136, in synloop
+    _loop_cycle()
+    ~~~~~~~~~~~^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\celery\worker\loops.py", line 125, in _loop_cycle
+    connection.drain_events(timeout=2.0)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\kombu\connection.py", line 343, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\kombu\transport\virtual\base.py", line 997, in drain_events
+    get(self._deliver, timeout=timeout)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\kombu\transport\redis.py", line 601, in get
+    ret = self.handle_event(fileno, event)
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\kombu\transport\redis.py", line 583, in handle_event
+    return self.on_readable(fileno), self
+           ~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\kombu\transport\redis.py", line 579, in on_readable
+    chan.handlers[type]()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\kombu\transport\redis.py", line 931, in _receive
+    ret.append(self._receive_one(c))
+               ~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\kombu\transport\redis.py", line 941, in _receive_one
+    response = c.parse_response()
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\client.py", line 998, in parse_response
+    response = self._execute(conn, try_read)
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\client.py", line 972, in _execute
+    response = conn.retry.call_with_retry(
+        lambda: command(*args, **kwargs),
+        lambda _: self._reconnect(conn),
+    )
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\retry.py", line 121, in call_with_retry
+    fail(error)
+    ~~~~^^^^^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\client.py", line 974, in <lambda>
+    lambda _: self._reconnect(conn),
+              ~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\client.py", line 958, in _reconnect
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\connection.py", line 846, in connect
+    self.connect_check_health(check_health=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\connection.py", line 869, in connect_check_health
+    self.on_connect_check_health(check_health=check_health)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\connection.py", line 994, in on_connect_check_health
+    self.read_response()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\connection.py", line 1133, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\redis\_parsers\socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+2026-01-27 12:27:23,102 - py.warnings - WARNING - C:\Users\Juan Carmona\AppData\Roaming\Python\Python314\site-packages\celery\worker\consumer\consumer.py:397: CPendingDeprecationWarning: 
+In Celery 5.1 we introduced an optional breaking change which
+on connection loss cancels all currently executed tasks with late acknowledgement enabled.
+These tasks cannot be acknowledged as the connection is gone, and the tasks are automatically redelivered
+back to the queue. You can enable this behavior using the worker_cancel_long_running_tasks_on_connection_loss
+setting. In Celery 5.1 it is set to False by default. The setting will be set to True by default in Celery 6.0.
+
+  warnings.warn(CANCEL_TASKS_BY_DEFAULT, CPendingDeprecationWarning)
+
+2026-01-27 12:27:23,118 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-27 12:27:23,133 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-27 12:27:24,160 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-27 12:29:53,644 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-27 12:29:53,651 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-27 12:29:54,683 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-27 12:29:54,711 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-01-27 12:29:54,938 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-01-27 12:37:17,010 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-27 12:37:17,016 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-27 12:37:18,036 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-27 12:37:18,065 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-01-27 12:37:19,342 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-01-27 13:26:33,813 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-27 13:26:33,830 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-27 13:26:34,876 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-27 13:26:34,929 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-01-27 13:26:47,111 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-01-27 13:36:01,225 - celery.beat - INFO - beat: Starting...
+2026-01-27 13:36:01,233 - celery_sqlalchemy_scheduler.schedulers - INFO - setup_schedule
+2026-01-27 13:36:01,233 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-01-27 13:36:01,332 - celery_sqlalchemy_scheduler.schedulers - ERROR - Cannot add entry 'celery.backend_cleanup' to database schedule: AttributeError("'zoneinfo.ZoneInfo' object has no attribute 'zone'"). Contents: {'task': 'celery.backend_cleanup', 'schedule': <crontab: 0 4 * * * (m/h/dM/MY/d)>, 'options': {'expires': 43200}}
+
+2026-01-27 13:36:06,585 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-01-27 13:37:42,324 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-01-27 13:37:42,325 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-01-27 13:37:42,326 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-01-27 13:37:42,326 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-01-27 13:42:00,322 - celery.beat - INFO - beat: Starting...
+2026-01-27 13:42:00,330 - celery_sqlalchemy_scheduler.schedulers - INFO - setup_schedule
+2026-01-27 13:42:00,330 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-01-27 13:42:00,652 - celery_sqlalchemy_scheduler.schedulers - ERROR - Cannot add entry 'celery.backend_cleanup' to database schedule: AttributeError("'zoneinfo.ZoneInfo' object has no attribute 'zone'"). Contents: {'task': 'celery.backend_cleanup', 'schedule': <crontab: 0 4 * * * (m/h/dM/MY/d)>, 'options': {'expires': 43200}}
+
+2026-01-27 13:42:05,965 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-01-27 13:42:10,685 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-01-27 13:42:10,685 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-01-27 13:42:10,686 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-01-27 13:42:10,687 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-01-27 13:57:36,649 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-27 13:57:36,658 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-27 13:57:37,694 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-27 13:57:37,813 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-01-27 13:57:47,727 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-01-27 15:13:31,715 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-01-27 15:13:31,723 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-01-27 15:13:32,770 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-01-27 15:13:32,814 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-01-27 15:13:39,409 - flower.command - INFO - Visit me at http://0.0.0.0:5556
+2026-01-27 15:13:39,434 - flower.command - INFO - Broker: redis://localhost:6379/0
+2026-01-27 15:13:39,437 - flower.command - INFO - Registered tasks: 
+['app.worker.generar_reporte_pesado_task',
+ 'app.worker.limpiar_reportes_antiguos_task',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+2026-01-27 15:13:39,470 - kombu.mixins - INFO - Connected to redis://localhost:6379/0
+2026-01-27 15:13:44,450 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-01-27 19:53:29,222 - celery.events.state - WARNING - Substantial drift from celery@ASUSF15 may mean clocks are out of sync.  Current drift is 381 seconds.  [orig: 2026-01-27 19:53:29.221482 recv: 2026-01-27 19:47:08.251568]
+2026-02-04 10:27:42,109 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 2.00 seconds... (1/100)
+
+2026-02-04 10:27:46,142 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 4.00 seconds... (2/100)
+
+2026-02-04 10:27:52,181 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 6.00 seconds... (3/100)
+
+2026-02-04 10:28:00,205 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 8.00 seconds... (4/100)
+
+2026-02-04 10:28:08,222 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-02-04 10:28:08,227 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-02-04 10:28:09,247 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-02-04 10:28:09,275 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-02-04 10:28:16,938 - celery.worker.consumer.consumer - WARNING - consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\retry.py", line 116, in call_with_retry
+    return do()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 973, in <lambda>
+    lambda: command(*args, **kwargs),
+            ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 996, in try_read
+    return conn.read_response(disconnect_on_error=False, push_request=True)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 1133, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 346, in start
+    blueprint.start(self)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+    ~~~~~~~~~~^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 788, in start
+    c.loop(*c.loop_args())
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\loops.py", line 136, in synloop
+    _loop_cycle()
+    ~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\loops.py", line 125, in _loop_cycle
+    connection.drain_events(timeout=2.0)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\connection.py", line 343, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\virtual\base.py", line 997, in drain_events
+    get(self._deliver, timeout=timeout)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 601, in get
+    ret = self.handle_event(fileno, event)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 583, in handle_event
+    return self.on_readable(fileno), self
+           ~~~~~~~~~~~~~~~~^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 579, in on_readable
+    chan.handlers[type]()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 931, in _receive
+    ret.append(self._receive_one(c))
+               ~~~~~~~~~~~~~~~~~^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 941, in _receive_one
+    response = c.parse_response()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 998, in parse_response
+    response = self._execute(conn, try_read)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 972, in _execute
+    response = conn.retry.call_with_retry(
+        lambda: command(*args, **kwargs),
+        lambda _: self._reconnect(conn),
+    )
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\retry.py", line 121, in call_with_retry
+    fail(error)
+    ~~~~^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 974, in <lambda>
+    lambda _: self._reconnect(conn),
+              ~~~~~~~~~~~~~~~^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 958, in _reconnect
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 846, in connect
+    self.connect_check_health(check_health=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 869, in connect_check_health
+    self.on_connect_check_health(check_health=check_health)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 994, in on_connect_check_health
+    self.read_response()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 1133, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+2026-02-04 10:28:16,949 - py.warnings - WARNING - D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py:397: CPendingDeprecationWarning: 
+In Celery 5.1 we introduced an optional breaking change which
+on connection loss cancels all currently executed tasks with late acknowledgement enabled.
+These tasks cannot be acknowledged as the connection is gone, and the tasks are automatically redelivered
+back to the queue. You can enable this behavior using the worker_cancel_long_running_tasks_on_connection_loss
+setting. In Celery 5.1 it is set to False by default. The setting will be set to True by default in Celery 6.0.
+
+  warnings.warn(CANCEL_TASKS_BY_DEFAULT, CPendingDeprecationWarning)
+
+2026-02-04 10:28:16,959 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Connection closed by server..
+Trying again in 2.00 seconds... (1/100)
+
+2026-02-04 10:28:18,965 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-02-04 10:28:18,972 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-02-04 10:28:19,989 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-02-04 10:28:42,831 - flower.command - INFO - Visit me at http://0.0.0.0:5556
+2026-02-04 10:28:42,842 - flower.command - INFO - Broker: redis://localhost:6379/0
+2026-02-04 10:28:42,844 - flower.command - INFO - Registered tasks: 
+['app.worker.generar_reporte_pesado_task',
+ 'app.worker.limpiar_reportes_antiguos_task',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+2026-02-04 10:28:42,858 - kombu.mixins - INFO - Connected to redis://localhost:6379/0
+2026-02-04 10:28:47,862 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-02-04 10:30:04,779 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[1ef30fec-276e-4fd1-8318-9e93b9086ca4] received
+2026-02-04 10:30:04,782 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 3. Formato: CSV
+2026-02-04 10:30:04,920 - app.core.lis - INFO - 🔌 Ejecutando query en LIS: 
+SELECT
+    (ROW_NUMBER() OVER (ORDER BY pa.paciente_cod ASC) + %(ultimo_id)s) AS id,
+    pa.paciente_cod AS noIngreso,
+    CONCAT_WS(' ', pa.nom1, pa.ape1) AS nombre,
+    COALESCE(TO_CHAR(pa.nacio, 'YYYY-MM-DD'), '2000-01-01') AS fechaNac,
+    pa.tipodcto_cod as tipoDocum,
+    pa.nit AS numDocum,
+    pa.edad,
+    CASE floor(random() * 3)
+        WHEN 0 THEN 'Soltero'
+        WHEN 1 THEN 'Casado'
+        ELSE 'Divorciado'
+    END AS estadoCivil,
+    
+    -- VALIDACIÓN DIRECCIÓN (Maneja NULL y vacíos)
+    COALESCE(NULLIF(TRIM(pa.direccion), ''), 'Cra. 27 #36-42') AS direccionResidencia,
+    CASE
+    WHEN pa.sexo = 'M' THEN 'Masculino'
+    WHEN pa.sexo = 'F' THEN 'Femenino'
+    ELSE 'Otro'
+    END AS genero,
+    
+    
+    -- VALIDACIÓN EMAIL (Maneja NULL y vacíos)
+    COALESCE(NULLIF(TRIM(pa.email), ''), 'radicacion.biolab@biolabdiagnostica.com') AS email,
+    
+    c.razon as razonSocialCliente,
+    c.nit as nitCliente,
+    c.contrato as noContratoCliente,
+    CASE 
+        WHEN c.razon = 'EMSSANAR EPS S.A.S' THEN 'Plan de beneficios en salud financiado con UPC'
+        ELSE c.razon 
+    END AS planBeneficioCliente,
+    c.nombre as regimenCliente
+FROM paciente pa
+    LEFT JOIN clientes c ON c.clte_codigo = pa.clte_codigo
+WHERE 
+    pa.paciente_cod IN %(lista_pacientes)s
+
+2026-02-04 10:30:04,921 - app.core.lis - INFO - 🔌 Params: {'lista_pacientes': ('80007888',), 'ultimo_id': '0'}
+2026-02-04 10:30:05,051 - app.core.lis - INFO - ✅ Se obtuvieron 1 filas del LIS.
+2026-02-04 10:30:05,052 - app.worker - INFO - 📊 Datos obtenidos del LIS: 1 registros
+2026-02-04 10:30:05,055 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-02-04 10:30:05,060 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[1ef30fec-276e-4fd1-8318-9e93b9086ca4] succeeded in 0.2787105999959749s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 1, 'formato': 'CSV', 'datos_preview': [{'id': 1, 'noingreso': '80007888', 'nombre': 'LEIDY LIZETH MUÑOZ RECALDE', 'fechanac': '1992-12-26', 'tipodocum': 'CC', 'numdocum': '1143954448', 'edad': Decimal('33'), 'estadocivil': 'Divorciado', 'direccionresidencia': 'CL 110 27 141', 'genero': 'Femenino', 'email': 'leidymur26@gmail.com', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2ES250001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS SUBSIDIADO'}]}
+2026-02-04 10:40:59,632 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[9ad43afe-7e11-4de7-82e0-2d150e503b88] received
+2026-02-04 10:40:59,634 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 3. Formato: CSV
+2026-02-04 10:40:59,699 - app.core.lis - INFO - 🔌 Ejecutando query en LIS: 
+SELECT
+    (ROW_NUMBER() OVER (ORDER BY pa.paciente_cod ASC) + %(ultimo_id)s) AS id,
+    pa.paciente_cod AS noIngreso,
+    CONCAT_WS(' ', pa.nom1, pa.ape1) AS nombre,
+    COALESCE(TO_CHAR(pa.nacio, 'YYYY-MM-DD'), '2000-01-01') AS fechaNac,
+    pa.tipodcto_cod as tipoDocum,
+    pa.nit AS numDocum,
+    pa.edad,
+    CASE floor(random() * 3)
+        WHEN 0 THEN 'Soltero'
+        WHEN 1 THEN 'Casado'
+        ELSE 'Divorciado'
+    END AS estadoCivil,
+    
+    -- VALIDACIÓN DIRECCIÓN (Maneja NULL y vacíos)
+    COALESCE(NULLIF(TRIM(pa.direccion), ''), 'Cra. 27 #36-42') AS direccionResidencia,
+    CASE
+    WHEN pa.sexo = 'M' THEN 'Masculino'
+    WHEN pa.sexo = 'F' THEN 'Femenino'
+    ELSE 'Otro'
+    END AS genero,
+    
+    
+    -- VALIDACIÓN EMAIL (Maneja NULL y vacíos)
+    COALESCE(NULLIF(TRIM(pa.email), ''), 'radicacion.biolab@biolabdiagnostica.com') AS email,
+    
+    c.razon as razonSocialCliente,
+    c.nit as nitCliente,
+    c.contrato as noContratoCliente,
+    CASE 
+        WHEN c.razon = 'EMSSANAR EPS S.A.S' THEN 'Plan de beneficios en salud financiado con UPC'
+        ELSE c.razon 
+    END AS planBeneficioCliente,
+    c.nombre as regimenCliente
+FROM paciente pa
+    LEFT JOIN clientes c ON c.clte_codigo = pa.clte_codigo
+WHERE 
+    pa.paciente_cod IN %(lista_pacientes)s
+
+2026-02-04 10:40:59,700 - app.core.lis - INFO - 🔌 Params: {'lista_pacientes': ('80007460', '80007461', '80007462', '80007463', '80007468', '80007464', '80007465', '80007466', '80007467', '80007470', '80007471', '80007469', '80007472', '80007473', '80007474', '80007475', '80007477', '80007448', '80007476', '80007479', '80007480', '80007481', '80007483', '80007485', '80007482', '80007486', '80007487', '80007489', '80007488', '80007493', '80007491', '80007495', '80007492', '80007498', '80007494', '80007497', '80007500', '80007503', '80007501', '80007502', '80007506', '80007499', '80007504', '80007505', '80007507', '80007509', '80007510', '80007511', '80007512', '80007513', '80007514', '80007515', '80007516', '80007517', '80007518', '80007519', '80007520', '80007521', '80007522', '80007523', '80007524', '80007238', '80007525', '80007527', '80007528', '80007530', '80007532', '80007533', '80007535', '80007536', '80007538', '80007539', '80007537', '80007542', '80007540', '80007541', '80007543', '80007545', '80007546', '80007544', '80007548', '80007547', '80007550', '80007551', '80007549', '80007553', '80007555', '80007552', '80007554', '80007556', '80007557', '80007558', '80007560', '80007561', '80007559', '80007562', '80007563', '80007566', '80007565', '80007564', '80007567', '80007568', '80007569', '80007570', '80007571', '80007574', '80007572', '80007573', '80007578', '80007580', '80007581', '80007583', '80007582', '80007586', '80007587', '80007589', '80007588', '80007590', '80007592', '80007591', '80007593', '80007595', '80007597', '80007596', '80007599', '80007598', '80007600', '80007602', '80007601', '80007606', '80007607', '80007604', '80007608', '80007610', '80007609', '80007611', '80007613', '80007612', '80007614', '80007615', '80007617', '80007619', '80007618', '80007616', '80007620', '80007621', '80007622', '80007624', '80007623', '80007625', '80007627', '80007628', '80007626', '80007629', '80007631', '80007632', '80007630', '80007633', '80007634', '80007635', '80007637', '80007636', '80007638', '80007643', '80007644', '80007645', '80007647', '80007648', '80007646', '80007650', '80007651', '80007662', '80007653', '80007655', '80007657', '80007656', '80007959', '80007658', '80007660', '80007661', '80007662', '80007663', '80007665', '80007664', '80007666', '80007668', '80007667', '80007670', '80007671', '80007672', '80007673', '80007674', '80007675', '80007676', '80007678', '80007677', '80007679', '80007683', '80007680', '80007691', '80007702', '80007707', '80007709', '80007712', '80007711', '80007714', '80007713', '80007715', '80007717', '80007716', '80007718', '80007721', '80007722', '80007720', '80007725', '80007723', '80007726', '80007724', '80007727', '80007724', '80007729', '80007728', '80007731', '80007734', '80007732', '80007737', '80007738', '80007736', '80007739', '80007740', '80007741', '80007742', '80007743', '80007744', '80007745', '80007746', '80007747', '80007748', '80007750', '80007751', '80007752', '80007754', '80007756', '80007758', '80007260', '80007761', '80007765', '80007766', '80007767', '80007768', '80007769', '80007776', '80007770', '80007771', '80007772', '80007773', '80007774', '80007776', '80007777', '80007778', '80007781', '80007779', '80007780', '80007783', '80007782', '80007784', '80007785', '80007786', '80007787', '80007788', '80007791', '80007789', '80007790', '80007792', '80007793', '80007794', '80007796', '80007795', '80007798', '80007797', '80007800', '80007799', '80007801', '80007802', '80007803', '80007804', '80007805', '80007806', '80007807', '80007808', '80007809', '80007810', '80007812', '80007811', '80007814', '80007813', '80007836', '80007835', '80007837', '80007838', '80007840', '80007841', '80007842', '80007843', '80007839', '80007844', '80007846', '80007845', '80007847', '80007848', '80007847', '80007850', '80007851', '80007852', '80007855', '80007850', '80007854', '80007857', '80007856', '80007858', '80007859', '80007861', '80007862', '80007860', '80007863', '80007864', '80007865', '80007866', '80007867', '80007868', '80007869', '80007870', '80007871', '80007872', '80007873', '80007875', '80007874', '80007877', '80007876', '80007878', '80007881', '80007880', '80007882', '80007883', '80007890', '80007884', '80007886', '80007885', '80007887', '80007889', '80007891', '80007892', '80007893', '80007894', '80007895', '80007896', '80007898', '80007899', '80007902', '80007901', '80007904', '80007905', '80007907', '80007908', '80007909', '80007910', '80007911', '80007913', '80007912', '80007914', '80007915', '80007976', '80007979', '80007917', '80007924', '80007921', '80007922', '80007923', '80007925', '80007926', '80007927', '80007928', '80007930', '80007931', '80007932', '80007933', '80007934', '80007936', '80007935', '80007938', '80007940', '80007941', '80007942', '80007945', '80007944', '80007947', '80007946', '80007948', '80007958', '80007959', '80007960', '80007957', '80007961', '80007962', '80007963', '80007964', '80007965', '80007966', '80007967', '80007967', '80007968', '80007970', '80007969', '80007971', '80007972', '80007973', '80007974', '80007976', '80007976', '80007977', '80007976', '80007979', '80007978', '80007980', '80007981', '80007982', '80007983', '80007985', '80007987', '80007986', '80007988', '80007989', '80007990', '80007991', '80007993', '80007995', '80007994', '80007996', '80007994', '80008000', '80007999', '80007998'), 'ultimo_id': '0'}
+2026-02-04 10:40:59,819 - app.core.lis - INFO - ✅ Se obtuvieron 430 filas del LIS.
+2026-02-04 10:40:59,819 - app.worker - INFO - 📊 Datos obtenidos del LIS: 430 registros
+2026-02-04 10:40:59,824 - app.worker - INFO - ✅ Archivo generado: /static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv
+2026-02-04 10:40:59,827 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[9ad43afe-7e11-4de7-82e0-2d150e503b88] succeeded in 0.19269469999562716s: {'archivo': 'Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'url_descarga': '/static/reports/Reporte_2_Reporte_por_Lista_(PDFCSV).csv', 'total_registros': 430, 'formato': 'CSV', 'datos_preview': [{'id': 1, 'noingreso': '80007238', 'nombre': 'NESTOR RAUL CUERO BARANNDICA', 'fechanac': '1971-06-30', 'tipodocum': 'CC', 'numdocum': '94314148', 'edad': Decimal('54'), 'estadocivil': 'Divorciado', 'direccionresidencia': 'KR 20B 4 08', 'genero': 'Masculino', 'email': 'SUMINISTROSGHSAS@GMAIL.COM', 'razonsocialcliente': 'EMSSANAR EPS S.A.S', 'nitcliente': '901021565-8', 'nocontratocliente': '1023-2EC2500001', 'planbeneficiocliente': 'Plan de beneficios en salud financiado con UPC', 'regimencliente': 'EMSSANAR EPS CONTRIBUTIVO'}, {'id': 2, 'noingreso': '80007260', 'nombre': 'MARLENY CRUZ DOMINGUEZ', 'fechanac': '1947-08-05', 'tipodocum': 'CC', 'numdocum': '29539266', 'edad': Decimal('78'), 'estadocivil': 'Casado', 'direccionresidencia': 'CLL 3 10 58 GUACARÍ', 'genero': 'Femenino', 'email': 'lalafa@gmail.com', 'razonsocialcli...', ...}]}
+2026-02-04 13:22:45,723 - celery.events.state - WARNING - Substantial drift from celery@ASUSF15 may mean clocks are out of sync.  Current drift is 376 seconds.  [orig: 2026-02-04 13:22:45.722190 recv: 2026-02-04 13:16:29.775359]
+2026-02-04 21:42:36,069 - flower.events - ERROR - Failed to capture events: 'Connection closed by server.', trying again in 1 seconds.
+2026-02-04 21:42:36,056 - celery.worker.consumer.consumer - WARNING - consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\retry.py", line 116, in call_with_retry
+    return do()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 973, in <lambda>
+    lambda: command(*args, **kwargs),
+            ~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 996, in try_read
+    return conn.read_response(disconnect_on_error=False, push_request=True)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 1133, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 346, in start
+    blueprint.start(self)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\bootsteps.py", line 116, in start
+    step.start(parent)
+    ~~~~~~~~~~^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 788, in start
+    c.loop(*c.loop_args())
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\loops.py", line 136, in synloop
+    _loop_cycle()
+    ~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\loops.py", line 125, in _loop_cycle
+    connection.drain_events(timeout=2.0)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\connection.py", line 343, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\virtual\base.py", line 997, in drain_events
+    get(self._deliver, timeout=timeout)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 601, in get
+    ret = self.handle_event(fileno, event)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 583, in handle_event
+    return self.on_readable(fileno), self
+           ~~~~~~~~~~~~~~~~^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 579, in on_readable
+    chan.handlers[type]()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 931, in _receive
+    ret.append(self._receive_one(c))
+               ~~~~~~~~~~~~~~~~~^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\kombu\transport\redis.py", line 941, in _receive_one
+    response = c.parse_response()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 998, in parse_response
+    response = self._execute(conn, try_read)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 972, in _execute
+    response = conn.retry.call_with_retry(
+        lambda: command(*args, **kwargs),
+        lambda _: self._reconnect(conn),
+    )
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\retry.py", line 121, in call_with_retry
+    fail(error)
+    ~~~~^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 974, in <lambda>
+    lambda _: self._reconnect(conn),
+              ~~~~~~~~~~~~~~~^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\client.py", line 958, in _reconnect
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 846, in connect
+    self.connect_check_health(check_health=True)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 869, in connect_check_health
+    self.on_connect_check_health(check_health=check_health)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 994, in on_connect_check_health
+    self.read_response()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\connection.py", line 1133, in read_response
+    response = self._parser.read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 15, in read_response
+    result = self._read_response(disable_decoding=disable_decoding)
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\resp2.py", line 25, in _read_response
+    raw = self._buffer.readline()
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 115, in readline
+    self._read_from_socket()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\redis\_parsers\socket.py", line 68, in _read_from_socket
+    raise ConnectionError(SERVER_CLOSED_CONNECTION_ERROR)
+redis.exceptions.ConnectionError: Connection closed by server.
+2026-02-04 21:42:36,132 - py.warnings - WARNING - D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\venv\Lib\site-packages\celery\worker\consumer\consumer.py:397: CPendingDeprecationWarning: 
+In Celery 5.1 we introduced an optional breaking change which
+on connection loss cancels all currently executed tasks with late acknowledgement enabled.
+These tasks cannot be acknowledged as the connection is gone, and the tasks are automatically redelivered
+back to the queue. You can enable this behavior using the worker_cancel_long_running_tasks_on_connection_loss
+setting. In Celery 5.1 it is set to False by default. The setting will be set to True by default in Celery 6.0.
+
+  warnings.warn(CANCEL_TASKS_BY_DEFAULT, CPendingDeprecationWarning)
+
+2026-02-04 21:42:43,148 - flower.events - ERROR - Failed to capture events: 'Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.', trying again in 2 seconds.
+2026-02-04 21:42:51,220 - flower.events - ERROR - Failed to capture events: 'Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.', trying again in 4 seconds.
+2026-02-04 21:43:01,312 - flower.events - ERROR - Failed to capture events: 'Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.', trying again in 8 seconds.
+2026-02-04 21:43:15,393 - flower.events - ERROR - Failed to capture events: 'Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.', trying again in 16 seconds.
+2026-02-04 21:43:37,479 - flower.events - ERROR - Failed to capture events: 'Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.', trying again in 32 seconds.
+2026-02-04 21:44:15,562 - flower.events - ERROR - Failed to capture events: 'Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.', trying again in 64 seconds.
+2026-02-04 21:45:25,614 - flower.events - ERROR - Failed to capture events: 'Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.', trying again in 128 seconds.
+2026-02-04 21:47:39,684 - flower.events - ERROR - Failed to capture events: 'Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.', trying again in 256 seconds.
+2026-02-04 21:52:01,765 - flower.events - ERROR - Failed to capture events: 'Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.', trying again in 512 seconds.
+2026-02-05 15:18:08,465 - flower.command - INFO - Visit me at http://0.0.0.0:5556
+2026-02-05 15:18:08,481 - flower.command - INFO - Broker: redis://localhost:6379/0
+2026-02-05 15:18:08,484 - flower.command - INFO - Registered tasks: 
+['app.worker.generar_reporte_pesado_task',
+ 'app.worker.limpiar_reportes_antiguos_task',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+2026-02-05 15:18:08,499 - kombu.mixins - INFO - Connected to redis://localhost:6379/0
+2026-02-05 15:18:09,554 - flower.inspector - WARNING - Inspect method stats failed
+2026-02-05 15:18:09,555 - flower.inspector - WARNING - Inspect method conf failed
+2026-02-05 15:18:09,555 - flower.inspector - WARNING - Inspect method reserved failed
+2026-02-05 15:18:09,556 - flower.inspector - WARNING - Inspect method scheduled failed
+2026-02-05 15:18:09,556 - flower.inspector - WARNING - Inspect method active failed
+2026-02-05 15:18:09,557 - flower.inspector - WARNING - Inspect method active_queues failed
+2026-02-05 15:18:09,557 - flower.inspector - WARNING - Inspect method registered failed
+2026-02-05 15:18:09,559 - flower.inspector - WARNING - Inspect method revoked failed
+2026-02-05 15:18:52,213 - flower.command - INFO - Visit me at http://0.0.0.0:5556
+2026-02-05 15:18:52,231 - flower.command - INFO - Broker: redis://localhost:6379/0
+2026-02-05 15:18:52,233 - flower.command - INFO - Registered tasks: 
+['app.worker.generar_reporte_pesado_task',
+ 'app.worker.limpiar_reportes_antiguos_task',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+2026-02-05 15:19:34,654 - celery.beat - INFO - beat: Starting...
+2026-02-05 15:19:34,660 - celery_sqlalchemy_scheduler.schedulers - INFO - setup_schedule
+2026-02-05 15:19:34,661 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-05 15:19:37,633 - celery_sqlalchemy_scheduler.schedulers - ERROR - Cannot add entry 'celery.backend_cleanup' to database schedule: AttributeError("'zoneinfo.ZoneInfo' object has no attribute 'zone'"). Contents: {'task': 'celery.backend_cleanup', 'schedule': <crontab: 0 4 * * * (m/h/dM/MY/d)>, 'options': {'expires': 43200}}
+
+2026-02-05 15:19:42,890 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-05 15:20:08,905 - flower.command - INFO - Visit me at http://0.0.0.0:5556
+2026-02-05 15:20:08,924 - flower.command - INFO - Broker: redis://localhost:6379/0
+2026-02-05 15:20:08,926 - flower.command - INFO - Registered tasks: 
+['app.worker.generar_reporte_pesado_task',
+ 'app.worker.limpiar_reportes_antiguos_task',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+2026-02-05 15:22:44,919 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-05 15:23:29,196 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-05 15:23:29,197 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-05 15:23:29,197 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-05 15:23:29,197 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 11:55:38,584 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-02-07 11:55:38,589 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-02-07 11:55:39,626 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-02-07 11:55:39,650 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-02-07 11:56:34,029 - flower.command - INFO - Visit me at http://0.0.0.0:5556
+2026-02-07 11:56:34,049 - flower.command - INFO - Broker: redis://localhost:6379/0
+2026-02-07 11:56:34,051 - flower.command - INFO - Registered tasks: 
+['app.worker.generar_reporte_pesado_task',
+ 'app.worker.limpiar_reportes_antiguos_task',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+2026-02-07 11:56:34,067 - kombu.mixins - INFO - Connected to redis://localhost:6379/0
+2026-02-07 11:56:39,061 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-02-07 11:57:14,333 - celery.beat - INFO - beat: Starting...
+2026-02-07 11:57:14,339 - celery_sqlalchemy_scheduler.schedulers - INFO - setup_schedule
+2026-02-07 11:57:14,340 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 11:57:17,572 - celery_sqlalchemy_scheduler.schedulers - ERROR - Cannot add entry 'celery.backend_cleanup' to database schedule: AttributeError("'zoneinfo.ZoneInfo' object has no attribute 'zone'"). Contents: {'task': 'celery.backend_cleanup', 'schedule': <crontab: 0 4 * * * (m/h/dM/MY/d)>, 'options': {'expires': 43200}}
+
+2026-02-07 11:57:22,716 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:00:25,137 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:02:50,427 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:02:50,428 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:02:50,428 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:02:50,428 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:07:48,099 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-02-07 12:07:48,111 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-02-07 12:07:49,180 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-02-07 12:07:49,207 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-02-07 12:07:56,731 - flower.command - INFO - Visit me at http://0.0.0.0:5556
+2026-02-07 12:07:56,748 - flower.command - INFO - Broker: redis://localhost:6379/0
+2026-02-07 12:07:56,751 - flower.command - INFO - Registered tasks: 
+['app.worker.generar_reporte_pesado_task',
+ 'app.worker.limpiar_reportes_antiguos_task',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+2026-02-07 12:07:56,769 - kombu.mixins - INFO - Connected to redis://localhost:6379/0
+2026-02-07 12:08:01,758 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-02-07 12:08:11,038 - celery.beat - INFO - beat: Starting...
+2026-02-07 12:08:11,046 - celery_sqlalchemy_scheduler.schedulers - INFO - setup_schedule
+2026-02-07 12:08:11,047 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:08:11,313 - celery_sqlalchemy_scheduler.schedulers - ERROR - Cannot add entry 'celery.backend_cleanup' to database schedule: AttributeError("'zoneinfo.ZoneInfo' object has no attribute 'zone'"). Contents: {'task': 'celery.backend_cleanup', 'schedule': <crontab: 0 4 * * * (m/h/dM/MY/d)>, 'options': {'expires': 43200}}
+
+2026-02-07 12:08:16,681 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:08:42,238 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:08:42,238 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:08:42,239 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:08:42,239 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:11:02,177 - celery.beat - INFO - beat: Starting...
+2026-02-07 12:11:02,184 - celery_sqlalchemy_scheduler.schedulers - INFO - setup_schedule
+2026-02-07 12:11:02,185 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:11:02,438 - celery_sqlalchemy_scheduler.schedulers - ERROR - Cannot add entry 'celery.backend_cleanup' to database schedule: AttributeError("'zoneinfo.ZoneInfo' object has no attribute 'zone'"). Contents: {'task': 'celery.backend_cleanup', 'schedule': <crontab: 0 4 * * * (m/h/dM/MY/d)>, 'options': {'expires': 43200}}
+
+2026-02-07 12:11:03,305 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:11:03,305 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:11:03,305 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:11:03,305 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:14:35,886 - celery.beat - INFO - beat: Starting...
+2026-02-07 12:14:35,892 - celery_sqlalchemy_scheduler.schedulers - INFO - setup_schedule
+2026-02-07 12:14:35,892 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:14:36,017 - celery_sqlalchemy_scheduler.schedulers - ERROR - Cannot add entry 'celery.backend_cleanup' to database schedule: AttributeError("'zoneinfo.ZoneInfo' object has no attribute 'zone'"). Contents: {'task': 'celery.backend_cleanup', 'schedule': <crontab: 0 4 * * * (m/h/dM/MY/d)>, 'options': {'expires': 43200}}
+
+2026-02-07 12:14:41,320 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:14:54,715 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:14:54,716 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:14:54,716 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:14:54,716 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:15:16,473 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-02-07 12:15:16,481 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-02-07 12:15:17,503 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-02-07 12:15:17,534 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-02-07 12:15:29,887 - flower.command - INFO - Visit me at http://0.0.0.0:5556
+2026-02-07 12:15:29,903 - flower.command - INFO - Broker: redis://localhost:6379/0
+2026-02-07 12:15:29,905 - flower.command - INFO - Registered tasks: 
+['app.worker.generar_reporte_pesado_task',
+ 'app.worker.limpiar_reportes_antiguos_task',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+2026-02-07 12:15:29,919 - kombu.mixins - INFO - Connected to redis://localhost:6379/0
+2026-02-07 12:15:34,925 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-02-07 12:16:16,290 - celery.beat - INFO - beat: Starting...
+2026-02-07 12:16:16,297 - celery_sqlalchemy_scheduler.schedulers - INFO - setup_schedule
+2026-02-07 12:16:16,297 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:16:16,445 - celery_sqlalchemy_scheduler.schedulers - ERROR - Cannot add entry 'celery.backend_cleanup' to database schedule: AttributeError("'zoneinfo.ZoneInfo' object has no attribute 'zone'"). Contents: {'task': 'celery.backend_cleanup', 'schedule': <crontab: 0 4 * * * (m/h/dM/MY/d)>, 'options': {'expires': 43200}}
+
+2026-02-07 12:16:21,854 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:18:50,586 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-02-07 12:18:50,591 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-02-07 12:18:51,617 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-02-07 12:18:51,638 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-02-07 12:18:54,068 - flower.command - INFO - Visit me at http://0.0.0.0:5556
+2026-02-07 12:18:54,085 - flower.command - INFO - Broker: redis://localhost:6379/0
+2026-02-07 12:18:54,088 - flower.command - INFO - Registered tasks: 
+['app.worker.generar_reporte_pesado_task',
+ 'app.worker.limpiar_reportes_antiguos_task',
+ 'celery.accumulate',
+ 'celery.backend_cleanup',
+ 'celery.chain',
+ 'celery.chord',
+ 'celery.chord_unlock',
+ 'celery.chunks',
+ 'celery.group',
+ 'celery.map',
+ 'celery.starmap']
+2026-02-07 12:18:54,103 - kombu.mixins - INFO - Connected to redis://localhost:6379/0
+2026-02-07 12:18:59,101 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-02-07 12:19:03,928 - celery_sqlalchemy_scheduler.schedulers - INFO - DatabaseScheduler: Schedule changed.
+2026-02-07 12:19:03,928 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:19:24,265 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:20:00,032 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:20:00,052 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[0fd76267-89fc-4bd8-8155-ce915e41c777] received
+2026-02-07 12:20:00,054 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:20:00,204 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:20:00,209 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[0fd76267-89fc-4bd8-8155-ce915e41c777] succeeded in 0.15521349999471568s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:21:00,034 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:22:00,026 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:22:25,360 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:23:00,028 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:24:00,034 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:25:00,038 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:25:30,363 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:26:00,044 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:27:00,143 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:28:00,028 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:28:35,290 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:29:00,028 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:30:00,027 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:31:00,029 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:31:35,506 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:32:00,076 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:33:00,150 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:34:00,027 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:34:40,392 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:35:00,025 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:36:00,164 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:37:00,026 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:37:28,521 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-02-07 12:37:28,531 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-02-07 12:37:29,558 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-02-07 12:37:29,578 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-02-07 12:37:29,582 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[e6244460-ea7c-4c92-ae30-2630c21063de] received
+2026-02-07 12:37:29,582 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,627 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,631 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[e6244460-ea7c-4c92-ae30-2630c21063de] succeeded in 0.04932960000587627s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,633 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[1f6cddf6-feb5-4b25-bdb1-3e4e8933292a] received
+2026-02-07 12:37:29,634 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,635 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,636 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[1f6cddf6-feb5-4b25-bdb1-3e4e8933292a] succeeded in 0.002653799980180338s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,639 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[8f720803-4211-47c6-91ac-67e2263771ae] received
+2026-02-07 12:37:29,639 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,640 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,642 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[8f720803-4211-47c6-91ac-67e2263771ae] succeeded in 0.0029904000111855567s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,644 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[17abf526-72de-41de-b50a-fe418e0d1234] received
+2026-02-07 12:37:29,644 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,646 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,647 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[17abf526-72de-41de-b50a-fe418e0d1234] succeeded in 0.0028517000027932227s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,650 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[99348ca7-9ded-40e5-92de-550c35c194e8] received
+2026-02-07 12:37:29,650 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,651 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,653 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[99348ca7-9ded-40e5-92de-550c35c194e8] succeeded in 0.0032620000129099935s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,655 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[b5acdce1-e714-4f63-9ece-b72a6fd28100] received
+2026-02-07 12:37:29,655 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,657 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,658 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[b5acdce1-e714-4f63-9ece-b72a6fd28100] succeeded in 0.0028461999900173396s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,661 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[889f6956-8af7-47a3-8547-8a1ae2e5b006] received
+2026-02-07 12:37:29,661 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,662 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,664 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[889f6956-8af7-47a3-8547-8a1ae2e5b006] succeeded in 0.0029654000245500356s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,667 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[6e755916-067c-44c3-9786-eeb4c74adb6a] received
+2026-02-07 12:37:29,668 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,669 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,670 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[6e755916-067c-44c3-9786-eeb4c74adb6a] succeeded in 0.0027599000022746623s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,673 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[39705b1c-a731-4d91-aa08-e747b83878c5] received
+2026-02-07 12:37:29,673 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,675 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,676 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[39705b1c-a731-4d91-aa08-e747b83878c5] succeeded in 0.0026230000075884163s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,678 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[06d326bd-df0e-4a5d-b103-ce3b471e282f] received
+2026-02-07 12:37:29,679 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,680 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,682 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[06d326bd-df0e-4a5d-b103-ce3b471e282f] succeeded in 0.0029492999892681837s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,684 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[9d4b5217-07f7-457e-8408-0d290bcdf167] received
+2026-02-07 12:37:29,684 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,685 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,687 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[9d4b5217-07f7-457e-8408-0d290bcdf167] succeeded in 0.0028118000191170722s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,689 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[33b17de0-08d5-4e8e-96f1-fdcb556dc6df] received
+2026-02-07 12:37:29,689 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,690 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,692 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[33b17de0-08d5-4e8e-96f1-fdcb556dc6df] succeeded in 0.0027135999989695847s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,694 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[c08084ba-cfa0-4261-9cca-52b66601d272] received
+2026-02-07 12:37:29,694 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,695 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,697 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[c08084ba-cfa0-4261-9cca-52b66601d272] succeeded in 0.002678599994396791s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,699 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[2211f380-b41b-4f57-86eb-59131341055b] received
+2026-02-07 12:37:29,700 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,701 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,703 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[2211f380-b41b-4f57-86eb-59131341055b] succeeded in 0.0029230000218376517s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,705 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[fe243702-7e32-472e-b144-0cfd870274af] received
+2026-02-07 12:37:29,705 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,706 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,709 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[fe243702-7e32-472e-b144-0cfd870274af] succeeded in 0.0033804999839048833s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,711 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[cae1cece-a727-4ff7-9acd-aff78c65ae2c] received
+2026-02-07 12:37:29,711 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,712 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,714 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[cae1cece-a727-4ff7-9acd-aff78c65ae2c] succeeded in 0.002786600001854822s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:29,716 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[be57bf1d-8b71-4290-8884-34ffc3720280] received
+2026-02-07 12:37:29,717 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:37:29,718 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:37:29,719 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[be57bf1d-8b71-4290-8884-34ffc3720280] succeeded in 0.0024593000125605613s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:37:34,102 - celery.worker.control - INFO - Events of group {task} enabled by remote.
+2026-02-07 12:37:45,494 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:38:00,041 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:38:00,045 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[3c52a3f5-d844-48ac-bc46-5cea17dac59c] received
+2026-02-07 12:38:00,049 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:38:00,052 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:38:00,055 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[3c52a3f5-d844-48ac-bc46-5cea17dac59c] succeeded in 0.006145999999716878s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:39:00,032 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:39:00,035 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[4e734f6b-d88c-4cee-a7fb-2ba41440aaf2] received
+2026-02-07 12:39:00,038 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:39:00,040 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:39:00,042 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[4e734f6b-d88c-4cee-a7fb-2ba41440aaf2] succeeded in 0.004145100014284253s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:40:00,036 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:40:00,044 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[251ed194-b759-43b3-a5de-80abd8c7c627] received
+2026-02-07 12:40:00,049 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:40:00,054 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:40:00,058 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[251ed194-b759-43b3-a5de-80abd8c7c627] succeeded in 0.0087739999871701s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:40:50,573 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:41:00,030 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:41:00,036 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[bd063980-4772-4e32-8867-079ae1713fa6] received
+2026-02-07 12:41:00,039 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:41:00,040 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:41:00,043 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[bd063980-4772-4e32-8867-079ae1713fa6] succeeded in 0.0038809000106994063s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:42:00,052 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:42:00,056 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[26277b67-11bc-46cf-bcf8-1fb58063c8ed] received
+2026-02-07 12:42:00,058 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:42:00,059 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:42:00,061 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[26277b67-11bc-46cf-bcf8-1fb58063c8ed] succeeded in 0.00325209999573417s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:43:00,053 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:43:00,056 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[1e52b38b-7e63-417c-9af8-4d644b80f67a] received
+2026-02-07 12:43:00,058 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:43:00,060 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:43:00,062 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[1e52b38b-7e63-417c-9af8-4d644b80f67a] succeeded in 0.003564300015568733s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:43:55,697 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:44:00,054 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:44:00,058 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[48d4a6af-f625-4c79-b292-b9b866a31961] received
+2026-02-07 12:44:00,060 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:44:00,062 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:44:00,064 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[48d4a6af-f625-4c79-b292-b9b866a31961] succeeded in 0.004050199990160763s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:45:00,135 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:45:00,139 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[6a3050fc-bd27-4ece-a67e-ab64afd24f76] received
+2026-02-07 12:45:00,141 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:45:00,143 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:45:00,145 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[6a3050fc-bd27-4ece-a67e-ab64afd24f76] succeeded in 0.003428299998631701s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:46:00,053 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:46:00,056 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[3cfac3cb-e6fa-4a6d-83c3-60efc32764ac] received
+2026-02-07 12:46:00,058 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:46:00,060 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:46:00,061 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[3cfac3cb-e6fa-4a6d-83c3-60efc32764ac] succeeded in 0.003287100000306964s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:46:59,991 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:47:00,136 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:47:00,139 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[677c7297-bb83-4e9c-a8e7-0d231ce501b3] received
+2026-02-07 12:47:00,140 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:47:00,142 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:47:00,143 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[677c7297-bb83-4e9c-a8e7-0d231ce501b3] succeeded in 0.003107700002146885s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:48:00,140 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:48:00,143 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[e5b43a0d-01ce-4d6c-b67d-3a4056090fc1] received
+2026-02-07 12:48:00,145 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:48:00,147 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:48:00,149 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[e5b43a0d-01ce-4d6c-b67d-3a4056090fc1] succeeded in 0.0036703000077977777s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:49:00,028 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:49:00,031 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[50375c1b-614a-4ce4-8b47-3f8da8515684] received
+2026-02-07 12:49:00,033 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:49:00,035 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:49:00,037 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[50375c1b-614a-4ce4-8b47-3f8da8515684] succeeded in 0.003533800016157329s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:50:00,026 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:50:00,030 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[c4ced062-835f-4136-b7b2-a7c032770901] received
+2026-02-07 12:50:00,032 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:50:00,033 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:50:00,035 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[c4ced062-835f-4136-b7b2-a7c032770901] succeeded in 0.0035157999955117702s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:50:05,166 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:51:00,058 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:51:00,061 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[56e3f5d6-472b-4cae-8fdb-d318ec697c49] received
+2026-02-07 12:51:00,063 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:51:00,064 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:51:00,066 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[56e3f5d6-472b-4cae-8fdb-d318ec697c49] succeeded in 0.0033619000168982893s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:52:00,051 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:52:00,055 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[2b41bdbb-3c3b-42cf-a6cc-39541c3c1a14] received
+2026-02-07 12:52:00,057 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:52:00,059 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:52:00,061 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[2b41bdbb-3c3b-42cf-a6cc-39541c3c1a14] succeeded in 0.0038309000083245337s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:53:00,171 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:53:00,175 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[59235c5e-5734-4fd7-be67-02f795480c1b] received
+2026-02-07 12:53:00,177 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:53:00,178 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:53:00,180 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[59235c5e-5734-4fd7-be67-02f795480c1b] succeeded in 0.003720899985637516s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:53:10,280 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:54:00,026 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:54:00,029 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[14098f99-1c71-422b-b6ea-d9c0751a8e6c] received
+2026-02-07 12:54:00,031 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:54:00,033 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:54:00,035 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[14098f99-1c71-422b-b6ea-d9c0751a8e6c] succeeded in 0.003654700005427003s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:55:00,028 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:55:00,031 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[dcc1a16c-6650-4f63-a726-e07407383bf5] received
+2026-02-07 12:55:00,034 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:55:00,035 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:55:00,037 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[dcc1a16c-6650-4f63-a726-e07407383bf5] succeeded in 0.0034602999803610146s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:56:00,030 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:56:00,033 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[473d67ad-1c8b-4e2e-a018-beac8e2d129c] received
+2026-02-07 12:56:00,035 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:56:00,036 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:56:00,038 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[473d67ad-1c8b-4e2e-a018-beac8e2d129c] succeeded in 0.0034124999947380275s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:56:15,288 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 12:57:00,059 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:57:00,063 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f060ae95-5d11-4d7d-a043-949b7c1c8879] received
+2026-02-07 12:57:00,065 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:57:00,066 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:57:00,068 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f060ae95-5d11-4d7d-a043-949b7c1c8879] succeeded in 0.003307700011646375s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:58:00,028 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:58:00,031 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[8b55a9c5-3c92-45a1-bb7c-8c5a0abdec62] received
+2026-02-07 12:58:00,033 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:58:00,035 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:58:00,037 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[8b55a9c5-3c92-45a1-bb7c-8c5a0abdec62] succeeded in 0.004261199996108189s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:59:00,029 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 12:59:00,032 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[5ac47646-97a5-43f4-b77a-bab271d05e49] received
+2026-02-07 12:59:00,035 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 12:59:00,037 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 12:59:00,040 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[5ac47646-97a5-43f4-b77a-bab271d05e49] succeeded in 0.004444499994860962s: {'error': 'Reporte no encontrado'}
+2026-02-07 12:59:20,220 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 13:00:00,039 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:00:00,043 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[36567f0e-21eb-4bc5-826e-9aee675f1336] received
+2026-02-07 13:00:00,045 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:00:00,047 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:00:00,049 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[36567f0e-21eb-4bc5-826e-9aee675f1336] succeeded in 0.0039021999982651323s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:01:00,054 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:01:00,058 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[ed2eb01b-f23f-4c52-91b7-f04f255da476] received
+2026-02-07 13:01:00,060 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:01:00,061 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:01:00,063 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[ed2eb01b-f23f-4c52-91b7-f04f255da476] succeeded in 0.003592599998228252s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:02:00,142 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:02:00,150 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[ca2da3cf-ee50-4efd-a4ca-1c257ab270ed] received
+2026-02-07 13:02:00,157 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:02:00,162 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:02:00,168 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[ca2da3cf-ee50-4efd-a4ca-1c257ab270ed] succeeded in 0.01060519999009557s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:02:25,481 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 13:03:00,040 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:03:00,046 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[f7ad30f6-9821-4144-a1f6-f18042464404] received
+2026-02-07 13:03:00,050 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:03:00,053 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:03:00,056 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[f7ad30f6-9821-4144-a1f6-f18042464404] succeeded in 0.005924500001128763s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:04:00,138 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:04:00,151 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[ec040868-98eb-4cec-b1ab-8b46e4f23373] received
+2026-02-07 13:04:00,159 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:04:00,164 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:04:00,171 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[ec040868-98eb-4cec-b1ab-8b46e4f23373] succeeded in 0.012108399998396635s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:05:00,157 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:05:00,180 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[9c61a5c3-70e0-439e-9d33-9743096e3794] received
+2026-02-07 13:05:00,188 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:05:00,193 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:05:00,199 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[9c61a5c3-70e0-439e-9d33-9743096e3794] succeeded in 0.011971200001426041s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:05:25,625 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 13:06:00,144 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:06:00,156 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[1bd2ecaf-60b4-47fd-8ef3-c55cfbe27d05] received
+2026-02-07 13:06:00,166 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:06:00,171 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:06:00,178 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[1bd2ecaf-60b4-47fd-8ef3-c55cfbe27d05] succeeded in 0.012280399998417124s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:07:00,153 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:07:00,166 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[dff0cbec-6556-45c9-8d88-96a731f78502] received
+2026-02-07 13:07:00,174 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:07:00,179 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:07:00,185 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[dff0cbec-6556-45c9-8d88-96a731f78502] succeeded in 0.011177500011399388s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:08:00,050 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:08:00,060 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[d90315a6-dffc-4950-9262-d1638a5857ce] received
+2026-02-07 13:08:00,063 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:08:00,065 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:08:00,068 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[d90315a6-dffc-4950-9262-d1638a5857ce] succeeded in 0.004868999996688217s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:08:30,830 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 13:09:00,148 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:09:00,161 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[97daf8b4-4e3d-4586-b84c-e8aa26f8e0ed] received
+2026-02-07 13:09:00,169 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:09:00,174 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:09:00,181 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[97daf8b4-4e3d-4586-b84c-e8aa26f8e0ed] succeeded in 0.012217800016514957s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:10:00,151 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:10:00,164 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[89cb5721-2f0a-418b-a752-92a8f23f9c1a] received
+2026-02-07 13:10:00,173 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:10:00,178 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:10:00,186 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[89cb5721-2f0a-418b-a752-92a8f23f9c1a] succeeded in 0.013636299991048872s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:11:00,250 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:11:00,263 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[3c5d36ff-af38-4d61-9b09-1675b377a6e6] received
+2026-02-07 13:11:00,272 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:11:00,277 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:11:00,285 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[3c5d36ff-af38-4d61-9b09-1675b377a6e6] succeeded in 0.013210600009188056s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:11:36,317 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 13:12:00,152 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:12:00,165 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[a501b7ff-0871-42d0-be30-00d8efbd0eee] received
+2026-02-07 13:12:00,174 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:12:00,179 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:12:00,187 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[a501b7ff-0871-42d0-be30-00d8efbd0eee] succeeded in 0.013043099985225126s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:13:00,150 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:13:00,162 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[1380ba39-223a-4d33-a802-e73caa9d2506] received
+2026-02-07 13:13:00,172 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:13:00,176 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:13:00,184 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[1380ba39-223a-4d33-a802-e73caa9d2506] succeeded in 0.012474299990572035s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:14:00,050 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:14:00,057 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[5198c50f-8205-4d98-9128-3c3537e7baac] received
+2026-02-07 13:14:00,060 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:14:00,063 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:14:00,066 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[5198c50f-8205-4d98-9128-3c3537e7baac] succeeded in 0.005392499995650724s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:14:41,173 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 13:15:00,138 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:15:00,150 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[4c9eb10d-591e-4b39-bcde-8211f7e01a50] received
+2026-02-07 13:15:00,159 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:15:00,165 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:15:00,172 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[4c9eb10d-591e-4b39-bcde-8211f7e01a50] succeeded in 0.012271300016436726s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:16:00,137 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:16:00,149 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[3c85bc63-fe2c-44dc-8ead-aa116f26f084] received
+2026-02-07 13:16:00,157 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:16:00,163 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:16:00,170 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[3c85bc63-fe2c-44dc-8ead-aa116f26f084] succeeded in 0.012938400002894923s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:17:00,145 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:17:00,157 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[0268ec47-fb03-47d5-a755-63ee0f053673] received
+2026-02-07 13:17:00,165 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:17:00,170 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:17:00,177 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[0268ec47-fb03-47d5-a755-63ee0f053673] succeeded in 0.011769300006562844s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:17:46,487 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 13:18:00,058 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:18:00,064 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[ae58e948-69e3-4bd1-9f81-cae97642b525] received
+2026-02-07 13:18:00,067 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:18:00,069 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:18:00,072 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[ae58e948-69e3-4bd1-9f81-cae97642b525] succeeded in 0.005158499989192933s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:19:00,147 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:19:00,160 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[d5118ff3-fba5-438e-a139-31ba99b7d4d2] received
+2026-02-07 13:19:00,167 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:19:00,172 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:19:00,179 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[d5118ff3-fba5-438e-a139-31ba99b7d4d2] succeeded in 0.011718900001142174s: {'error': 'Reporte no encontrado'}
+2026-02-07 13:20:00,153 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 13:20:00,165 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[82294263-86af-4fd9-96e0-78840d3d3cec] received
+2026-02-07 13:20:00,173 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 13:20:00,179 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 13:20:00,186 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[82294263-86af-4fd9-96e0-78840d3d3cec] succeeded in 0.013204699993366376s: {'error': 'Reporte no encontrado'}
+2026-02-07 16:20:30,674 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 16:20:31,489 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 16:20:32,297 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[4a461c9d-78f1-4e3c-b968-5039e1eda2c9] received
+2026-02-07 16:20:32,242 - celery.events.state - WARNING - Substantial drift from celery@ASUSF15 may mean clocks are out of sync.  Current drift is 10802 seconds.  [orig: 2026-02-07 16:20:32.236904 recv: 2026-02-07 13:20:30.388353]
+2026-02-07 16:20:32,390 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 16:20:32,407 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 16:20:32,434 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[4a461c9d-78f1-4e3c-b968-5039e1eda2c9] succeeded in 0.04440109999268316s: {'error': 'Reporte no encontrado'}
+2026-02-07 19:59:37,160 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 19:59:37,604 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 19:59:37,610 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[a9571992-9e61-4e9f-9576-dd6030dbe5ec] received
+2026-02-07 19:59:37,614 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 19:59:37,617 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 19:59:37,620 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[a9571992-9e61-4e9f-9576-dd6030dbe5ec] succeeded in 0.006068999995477498s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:00:00,158 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:00:00,164 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[9ee0fd43-bc77-4811-a1b6-bf7d9067add9] received
+2026-02-07 20:00:00,168 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:00:00,170 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:00:00,174 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[9ee0fd43-bc77-4811-a1b6-bf7d9067add9] succeeded in 0.006298899999819696s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:01:00,035 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:01:00,040 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[323c8fff-d822-4a1b-94f3-b17df96f6792] received
+2026-02-07 20:01:00,041 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:01:00,043 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:01:00,044 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[323c8fff-d822-4a1b-94f3-b17df96f6792] succeeded in 0.003028799983439967s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:02:00,026 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:02:00,030 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[96d80930-f095-4f76-be80-6035fa1c8883] received
+2026-02-07 20:02:00,032 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:02:00,034 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:02:00,036 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[96d80930-f095-4f76-be80-6035fa1c8883] succeeded in 0.003691099991556257s: {'error': 'Reporte no encontrado'}
+2026-02-07 20:02:40,469 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-02-07 20:03:00,138 - celery.beat - INFO - Scheduler: Sending due task Prueba Final Minuto (app.worker.generar_reporte_pesado_task)
+2026-02-07 20:03:00,141 - celery.worker.strategy - INFO - Task app.worker.generar_reporte_pesado_task[289531d8-3293-455f-9d03-ba1ec6f707a5] received
+2026-02-07 20:03:00,143 - app.worker - INFO - 📄 [WORKER] Iniciando tarea reporte ID 1. Formato: PDF
+2026-02-07 20:03:00,144 - app.worker - ERROR - ❌ Reporte 1 no encontrado en base de datos.
+2026-02-07 20:03:00,146 - celery.app.trace - INFO - Task app.worker.generar_reporte_pesado_task[289531d8-3293-455f-9d03-ba1ec6f707a5] succeeded in 0.003502400009892881s: {'error': 'Reporte no encontrado'}

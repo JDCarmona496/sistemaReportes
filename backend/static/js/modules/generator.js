@@ -22,10 +22,15 @@ async function cargarListaReportes() {
     if (statEl) statEl.innerText = reportesCache.length;
 
     const select = document.getElementById("reportSelect");
-    select.innerHTML = '<option value="">-- Seleccione --</option>';
-    reportesCache.forEach((r) => {
-      select.innerHTML += `<option value="${r.id}">${r.title}</option>`;
-    });
+    if (select) {
+      select.innerHTML = '<option value="">-- Seleccione --</option>';
+      reportesCache.forEach((r) => {
+        const opt = document.createElement("option");
+        opt.value = r.id;
+        opt.innerText = r.title;
+        select.appendChild(opt);
+      });
+    }
   } catch (e) {
     console.error(e);
   }
@@ -34,6 +39,8 @@ async function cargarListaReportes() {
 function cargarFormularioDinamico() {
   const id = document.getElementById("reportSelect").value;
   const container = document.getElementById("dynamicForm");
+
+  if (!container) return;
   container.innerHTML = "";
 
   if (!id) return;
@@ -59,24 +66,29 @@ function cargarFormularioDinamico() {
 
 async function generarReporte() {
   const reportSelect = document.getElementById("reportSelect");
+  if (!reportSelect) return;
+
   const reportId = reportSelect.value;
-  const reportTitle = reportSelect.options[reportSelect.selectedIndex]?.text;
+  const reportTitle =
+    reportSelect.options[reportSelect.selectedIndex]?.text || "Reporte";
 
   if (!reportId)
     return Swal.fire("Atención", "Seleccione un reporte primero", "warning");
 
   const params = {};
-  document.querySelectorAll(".param-input").forEach((i) => {
+  const inputs = document.querySelectorAll(".param-input");
+  inputs.forEach((i) => {
     let val = i.value;
     if (i.name === "lista_pacientes" || val.includes(","))
       val = val.split(",").filter((x) => x.trim() !== "");
     params[i.name] = val;
   });
 
-  const formato = document.querySelector('input[name="formato"]:checked').value;
+  const formatoRadio = document.querySelector('input[name="formato"]:checked');
+  const formato = formatoRadio ? formatoRadio.value : "PDF";
 
   try {
-    // Feedback Toast
+    // Feedback Toast (No bloqueante)
     const Toast = Swal.mixin({
       toast: true,
       position: "top-end",
@@ -107,6 +119,12 @@ async function generarReporte() {
 
 function agregarFilaCola(taskId, titulo, formato) {
   const tbody = document.getElementById("downloads-body");
+  if (!tbody) {
+    console.error("No se encontró la tabla de descargas (downloads-body)");
+    return;
+  }
+
+  // Ocultar mensaje de vacío si existe
   const emptyMsg = document.getElementById("empty-queue-msg");
   if (emptyMsg) emptyMsg.classList.add("hidden");
 
@@ -124,6 +142,7 @@ function agregarFilaCola(taskId, titulo, formato) {
         </td>
         <td class="px-4 py-3 text-right text-xs text-gray-400">Espere...</td>
     `;
+
   // Insertar al inicio de la tabla
   tbody.insertBefore(tr, tbody.firstChild);
 
@@ -143,32 +162,42 @@ function monitorFila(taskId, rowElement) {
         clearInterval(interval);
 
         // Actualizar Fila a Éxito
-        rowElement.classList.remove("bg-blue-50");
-        rowElement.classList.add("bg-white");
+        if (rowElement) {
+          rowElement.classList.remove("bg-blue-50");
+          rowElement.classList.add("bg-white");
 
-        const url = data.resultado.url_descarga;
-        const isPdf = data.resultado.formato === "PDF";
-        const btnClass = isPdf
-          ? "text-red-600 border-red-200 hover:bg-red-50"
-          : "text-green-600 border-green-200 hover:bg-green-50";
-        const icon = isPdf ? "fa-file-pdf" : "fa-file-csv";
+          const url = data.resultado.url_descarga;
+          const isPdf = data.resultado.formato === "PDF";
+          const btnClass = isPdf
+            ? "text-red-600 border-red-200 hover:bg-red-50"
+            : "text-green-600 border-green-200 hover:bg-green-50";
+          const icon = isPdf ? "fa-file-pdf" : "fa-file-csv";
 
-        rowElement.querySelector("td:nth-child(3)").innerHTML = `
-                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800">
-                        <i class="fa-solid fa-check"></i> Listo
-                    </span>`;
+          const celdaEstado = rowElement.querySelector("td:nth-child(3)");
+          if (celdaEstado) {
+            celdaEstado.innerHTML = `
+                        <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800">
+                            <i class="fa-solid fa-check"></i> Listo
+                        </span>`;
+          }
 
-        rowElement.querySelector("td:nth-child(4)").innerHTML = `
-                    <a href="${url}" target="_blank" class="inline-flex items-center gap-1 border ${btnClass} border px-3 py-1 rounded transition font-bold text-xs">
-                        <i class="fa-solid ${icon}"></i> Descargar
-                    </a>`;
+          const celdaAccion = rowElement.querySelector("td:nth-child(4)");
+          if (celdaAccion) {
+            celdaAccion.innerHTML = `
+                        <a href="${url}" target="_blank" class="inline-flex items-center gap-1 border ${btnClass} border px-3 py-1 rounded transition font-bold text-xs">
+                            <i class="fa-solid ${icon}"></i> Descargar
+                        </a>`;
+          }
+        }
       } else if (data.estado === "FAILURE") {
         clearInterval(interval);
-        rowElement.classList.add("bg-red-50");
-        rowElement.querySelector("td:nth-child(3)").innerHTML =
-          `<span class="text-red-600 font-bold text-xs">Error</span>`;
-        rowElement.querySelector("td:nth-child(4)").innerText =
-          "Fallo en worker";
+        if (rowElement) {
+          rowElement.classList.add("bg-red-50");
+          rowElement.querySelector("td:nth-child(3)").innerHTML =
+            `<span class="text-red-600 font-bold text-xs">Error</span>`;
+          rowElement.querySelector("td:nth-child(4)").innerText =
+            "Fallo en worker";
+        }
       }
     } catch (e) {
       // Si falla la red, sigue intentando en el próximo intervalo

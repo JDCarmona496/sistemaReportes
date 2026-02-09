@@ -4,14 +4,12 @@ import logging
 import os
 from dotenv import load_dotenv
 from typing import Any
-import re  # <--- 1. NUEVO: Importamos Regex para la traducción
+import re
 
-# Cargar variables del archivo .env
 load_dotenv()
 
 logger = logging.getLogger(__name__)
 
-# Configuración Segura (Leyendo desde el .env)
 LIS_CONFIG = {
     "host": os.getenv("LIS_HOST", "localhost"),
     "database": os.getenv("LIS_DB", "WINSISLAB"),
@@ -22,6 +20,35 @@ LIS_CONFIG = {
 }
 
 
+# --- NUEVA FUNCIÓN: Verificar Estado ---
+def verificar_conexion_lis():
+    """
+    Intenta hacer un 'Ping' a la base de datos externa.
+    Retorna: (bool, str) -> (Exito, Mensaje/Latencia)
+    """
+    conn = None
+    try:
+        # Hacemos una copia de la config para bajar el timeout solo para esta prueba
+        # Si la VPN está caída, no queremos esperar 10s, queremos saberlo YA (2s).
+        ping_config = LIS_CONFIG.copy()
+        ping_config["connect_timeout"] = 2
+
+        conn = psycopg2.connect(**ping_config)
+        cursor = conn.cursor()
+        cursor.execute("SELECT 1")  # Consulta más ligera posible
+        conn.close()
+
+        return True, "En Línea"
+    except psycopg2.OperationalError as e:
+        return False, "Sin Conexión (VPN/Red)"
+    except Exception as e:
+        return False, f"Error: {str(e)}"
+    finally:
+        if conn and not conn.closed:
+            conn.close()
+
+
+# ... (Tu función ejecutar_consulta_lis sigue igual abajo) ...
 def ejecutar_consulta_lis(sql_query: str, params: Any = None):
     """
     Se conecta al LIS, ejecuta una consulta y devuelve una lista de diccionarios.
@@ -29,29 +56,19 @@ def ejecutar_consulta_lis(sql_query: str, params: Any = None):
     Traduce sintaxis :param a %(param)s para compatibilidad con Psycopg2.
     """
     connection = None
-    cursor = None  # Inicializamos cursor para evitar errores en finally
+    cursor = None
     try:
-        # 1. Conectar
         connection = psycopg2.connect(**LIS_CONFIG)
-
-        # 2. Cursor que devuelve diccionarios
         cursor = connection.cursor(cursor_factory=RealDictCursor)
 
-        # --- 3. PARCHE DE TRADUCCIÓN SQL (:param -> %(param)s) ---
-        # Psycopg2 requiere %(nombre)s, pero el Dashboard envía :nombre
         if params and isinstance(params, dict):
-            # Busca palabras que empiecen con : y las reemplaza por %(palabra)s
-            # Ejemplo: transformamos ":nit" en "%(nit)s"
             sql_query = re.sub(r":([a-zA-Z0-9_]+)", r"%(\1)s", sql_query)
 
-        # --- 4. PARCHE DE COMPATIBILIDAD (LISTA -> TUPLA) ---
-        # Psycopg2 requiere TUPLAS para cláusulas 'IN %(lista)s',
         if params and isinstance(params, dict):
             for k, v in params.items():
                 if isinstance(v, list):
                     params[k] = tuple(v)
 
-        # 5. Ejecutar
         if params:
             logger.info(f"🔌 Ejecutando query en LIS: {sql_query}")
             logger.info(f"🔌 Params: {params}")
@@ -59,11 +76,7 @@ def ejecutar_consulta_lis(sql_query: str, params: Any = None):
             logger.info(f"🔌 Ejecutando query simple en LIS...")
 
         cursor.execute(sql_query, params)
-
-        # 6. Obtener resultados
         resultados = cursor.fetchall()
-
-        # Convertir a lista normal
         datos_limpios = [dict(row) for row in resultados]
 
         logger.info(f"✅ Se obtuvieron {len(datos_limpios)} filas del LIS.")
@@ -71,11 +84,9 @@ def ejecutar_consulta_lis(sql_query: str, params: Any = None):
 
     except Exception as e:
         logger.error(f"❌ Error consultando el LIS: {e}")
-        # Es importante relanzar el error para que Celery se entere y marque TASK FAILURE
         raise e
 
     finally:
-        # 7. Siempre cerrar la conexión
         if cursor:
             cursor.close()
         if connection:

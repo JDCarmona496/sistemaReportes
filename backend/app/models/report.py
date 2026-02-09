@@ -1,3 +1,4 @@
+# type: ignore
 from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime
 from sqlalchemy.sql import func
 from sqlalchemy.dialects.postgresql import JSON

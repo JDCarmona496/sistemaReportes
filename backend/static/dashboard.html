@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | BIOLAB</title>
 
+    <!-- Fuente Urbanist -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700&display=swap" rel="stylesheet">
+
     <!-- Librerías Externas -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,7 +18,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Estilos Personalizados -->
+    <link rel="stylesheet" href="/static/css/styles.css">
     <style>
+        body {
+            font-family: 'Urbanist', sans-serif;
+        }
+
         .fade-in {
             animation: fadeIn 0.3s ease-in-out;
         }
@@ -31,30 +41,28 @@
         .nav-item.active {
             background-color: rgba(255, 255, 255, 0.15);
             border-left: 4px solid rgba(255, 255, 255, 0.7);
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .nav-item:hover:not(.active) {
             background-color: rgba(255, 255, 255, 0.05);
         }
 
-        /* Animación suave para filas nuevas */
-        @keyframes slideDown {
-            from {
+        /* Indicador de Estado LIS */
+        .ping {
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ping {
+
+            75%,
+            100% {
+                transform: scale(2);
                 opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
             }
         }
 
-        .new-row {
-            animation: slideDown 0.3s ease-out;
-        }
-
+        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -74,7 +82,7 @@
     </style>
 </head>
 
-<body class="bg-gray-50 font-sans text-gray-800 h-screen flex overflow-hidden">
+<body class="bg-gray-50 text-gray-800 h-screen flex overflow-hidden">
 
     <!-- ================= SIDEBAR ================= -->
     <aside id="main-sidebar"
@@ -102,6 +110,10 @@
                     class="nav-item block px-6 py-3 cursor-pointer transition text-sm flex items-center gap-3">
                     <i class="fa-solid fa-database w-5"></i> Config. Reportes
                 </a>
+                <a onclick="loadView('scheduler')" id="nav-scheduler"
+                    class="nav-item block px-6 py-3 cursor-pointer transition text-sm flex items-center gap-3">
+                    <i class="fa-regular fa-clock w-5"></i> Programador Tareas
+                </a>
                 <a onclick="loadView('users')" id="nav-users"
                     class="nav-item block px-6 py-3 cursor-pointer transition text-sm flex items-center gap-3">
                     <i class="fa-solid fa-users w-5"></i> Usuarios
@@ -121,34 +133,52 @@
 
         <div class="p-4 border-t border-blue-800">
             <button onclick="logout()"
-                class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded text-sm transition shadow">
-                <i class="fa-solid fa-sign-out-alt"></i> Salir
+                class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded text-sm transition shadow font-semibold">
+                <i class="fa-solid fa-sign-out-alt mr-2"></i> Salir
             </button>
         </div>
     </aside>
 
     <!-- ================= MAIN CONTENT ================= -->
     <main class="flex-1 flex flex-col relative h-full">
+        <!-- HEADER -->
         <header class="h-16 bg-white shadow flex items-center justify-between px-6 z-10">
-            <h2 id="page-title" class="text-xl font-bold text-gray-700">Dashboard</h2>
+            <div class="flex items-center gap-4">
+                <h2 id="page-title" class="text-xl font-bold text-gray-700">Dashboard</h2>
+
+                <!-- INDICADOR DE ESTADO LIS -->
+                <div id="lis-status-indicator"
+                    class="hidden flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border transition-colors duration-300"
+                    title="Estado de Conexión Base de Datos LIS">
+                    <span class="relative flex h-3 w-3">
+                        <span id="lis-ping"
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></span>
+                        <span id="lis-dot" class="relative inline-flex rounded-full h-3 w-3 bg-gray-500"></span>
+                    </span>
+                    <span id="lis-text">Verificando LIS...</span>
+                </div>
+            </div>
+
             <div class="flex items-center gap-3">
                 <div class="text-right hidden md:block">
                     <p class="text-sm font-bold text-gray-700" id="user-name-display">Cargando...</p>
                     <p class="text-xs text-blue-500 font-bold" id="user-role-display">...</p>
                 </div>
-                <div class="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                <div
+                    class="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 border border-blue-200">
                     <i class="fa-solid fa-user"></i>
                 </div>
             </div>
         </header>
 
-        <div class="flex-1 overflow-y-auto p-6 bg-gray-100 relative">
+        <!-- ÁREA DE CONTENIDO -->
+        <div class="flex-1 overflow-y-auto p-6 bg-gray-100 relative flex flex-col">
 
             <!-- 1. VISTA HOME -->
             <div id="view-home" class="view-section fade-in hidden">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <div
-                        class="bg-white p-6 rounded-lg shadow border-l-4 border-blue-500 flex justify-between items-center">
+                        class="bg-white p-6 rounded-lg shadow border-l-4 border-blue-500 flex justify-between items-center transition hover:shadow-md">
                         <div>
                             <p class="text-gray-500 text-xs uppercase font-bold">Total Reportes</p>
                             <h3 class="text-2xl font-bold text-gray-800" id="stat-total-reports">-</h3>
@@ -156,7 +186,7 @@
                         <i class="fa-solid fa-file-contract text-3xl text-blue-200"></i>
                     </div>
                     <div
-                        class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500 flex justify-between items-center">
+                        class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500 flex justify-between items-center transition hover:shadow-md">
                         <div>
                             <p class="text-gray-500 text-xs uppercase font-bold">Estado API</p>
                             <h3 class="text-2xl font-bold text-green-600">En Línea</h3>
@@ -177,9 +207,14 @@
                         <div class="relative h-64"><canvas id="chartActivity"></canvas></div>
                     </div>
                 </div>
+
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="font-bold text-gray-700 mb-4 border-b pb-2">Historial Reciente</h3>
+                    <div id="dashboard-history" class="text-sm text-gray-600">Cargando...</div>
+                </div>
             </div>
 
-            <!-- 2. VISTA GENERADOR (MEJORADA PARA COLA) -->
+            <!-- 2. VISTA GENERADOR -->
             <div id="view-generator" class="view-section fade-in hidden">
                 <div class="bg-white p-8 rounded-lg shadow max-w-3xl mx-auto">
                     <h3 class="text-lg font-bold mb-4 text-gray-700 border-b pb-2">Generar Nuevo Reporte</h3>
@@ -187,32 +222,31 @@
                     <div class="mb-5">
                         <label class="block text-sm font-bold text-gray-700 mb-1">Seleccione Reporte</label>
                         <select id="reportSelect" onchange="cargarFormularioDinamico()"
-                            class="w-full border p-2 rounded outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"></select>
+                            class="w-full border p-2 rounded outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 transition"></select>
                     </div>
 
                     <div id="dynamicForm" class="grid grid-cols-1 gap-4 mb-6"></div>
 
                     <div class="flex gap-4 mb-6">
                         <label
-                            class="flex-1 border p-3 rounded cursor-pointer hover:bg-gray-50 flex items-center gap-2">
-                            <input type="radio" name="formato" value="PDF" checked>
-                            <i class="fa-solid fa-file-pdf text-red-600"></i> <span class="font-medium">PDF
+                            class="flex-1 border p-3 rounded cursor-pointer hover:bg-gray-50 flex items-center gap-2 transition">
+                            <input type="radio" name="formato" value="PDF" checked> <i
+                                class="fa-solid fa-file-pdf text-red-600"></i> <span class="font-semibold">PDF
                                 (Adobe)</span>
                         </label>
                         <label
-                            class="flex-1 border p-3 rounded cursor-pointer hover:bg-gray-50 flex items-center gap-2">
-                            <input type="radio" name="formato" value="CSV">
-                            <i class="fa-solid fa-file-csv text-green-600"></i> <span class="font-medium">CSV
+                            class="flex-1 border p-3 rounded cursor-pointer hover:bg-gray-50 flex items-center gap-2 transition">
+                            <input type="radio" name="formato" value="CSV"> <i
+                                class="fa-solid fa-file-csv text-green-600"></i> <span class="font-semibold">CSV
                                 (Excel)</span>
                         </label>
                     </div>
 
                     <button onclick="generarReporte()"
-                        class="w-full bg-blue-700 text-white font-bold py-3 rounded hover:bg-blue-800 transition shadow-lg transform active:scale-95">
-                        <i class="fa-solid fa-play mr-2"></i> Agregar a Cola de Procesamiento
+                        class="w-full bg-blue-700 text-white font-bold py-3 rounded hover:bg-blue-800 transition shadow-lg transform active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-rocket"></i> Agregar a Cola
                     </button>
 
-                    <!-- BANDEJA DE COLA -->
                     <div class="mt-8 border-t pt-6">
                         <h4 class="font-bold text-gray-700 mb-4 flex items-center gap-2">
                             <i class="fa-solid fa-list-check"></i> Cola de Descargas
@@ -230,9 +264,8 @@
                                 </thead>
                                 <tbody id="downloads-body" class="divide-y divide-gray-100">
                                     <tr id="empty-queue-msg">
-                                        <td colspan="4" class="px-4 py-8 text-center text-gray-400 italic">
-                                            No hay reportes en la cola de esta sesión.
-                                        </td>
+                                        <td colspan="4" class="px-4 py-8 text-center text-gray-400 italic">No hay
+                                            reportes en la cola.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -246,7 +279,7 @@
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-lg font-bold text-gray-700">Gestión de Consultas SQL</h3>
                     <button onclick="abrirModalReporte()"
-                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow flex items-center gap-2 transition">
+                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow flex items-center gap-2 transition hover:-translate-y-0.5">
                         <i class="fa-solid fa-plus"></i> Nuevo Reporte
                     </button>
                 </div>
@@ -266,12 +299,49 @@
                 </div>
             </div>
 
-            <!-- 4. VISTA USUARIOS -->
+            <!-- 4. VISTA SCHEDULER -->
+            <div id="view-scheduler" class="view-section fade-in hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-700">Programador de Tareas (Cron)</h3>
+                        <p class="text-sm text-gray-500">Automatiza la generación y limpieza de reportes.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="cargarTablaScheduler()"
+                            class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-2 rounded shadow transition"
+                            title="Actualizar">
+                            <i class="fa-solid fa-rotate"></i>
+                        </button>
+                        <button onclick="abrirModalScheduler()"
+                            class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded shadow flex items-center gap-2 transition hover:-translate-y-0.5">
+                            <i class="fa-regular fa-clock"></i> Nueva Tarea
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-gray-100 text-gray-600 uppercase text-xs font-bold">
+                            <tr>
+                                <th class="px-6 py-3 border-b">Nombre / Tarea</th>
+                                <th class="px-6 py-3 border-b">Horario (CRON)</th>
+                                <th class="px-6 py-3 border-b">Días</th>
+                                <th class="px-6 py-3 border-b text-center">Runs</th>
+                                <th class="px-6 py-3 border-b text-center">Última Ejecución</th>
+                                <th class="px-6 py-3 border-b text-center">Estado</th>
+                                <th class="px-6 py-3 border-b text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scheduler-table-body" class="text-sm divide-y divide-gray-200"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 5. VISTA USUARIOS -->
             <div id="view-users" class="view-section fade-in hidden">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-lg font-bold text-gray-700">Gestión de Usuarios</h3>
                     <button onclick="abrirModalUsuario()"
-                        class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded shadow flex items-center gap-2 transition">
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded shadow flex items-center gap-2 transition hover:-translate-y-0.5">
                         <i class="fa-solid fa-user-plus"></i> Nuevo Usuario
                     </button>
                 </div>
@@ -292,7 +362,7 @@
                 </div>
             </div>
 
-            <!-- 5. VISTA CONFIGURACIÓN -->
+            <!-- 6. VISTA CONFIGURACIÓN -->
             <div id="view-settings" class="view-section fade-in hidden">
                 <div class="bg-white p-8 rounded-lg shadow max-w-4xl mx-auto">
                     <div class="flex justify-between items-center mb-6 border-b pb-4">
@@ -301,7 +371,7 @@
                             <p class="text-sm text-gray-500">Parámetros globales.</p>
                         </div>
                         <button onclick="guardarConfiguracion()"
-                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded shadow font-bold transition">
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded shadow font-bold transition hover:scale-105">
                             <i class="fa-solid fa-save mr-2"></i> Guardar Cambios
                         </button>
                     </div>
@@ -309,19 +379,38 @@
                 </div>
             </div>
 
-            <!-- 6. VISTA MONITOR -->
+            <!-- 7. VISTA MONITOR -->
             <div id="view-monitor" class="view-section fade-in hidden h-full">
                 <div class="bg-white p-2 rounded shadow h-full flex flex-col">
-                    <iframe src="http://localhost:5555" class="flex-1 w-full border-none rounded"></iframe>
+                    <iframe id="flower-frame" class="flex-1 w-full border-none rounded"></iframe>
                 </div>
             </div>
+
+            <!-- FOOTER -->
+            <footer class="mt-auto py-6 border-t border-gray-200 bg-white">
+                <div class="text-center">
+                    <p class="text-sm font-semibold text-gray-600">Desarrollado con precisión y diseño por <span
+                            class="text-blue-600">Juan D. Carmona</span></p>
+                    <div class="mt-2 space-x-4 text-xs">
+                        <a href="mailto:juan.carmona.valdes@gmail.com"
+                            class="text-gray-500 hover:text-blue-600 transition"><i
+                                class="fa-solid fa-envelope mr-1"></i>juan.carmona.valdes@gmail.com</a>
+                        <span class="text-gray-300">|</span>
+                        <a href="https://github.com/JDCarmona496" target="_blank"
+                            class="text-gray-500 hover:text-blue-600 transition"><i
+                                class="fa-brands fa-github mr-1"></i>GitHub: JDCarmona496</a>
+                    </div>
+                </div>
+            </footer>
 
         </div>
     </main>
 
-    <!-- MODALES (Reporte y Usuario - Código igual al anterior) -->
+    <!-- ================= MODALES ================= -->
+
+    <!-- MODAL REPORTE -->
     <div id="modal-reporte"
-        class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center p-4">
+        class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity">
         <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl transform transition-all scale-100">
             <div class="bg-blue-900 text-white p-4 rounded-t-xl flex justify-between items-center">
                 <h3 class="font-bold text-lg" id="modal-title">Configurar Reporte</h3>
@@ -331,7 +420,8 @@
             <div class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
                 <input type="hidden" id="edit-report-id">
                 <div><label class="block text-sm font-bold text-gray-700 mb-1">Título</label><input type="text"
-                        id="edit-title" class="w-full border p-2 rounded outline-none"></div>
+                        id="edit-title" class="w-full border p-2 rounded outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
                 <div class="bg-blue-50 p-3 rounded border border-blue-100">
                     <label class="block text-sm font-bold text-blue-800 mb-1">Diseño</label>
                     <select id="edit-layout" class="w-full border border-blue-300 p-2 rounded outline-none bg-white">
@@ -340,22 +430,26 @@
                     </select>
                 </div>
                 <div><label class="block text-sm font-bold text-gray-700 mb-1">SQL</label><textarea id="edit-query"
-                        rows="5" class="w-full border p-2 rounded font-mono text-sm bg-gray-50 outline-none"></textarea>
+                        rows="5"
+                        class="w-full border p-2 rounded font-mono text-sm bg-gray-50 outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                 </div>
                 <div><label class="block text-sm font-bold text-gray-700 mb-1">Params (JSON)</label><textarea
                         id="edit-params" rows="5"
-                        class="w-full border p-2 rounded font-mono text-xs bg-gray-50 outline-none"></textarea></div>
+                        class="w-full border p-2 rounded font-mono text-xs bg-gray-50 outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
             </div>
             <div class="p-4 border-t bg-gray-50 rounded-b-xl flex justify-end gap-3">
-                <button onclick="cerrarModal()" class="px-4 py-2 text-gray-600 rounded">Cancelar</button>
+                <button onclick="cerrarModal()"
+                    class="px-4 py-2 text-gray-600 rounded hover:bg-gray-100">Cancelar</button>
                 <button onclick="guardarReporte()"
-                    class="px-4 py-2 bg-blue-600 text-white rounded font-bold shadow">Guardar</button>
+                    class="px-4 py-2 bg-blue-600 text-white rounded font-bold shadow hover:bg-blue-700">Guardar</button>
             </div>
         </div>
     </div>
 
+    <!-- MODAL USUARIO -->
     <div id="modal-usuario"
-        class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center p-4">
+        class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white rounded-xl shadow-2xl w-full max-w-md transform transition-all scale-100">
             <div class="bg-indigo-900 text-white p-4 rounded-t-xl flex justify-between items-center">
                 <h3 class="font-bold text-lg" id="modal-user-title">Usuario</h3>
@@ -365,24 +459,111 @@
             <div class="p-6 space-y-4">
                 <input type="hidden" id="user-id">
                 <div><label class="block text-sm font-bold text-gray-700 mb-1">Nombre</label><input type="text"
-                        id="user-name" class="w-full border p-2 rounded outline-none"></div>
+                        id="user-name"
+                        class="w-full border p-2 rounded outline-none focus:ring-2 focus:ring-indigo-500"></div>
                 <div><label class="block text-sm font-bold text-gray-700 mb-1">Email</label><input type="email"
-                        id="user-email" class="w-full border p-2 rounded outline-none"></div>
+                        id="user-email"
+                        class="w-full border p-2 rounded outline-none focus:ring-2 focus:ring-indigo-500"></div>
                 <div><label class="block text-sm font-bold text-gray-700 mb-1">Pass</label><input type="password"
-                        id="user-pass" class="w-full border p-2 rounded outline-none" placeholder="••••••••">
+                        id="user-pass" class="w-full border p-2 rounded outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="••••••••">
                     <p class="text-xs text-gray-400 mt-1" id="pass-hint">Dejar vacío si no cambia.</p>
                 </div>
                 <div class="flex items-center justify-between pt-2">
-                    <label class="flex items-center gap-2"><input type="checkbox" id="user-active" checked><span
-                            class="text-sm">Activo</span></label>
-                    <label class="flex items-center gap-2"><input type="checkbox" id="user-superuser"><span
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="user-active"
+                            checked class="w-4 h-4 text-indigo-600 rounded"><span class="text-sm">Activo</span></label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="user-superuser"
+                            class="w-4 h-4 text-red-600 rounded"><span
                             class="text-sm font-bold text-red-600">Admin</span></label>
                 </div>
             </div>
             <div class="p-4 border-t bg-gray-50 rounded-b-xl flex justify-end gap-3">
-                <button onclick="cerrarModalUsuario()" class="px-4 py-2 text-gray-600 rounded">Cancelar</button>
+                <button onclick="cerrarModalUsuario()"
+                    class="px-4 py-2 text-gray-600 rounded hover:bg-gray-100">Cancelar</button>
                 <button onclick="guardarUsuario()"
-                    class="px-4 py-2 bg-indigo-600 text-white rounded font-bold shadow">Guardar</button>
+                    class="px-4 py-2 bg-indigo-600 text-white rounded font-bold shadow hover:bg-indigo-700">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL SCHEDULER (CORREGIDO PARA ADMITIR ASTERISCOS) -->
+    <div id="modal-scheduler"
+        class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl transform transition-all scale-100">
+            <div class="bg-purple-900 text-white p-4 rounded-t-xl flex justify-between items-center">
+                <h3 class="font-bold text-lg" id="modal-scheduler-title">Programar Tarea</h3>
+                <button onclick="cerrarModalScheduler()" class="hover:text-gray-300"><i
+                        class="fa-solid fa-times text-xl"></i></button>
+            </div>
+            <div class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
+                <input type="hidden" id="sch-id">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Nombre Tarea</label>
+                        <input type="text" id="sch-name"
+                            class="w-full border p-2 rounded outline-none focus:ring-2 focus:ring-purple-500"
+                            placeholder="Ej: Limpieza Diaria">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Ruta Función</label>
+                        <input type="text" id="sch-task"
+                            class="w-full border p-2 rounded outline-none text-sm font-mono text-gray-600 bg-gray-50"
+                            value="app.worker.generar_reporte_pesado_task" readonly>
+                    </div>
+                </div>
+
+                <div class="bg-purple-50 p-4 rounded border border-purple-100">
+                    <p class="text-xs font-bold text-purple-800 uppercase mb-2">Programación (Hora Colombia)</p>
+                    <div class="flex gap-4 items-center">
+                        <div>
+                            <label class="text-xs text-gray-500 block">Hora (0-23 o *)</label>
+                            <input type="text" id="sch-hour"
+                                class="w-20 border p-2 rounded text-center font-bold font-mono focus:ring-2 focus:ring-purple-500"
+                                value="*" placeholder="*">
+                        </div>
+                        <span class="text-xl font-bold text-gray-400">:</span>
+                        <div>
+                            <label class="text-xs text-gray-500 block">Minuto (0-59 o *)</label>
+                            <input type="text" id="sch-minute"
+                                class="w-20 border p-2 rounded text-center font-bold font-mono focus:ring-2 focus:ring-purple-500"
+                                value="*" placeholder="*">
+                        </div>
+                        <div class="flex-1 ml-4">
+                            <label class="text-xs text-gray-500 block">Días Semana (0-6, * = todos)</label>
+                            <input type="text" id="sch-days"
+                                class="w-full border p-2 rounded text-center font-mono focus:ring-2 focus:ring-purple-500"
+                                value="*" placeholder="Ej: 1,3,5 (Lun,Mie,Vie)">
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2">Nota: Usa <b>*</b> para "todos/cada". Ejemplo: Hora <b>*</b>
+                        Minuto <b>*</b> = Cada minuto.</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Argumentos (Args - JSON)</label>
+                    <textarea id="sch-args" rows="2"
+                        class="w-full border p-2 rounded font-mono text-xs bg-gray-50 outline-none focus:ring-2 focus:ring-purple-500"
+                        placeholder="[1, 5]"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Argumentos Clave (Kwargs - JSON)</label>
+                    <textarea id="sch-kwargs" rows="2"
+                        class="w-full border p-2 rounded font-mono text-xs bg-gray-50 outline-none focus:ring-2 focus:ring-purple-500"
+                        placeholder='{"formato": "PDF"}'></textarea>
+                </div>
+
+                <div class="flex items-center gap-2 pt-2">
+                    <input type="checkbox" id="sch-enabled" checked
+                        class="w-5 h-5 text-purple-600 rounded cursor-pointer">
+                    <span class="font-bold text-gray-700">Tarea Activa</span>
+                </div>
+            </div>
+            <div class="p-4 border-t bg-gray-50 rounded-b-xl flex justify-end gap-3">
+                <button onclick="cerrarModalScheduler()"
+                    class="px-4 py-2 text-gray-600 rounded hover:bg-gray-100">Cancelar</button>
+                <button onclick="guardarScheduler()"
+                    class="px-4 py-2 bg-purple-600 text-white rounded font-bold shadow hover:bg-purple-700">Guardar
+                    Programación</button>
             </div>
         </div>
     </div>
@@ -390,6 +571,43 @@
     <!-- SCRIPT DE INICIALIZACIÓN -->
     <script type="module" src="/static/js/app.js"></script>
 
+    <!-- SCRIPT DE MONITOREO DE CONEXIÓN -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const indicator = document.getElementById('lis-status-indicator');
+            const ping = document.getElementById('lis-ping');
+            const dot = document.getElementById('lis-dot');
+            const text = document.getElementById('lis-text');
+
+            if (!indicator) return;
+
+            function checkLIS() {
+                const token = localStorage.getItem('access_token');
+                if (!token) return;
+
+                fetch('/api/v1/system/health/lis', { headers: { 'Authorization': `Bearer ${token}` } })
+                    .then(r => r.json())
+                    .then(data => {
+                        indicator.classList.remove('hidden');
+                        if (data.status === 'ok') {
+                            indicator.className = "flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border border-green-200 bg-green-50 text-green-700";
+                            ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
+                            dot.className = "relative inline-flex rounded-full h-3 w-3 bg-green-500";
+                            text.innerText = "LIS Conectado";
+                        } else {
+                            indicator.className = "flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border border-red-200 bg-red-50 text-red-700";
+                            ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75";
+                            dot.className = "relative inline-flex rounded-full h-3 w-3 bg-red-500";
+                            text.innerText = "LIS Desconectado";
+                        }
+                    })
+                    .catch(e => console.error("Error ping LIS:", e));
+            }
+
+            checkLIS();
+            setInterval(checkLIS, 30000);
+        });
+    </script>
 </body>
 
 </html>

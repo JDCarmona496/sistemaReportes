@@ -1,6 +1,6 @@
 from typing import Any, List, Dict
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session  # type: ignore
 from pydantic import BaseModel
 
 from app.api import deps
@@ -71,27 +71,30 @@ def obtener_estado_tarea(task_id: str, current_user=Depends(deps.get_current_use
     }
 
 
-# --- LISTAR TODOS (Necesario para el dropdown del Operador) ---
+# --- LISTAR TODOS (Necesario para que el Operador vea el Dropdown) ---
 @router.get("/", response_model=List[report_schema.Report])
 def read_reports(
     db: Session = Depends(get_db),
     skip: int = 0,
     limit: int = 100,
-    current_user=Depends(deps.get_current_user),  # Acceso: Todos los logueados
+    # Se mantiene acceso general para poder listar en el Generador
+    current_user=Depends(deps.get_current_user),
 ):
-    reports = db.query(Report).offset(skip).limit(limit).all()
+    reports = db.query(Report).offset(skip).limit(limit).all() # type: ignore
     return reports
 
 
-# --- LEER UNO SOLO (Necesario para cargar el formulario dinámico) ---
+# --- LEER UNO SOLO (Necesario para pintar el formulario dinámico) ---
 @router.get("/{report_id}", response_model=report_schema.Report)
 def read_report(
     *,
     db: Session = Depends(get_db),
     report_id: int,
-    current_user=Depends(deps.get_current_user),  # Acceso: Todos los logueados
+    # Se mantiene acceso general
+    current_user=Depends(deps.get_current_user),
 ):
-    report = db.query(Report).filter(Report.id == report_id).first()
+    # type: ignore - Pylance se confunde con .first()
+    report = db.query(Report).filter(Report.id == report_id).first() # type: ignore - Pylance se confunde con .first()
     if not report:
         raise HTTPException(status_code=404, detail="Reporte no encontrado")
     return report
@@ -108,12 +111,13 @@ def create_report(
     *,
     db: Session = Depends(get_db),
     report_in: report_schema.ReportCreate,
-    # 🛡️ CAMBIO CRÍTICO: Solo Superuser
+    # 🛡️ CAMBIO DE SEGURIDAD: Solo Superuser
     current_user=Depends(deps.get_current_active_superuser),
 ):
     """
     Crea un nuevo reporte en la base de datos.
     """
+    # Convertimos el modelo Pydantic a Diccionario para SQLAlchemy
     report_data = report_in.dict()
     db_report = Report(**report_data)
 
@@ -130,13 +134,14 @@ def update_report(
     db: Session = Depends(get_db),
     report_id: int,
     report_in: report_schema.ReportUpdate,
-    # 🛡️ CAMBIO CRÍTICO: Solo Superuser
+    # 🛡️ CAMBIO DE SEGURIDAD: Solo Superuser
     current_user=Depends(deps.get_current_active_superuser),
 ):
     """
     Actualiza un reporte existente.
     """
-    report = db.query(Report).filter(Report.id == report_id).first()
+    # type: ignore - Pylance se confunde con .first()
+    report = db.query(Report).filter(Report.id == report_id).first() # type: ignore - Pylance se confunde con .first()
     if not report:
         raise HTTPException(status_code=404, detail="Reporte no encontrado")
 
@@ -157,13 +162,14 @@ def delete_report(
     *,
     db: Session = Depends(get_db),
     report_id: int,
-    # 🛡️ CAMBIO CRÍTICO: Solo Superuser
+    # 🛡️ CAMBIO DE SEGURIDAD: Solo Superuser
     current_user=Depends(deps.get_current_active_superuser),
 ):
     """
     Elimina un reporte de la base de datos.
     """
-    report = db.query(Report).filter(Report.id == report_id).first()
+    # type: ignore - Pylance se confunde con .first()
+    report = db.query(Report).filter(Report.id == report_id).first() # type: ignore - Pylance se confunde con .first()
     if not report:
         raise HTTPException(status_code=404, detail="Reporte no encontrado")
 

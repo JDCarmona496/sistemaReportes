@@ -1,6 +1,6 @@
 from typing import List, Dict
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session  # type: ignore
 from pydantic import BaseModel
 
 from app.api import deps
@@ -35,10 +35,10 @@ def update_settings(
     """
     count = 0
     for key, value in update_data.settings.items():
-        # type: ignore (Pylance se queja de la comparación de columnas)
-        setting = db.query(SystemSetting).filter(SystemSetting.key == key).first()
+        # type: ignore (Pylance se queja de la comparación de columnas y llamadas opcionales)
+        setting = db.query(SystemSetting).filter(SystemSetting.key == key).first()  # type: ignore
         if setting:
-            # CORRECCIÓN 2: Agregamos type: ignore para evitar el error de asignación
+            # CORRECCIÓN: Agregamos type: ignore para evitar el error de asignación de columna
             setting.value = value  # type: ignore
             count += 1
 
