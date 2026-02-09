@@ -146,16 +146,30 @@
             <div class="flex items-center gap-4">
                 <h2 id="page-title" class="text-xl font-bold text-gray-700">Dashboard</h2>
 
-                <!-- INDICADOR DE ESTADO LIS -->
-                <div id="lis-status-indicator"
-                    class="hidden flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border transition-colors duration-300"
-                    title="Estado de Conexión Base de Datos LIS">
-                    <span class="relative flex h-3 w-3">
-                        <span id="lis-ping"
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></span>
-                        <span id="lis-dot" class="relative inline-flex rounded-full h-3 w-3 bg-gray-500"></span>
-                    </span>
-                    <span id="lis-text">Verificando LIS...</span>
+                <!-- INDICADORES DE ESTADO (DUAL) -->
+                <div class="flex items-center gap-2">
+                    <!-- Biolab Ping -->
+                    <div id="status-biolab"
+                        class="flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold border transition-colors duration-300 opacity-50"
+                        title="Estado BIOLAB">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-gray-500"></span>
+                        </span>
+                        BL
+                    </div>
+                    <!-- Biosalud Ping -->
+                    <div id="status-biosalud"
+                        class="flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold border transition-colors duration-300 opacity-50"
+                        title="Estado BIOSALUD">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-gray-500"></span>
+                        </span>
+                        BS
+                    </div>
                 </div>
             </div>
 
@@ -171,7 +185,6 @@
             </div>
         </header>
 
-        <!-- ÁREA DE CONTENIDO -->
         <div class="flex-1 overflow-y-auto p-6 bg-gray-100 relative flex flex-col">
 
             <!-- 1. VISTA HOME -->
@@ -217,10 +230,35 @@
             <!-- 2. VISTA GENERADOR -->
             <div id="view-generator" class="view-section fade-in hidden">
                 <div class="bg-white p-8 rounded-lg shadow max-w-3xl mx-auto">
-                    <h3 class="text-lg font-bold mb-4 text-gray-700 border-b pb-2">Generar Nuevo Reporte</h3>
+                    <h3 class="text-lg font-bold mb-6 text-gray-700 border-b pb-2">Generar Nuevo Reporte</h3>
+
+                    <!-- SELECTOR DE SEDE -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">1. Seleccione Sede</label>
+                        <div class="flex gap-4">
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="sede" value="BIOLAB" checked class="peer hidden">
+                                <div
+                                    class="flex flex-col items-center justify-center p-3 border-2 rounded-lg bg-white peer-checked:border-blue-600 peer-checked:bg-blue-50 transition hover:bg-gray-50 text-center shadow-sm">
+                                    <i class="fa-solid fa-building text-2xl text-blue-600 mb-2"></i>
+                                    <span class="font-bold text-gray-800">BIOLAB</span>
+                                    <span class="text-xs text-gray-500">Sede Principal</span>
+                                </div>
+                            </label>
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="sede" value="BIOSALUD" class="peer hidden">
+                                <div
+                                    class="flex flex-col items-center justify-center p-3 border-2 rounded-lg bg-white peer-checked:border-purple-600 peer-checked:bg-purple-50 transition hover:bg-gray-50 text-center shadow-sm">
+                                    <i class="fa-solid fa-hospital text-2xl text-purple-600 mb-2"></i>
+                                    <span class="font-bold text-gray-800">BIOSALUD</span>
+                                    <span class="text-xs text-gray-500">Sede Norte</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
 
                     <div class="mb-5">
-                        <label class="block text-sm font-bold text-gray-700 mb-1">Seleccione Reporte</label>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">2. Seleccione Reporte</label>
                         <select id="reportSelect" onchange="cargarFormularioDinamico()"
                             class="w-full border p-2 rounded outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 transition"></select>
                     </div>
@@ -229,13 +267,13 @@
 
                     <div class="flex gap-4 mb-6">
                         <label
-                            class="flex-1 border p-3 rounded cursor-pointer hover:bg-gray-50 flex items-center gap-2 transition">
+                            class="flex-1 border p-3 rounded cursor-pointer hover:bg-gray-50 flex items-center gap-2 transition bg-white">
                             <input type="radio" name="formato" value="PDF" checked> <i
                                 class="fa-solid fa-file-pdf text-red-600"></i> <span class="font-semibold">PDF
                                 (Adobe)</span>
                         </label>
                         <label
-                            class="flex-1 border p-3 rounded cursor-pointer hover:bg-gray-50 flex items-center gap-2 transition">
+                            class="flex-1 border p-3 rounded cursor-pointer hover:bg-gray-50 flex items-center gap-2 transition bg-white">
                             <input type="radio" name="formato" value="CSV"> <i
                                 class="fa-solid fa-file-csv text-green-600"></i> <span class="font-semibold">CSV
                                 (Excel)</span>
@@ -257,14 +295,14 @@
                                 <thead class="bg-gray-100 text-gray-600 font-bold uppercase text-xs">
                                     <tr>
                                         <th class="px-4 py-3">Reporte</th>
-                                        <th class="px-4 py-3">Formato</th>
+                                        <th class="px-4 py-3">Sede</th> <!-- NUEVO HEADER -->
                                         <th class="px-4 py-3">Estado</th>
                                         <th class="px-4 py-3 text-right">Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody id="downloads-body" class="divide-y divide-gray-100">
                                     <tr id="empty-queue-msg">
-                                        <td colspan="4" class="px-4 py-8 text-center text-gray-400 italic">No hay
+                                        <td colspan="5" class="px-4 py-8 text-center text-gray-400 italic">No hay
                                             reportes en la cola.</td>
                                     </tr>
                                 </tbody>
@@ -486,7 +524,7 @@
         </div>
     </div>
 
-    <!-- MODAL SCHEDULER (CORREGIDO PARA ADMITIR ASTERISCOS) -->
+    <!-- MODAL SCHEDULER -->
     <div id="modal-scheduler"
         class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl transform transition-all scale-100">
@@ -574,38 +612,65 @@
     <!-- SCRIPT DE MONITOREO DE CONEXIÓN -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const indicator = document.getElementById('lis-status-indicator');
-            const ping = document.getElementById('lis-ping');
-            const dot = document.getElementById('lis-dot');
-            const text = document.getElementById('lis-text');
+            console.log("🩺 Iniciando monitor de salud LIS...");
 
-            if (!indicator) return;
+            const statusBiolab = document.getElementById('status-biolab');
+            const statusBiosalud = document.getElementById('status-biosalud');
 
-            function checkLIS() {
-                const token = localStorage.getItem('access_token');
-                if (!token) return;
-
-                fetch('/api/v1/system/health/lis', { headers: { 'Authorization': `Bearer ${token}` } })
-                    .then(r => r.json())
-                    .then(data => {
-                        indicator.classList.remove('hidden');
-                        if (data.status === 'ok') {
-                            indicator.className = "flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border border-green-200 bg-green-50 text-green-700";
-                            ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
-                            dot.className = "relative inline-flex rounded-full h-3 w-3 bg-green-500";
-                            text.innerText = "LIS Conectado";
-                        } else {
-                            indicator.className = "flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border border-red-200 bg-red-50 text-red-700";
-                            ping.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75";
-                            dot.className = "relative inline-flex rounded-full h-3 w-3 bg-red-500";
-                            text.innerText = "LIS Desconectado";
-                        }
-                    })
-                    .catch(e => console.error("Error ping LIS:", e));
+            if (!statusBiolab || !statusBiosalud) {
+                console.error("❌ No se encontraron los elementos HTML de estado (status-biolab/biosalud)");
+                return;
             }
 
-            checkLIS();
-            setInterval(checkLIS, 30000);
+            function updateStatus(element, online) {
+                console.log(`Actualizando estado ${element.id}: ${online ? 'ONLINE' : 'OFFLINE'}`);
+                if (online) {
+                    element.classList.remove('opacity-50', 'bg-gray-50', 'text-gray-500', 'bg-red-50', 'text-red-700', 'border-red-200');
+                    element.classList.add('bg-green-50', 'text-green-700', 'border-green-200');
+                    element.querySelector('span span:last-child').className = "relative inline-flex rounded-full h-2 w-2 bg-green-500";
+                    element.querySelector('span span:first-child').className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
+                } else {
+                    element.classList.remove('opacity-50', 'bg-gray-50', 'text-gray-500', 'bg-green-50', 'text-green-700', 'border-green-200');
+                    element.classList.add('bg-red-50', 'text-red-700', 'border-red-200');
+                    element.querySelector('span span:last-child').className = "relative inline-flex rounded-full h-2 w-2 bg-red-500";
+                    element.querySelector('span span:first-child').className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75";
+                }
+            }
+
+            function checkAll() {
+                const token = localStorage.getItem('access_token');
+                if (!token) {
+                    console.warn("⚠️ No hay token, saltando chequeo de salud.");
+                    return;
+                }
+
+                // Ping Biolab
+                fetch('/api/v1/system/health/lis?sede=BIOLAB', { headers: { 'Authorization': `Bearer ${token}` } })
+                    .then(r => {
+                        if (!r.ok) throw new Error(`Status ${r.status}`);
+                        return r.json();
+                    })
+                    .then(d => updateStatus(statusBiolab, d.status === 'ok'))
+                    .catch(e => {
+                        console.error("Fallo ping BIOLAB:", e);
+                        updateStatus(statusBiolab, false);
+                    });
+
+                // Ping Biosalud
+                fetch('/api/v1/system/health/lis?sede=BIOSALUD', { headers: { 'Authorization': `Bearer ${token}` } })
+                    .then(r => {
+                        if (!r.ok) throw new Error(`Status ${r.status}`);
+                        return r.json();
+                    })
+                    .then(d => updateStatus(statusBiosalud, d.status === 'ok'))
+                    .catch(e => {
+                        console.error("Fallo ping BIOSALUD:", e);
+                        updateStatus(statusBiosalud, false);
+                    });
+            }
+
+            checkAll();
+            setInterval(checkAll, 30000); // 30 segundos
         });
     </script>
 </body>

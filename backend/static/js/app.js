@@ -9,7 +9,7 @@ import { initReports } from "./modules/reports.js";
 import { initUsers } from "./modules/users.js";
 import { initSettings } from "./modules/settings.js";
 import { initMonitor } from "./modules/monitor.js";
-import { initScheduler } from "./modules/scheduler.js";
+import { initScheduler } from "./modules/scheduler.js"; // <--- Nuevo Módulo
 
 // 3. Exponer funciones GLOBALES para el HTML
 // (Necesario porque los módulos son privados por defecto, pero el HTML usa onclick="...")
@@ -24,7 +24,7 @@ initReports();
 initUsers();
 initSettings();
 initMonitor();
-initScheduler();
+initScheduler(); // <--- Iniciar Scheduler
 
 // 5. Lógica de Arranque
 document.addEventListener("DOMContentLoaded", () => {

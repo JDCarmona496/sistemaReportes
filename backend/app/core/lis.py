@@ -10,80 +10,85 @@ load_dotenv()
 
 logger = logging.getLogger(__name__)
 
-LIS_CONFIG = {
-    "host": os.getenv("LIS_HOST", "localhost"),
-    "database": os.getenv("LIS_DB", "WINSISLAB"),
-    "user": os.getenv("LIS_USER", "postgres"),
-    "password": os.getenv("LIS_PASSWORD", ""),
-    "port": os.getenv("LIS_PORT", "5432"),
-    "connect_timeout": 10,
-}
 
-
-# --- NUEVA FUNCIÓN: Verificar Estado ---
-def verificar_conexion_lis():
+def get_lis_config(sede: str):
     """
-    Intenta hacer un 'Ping' a la base de datos externa.
-    Retorna: (bool, str) -> (Exito, Mensaje/Latencia)
+    Construye la configuración de conexión dinámicamente según la sede.
+    """
+    prefix = f"LIS_{sede.upper()}_"
+
+    return {
+        "host": os.getenv(f"{prefix}HOST"),
+        "database": os.getenv(f"{prefix}DB"),
+        "user": os.getenv(f"{prefix}USER"),
+        "password": os.getenv(f"{prefix}PASSWORD"),
+        "port": os.getenv(f"{prefix}PORT", "5432"),
+        "connect_timeout": 10,
+    }
+
+
+# --- FUNCIÓN DE SALUD (PING) ---
+def verificar_conexion_lis(sede: str = "BIOLAB"):
+    """
+    Intenta hacer un 'Ping' rápido a la base de datos.
+    Retorna: (bool, str) -> (Online?, Mensaje)
     """
     conn = None
     try:
-        # Hacemos una copia de la config para bajar el timeout solo para esta prueba
-        # Si la VPN está caída, no queremos esperar 10s, queremos saberlo YA (2s).
-        ping_config = LIS_CONFIG.copy()
+        config = get_lis_config(sede)
+
+        # Si no hay configuración IP, fallamos rápido
+        if not config["host"]:
+            return False, f"Sin config para {sede}"
+
+        # Timeout agresivo (2s) para no bloquear el dashboard
+        ping_config = config.copy()
         ping_config["connect_timeout"] = 2
 
         conn = psycopg2.connect(**ping_config)
         cursor = conn.cursor()
-        cursor.execute("SELECT 1")  # Consulta más ligera posible
+        cursor.execute("SELECT 1")  # La consulta más liviana posible
         conn.close()
 
-        return True, "En Línea"
-    except psycopg2.OperationalError as e:
-        return False, "Sin Conexión (VPN/Red)"
+        return True, "Online"
     except Exception as e:
-        return False, f"Error: {str(e)}"
+        return False, str(e)
     finally:
         if conn and not conn.closed:
             conn.close()
 
 
-# ... (Tu función ejecutar_consulta_lis sigue igual abajo) ...
-def ejecutar_consulta_lis(sql_query: str, params: Any = None):
+def ejecutar_consulta_lis(sql_query: str, params: Any = None, sede: str = "BIOLAB"):
     """
-    Se conecta al LIS, ejecuta una consulta y devuelve una lista de diccionarios.
-    Maneja la apertura y cierre de conexión automáticamente.
-    Traduce sintaxis :param a %(param)s para compatibilidad con Psycopg2.
+    Ejecuta consulta en la sede especificada.
     """
     connection = None
     cursor = None
+    db_config = get_lis_config(sede)
+
     try:
-        connection = psycopg2.connect(**LIS_CONFIG)
+        if not db_config["host"]:
+            raise ValueError(f"Configuración no encontrada para {sede}")
+
+        logger.info(f"🔌 Conectando a sede: {sede} ({db_config['host']})")
+        connection = psycopg2.connect(**db_config)
         cursor = connection.cursor(cursor_factory=RealDictCursor)
 
         if params and isinstance(params, dict):
             sql_query = re.sub(r":([a-zA-Z0-9_]+)", r"%(\1)s", sql_query)
-
-        if params and isinstance(params, dict):
             for k, v in params.items():
                 if isinstance(v, list):
                     params[k] = tuple(v)
-
-        if params:
-            logger.info(f"🔌 Ejecutando query en LIS: {sql_query}")
-            logger.info(f"🔌 Params: {params}")
-        else:
-            logger.info(f"🔌 Ejecutando query simple en LIS...")
 
         cursor.execute(sql_query, params)
         resultados = cursor.fetchall()
         datos_limpios = [dict(row) for row in resultados]
 
-        logger.info(f"✅ Se obtuvieron {len(datos_limpios)} filas del LIS.")
+        logger.info(f"✅ [{sede}] Se obtuvieron {len(datos_limpios)} filas.")
         return datos_limpios
 
     except Exception as e:
-        logger.error(f"❌ Error consultando el LIS: {e}")
+        logger.error(f"❌ Error consultando LIS ({sede}): {e}")
         raise e
 
     finally:

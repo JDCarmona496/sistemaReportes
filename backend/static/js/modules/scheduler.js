@@ -22,6 +22,7 @@ function cargarTablaScheduler() {
   fetch(`${API_URL}/scheduler/`, { headers: authHeaders() })
     .then((res) => {
       if (res.status === 403) throw new Error("Acceso denegado");
+      if (!res.ok) throw new Error("Error al cargar tareas");
       return res.json();
     })
     .then((tasks) => {
@@ -35,7 +36,8 @@ function cargarTablaScheduler() {
       }
 
       tasks.forEach((t) => {
-        // Manejamos el asterisco (*) para que no se le agregue un '0' delante
+        // --- CORRECCIÓN VISUAL: Formatear CRON ---
+        // Evita que '*' se muestre como '0*'
         const formatTime = (val) =>
           val === "*" ? "*" : val.toString().padStart(2, "0");
 
@@ -65,30 +67,31 @@ function cargarTablaScheduler() {
         tr.className =
           "hover:bg-gray-50 border-b last:border-0 transition-colors";
         tr.innerHTML = `
-                <td class="px-6 py-4 font-medium text-gray-900">
-                    ${t.name}
-                    <div class="text-xs text-gray-400 font-mono mt-1">${t.task.split(".").pop()}</div>
-                </td>
-                <td class="px-6 py-4 text-blue-600 font-bold font-mono">
-                    <i class="fa-regular fa-clock mr-1"></i> ${cronText}
-                </td>
-                <td class="px-6 py-4 text-sm text-gray-600">${dias}</td>
-                <td class="px-6 py-4 text-center text-xs font-mono bg-gray-50 rounded">${t.total_run_count}</td>
-                <td class="px-6 py-4 text-center ${lastRunClass}">${lastRun}</td>
-                <td class="px-6 py-4 text-center">${estadoBadge}</td>
-                <td class="px-6 py-4 text-right space-x-2">
-                    <button onclick='editarScheduler(${t.id})' class="text-indigo-600 hover:text-indigo-900 transition p-2 rounded hover:bg-indigo-50" title="Editar">
-                        <i class="fa-solid fa-pen-to-square text-lg"></i>
-                    </button>
-                    <button onclick="eliminarScheduler(${t.id})" class="text-red-600 hover:text-red-900 transition p-2 rounded hover:bg-red-50" title="Eliminar">
-                        <i class="fa-solid fa-trash text-lg"></i>
-                    </button>
-                </td>
-            `;
+                    <td class="px-6 py-4 font-medium text-gray-900">
+                        ${t.name}
+                        <div class="text-xs text-gray-400 font-mono mt-1">${t.task.split(".").pop()}</div>
+                    </td>
+                    <td class="px-6 py-4 text-blue-600 font-bold font-mono">
+                        <i class="fa-regular fa-clock mr-1"></i> ${cronText}
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600">${dias}</td>
+                    <td class="px-6 py-4 text-center text-xs font-mono bg-gray-50 rounded">${t.total_run_count}</td>
+                    <td class="px-6 py-4 text-center ${lastRunClass}">${lastRun}</td>
+                    <td class="px-6 py-4 text-center">${estadoBadge}</td>
+                    <td class="px-6 py-4 text-right space-x-2">
+                        <button onclick='editarScheduler(${t.id})' class="text-indigo-600 hover:text-indigo-900 transition p-2 rounded hover:bg-indigo-50" title="Editar">
+                            <i class="fa-solid fa-pen-to-square text-lg"></i>
+                        </button>
+                        <button onclick="eliminarScheduler(${t.id})" class="text-red-600 hover:text-red-900 transition p-2 rounded hover:bg-red-50" title="Eliminar">
+                            <i class="fa-solid fa-trash text-lg"></i>
+                        </button>
+                    </td>
+                `;
         tbody.appendChild(tr);
       });
     })
     .catch((err) => {
+      console.error(err);
       tbody.innerHTML = `<tr><td colspan="6" class="text-center text-red-500 py-4"><i class="fa-solid fa-triangle-exclamation mr-2"></i>${err.message}</td></tr>`;
     });
 }
@@ -135,7 +138,7 @@ function editarScheduler(id) {
   document.getElementById("sch-kwargs").value = JSON.stringify(t.kwargs);
   document.getElementById("sch-enabled").checked = t.enabled;
 
-  // Cargar CRON (Ahora acepta texto/asteriscos)
+  // Cargar CRON
   document.getElementById("sch-hour").value = t.crontab_hour;
   document.getElementById("sch-minute").value = t.crontab_minute;
   document.getElementById("sch-days").value = t.crontab_day_of_week;
@@ -148,7 +151,7 @@ async function guardarScheduler() {
   const taskName = document.getElementById("sch-task").value;
   const enabled = document.getElementById("sch-enabled").checked;
 
-  // Recolectar CRON (Texto para permitir *)
+  // Recolectar CRON
   const hour = document.getElementById("sch-hour").value;
   const minute = document.getElementById("sch-minute").value;
   const days = document.getElementById("sch-days").value;
@@ -172,8 +175,8 @@ async function guardarScheduler() {
       crontab_hour: hour,
       crontab_minute: minute,
       crontab_day_of_week: days,
-      crontab_day_of_month: "*", // Default
-      crontab_month_of_year: "*", // Default
+      crontab_day_of_month: "*",
+      crontab_month_of_year: "*",
     };
 
     const method = id ? "PUT" : "POST";

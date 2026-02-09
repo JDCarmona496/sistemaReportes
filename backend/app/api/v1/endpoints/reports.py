@@ -20,6 +20,8 @@ class ReporteRequest(BaseModel):
     reporte_id: int
     params: Dict[str, Any]
     formato: str = "PDF"
+    # --- CAMBIO CRÍTICO: Agregamos la sede para soportar Multi-Tenancy ---
+    sede: str = "BIOLAB"
 
 
 # =========================================================
@@ -35,19 +37,25 @@ def iniciar_generacion_reporte(
 ):
     """
     Recibe la orden del Frontend y se la pasa al Worker.
+    Soporta selección de Sede (BIOLAB / BIOSALUD).
     """
     usuario_real_id = current_user.id
 
     print(
-        f"🔒 Solicitud autenticada. Usuario: {current_user.email} (ID: {usuario_real_id})"
+        f"🔒 Solicitud autenticada. Usuario: {current_user.email} (ID: {usuario_real_id}) -> Sede: {request.sede}"
     )
 
+    # Pasamos la SEDE al worker para que elija la BD correcta
     task = generar_reporte_pesado_task.delay(
-        usuario_real_id, request.reporte_id, request.params, request.formato
+        usuario_real_id,
+        request.reporte_id,
+        request.params,
+        request.formato,
+        request.sede,  # <--- AQUÍ SE PASA EL DATO DE LA SEDE
     )
 
     return {
-        "mensaje": "La generación del reporte ha comenzado en segundo plano.",
+        "mensaje": f"Procesando reporte en sede {request.sede}...",
         "task_id": task.id,
         "estado": "Procesando en Celery ⏳",
     }
@@ -62,7 +70,11 @@ def obtener_estado_tarea(task_id: str, current_user=Depends(deps.get_current_use
     resultado = celery_app.AsyncResult(task_id)
 
     if resultado.state == "FAILURE":
-        return {"task_id": task_id, "estado": "FAILURE", "error": str(resultado.result)}
+        return {
+            "task_id": task_id,
+            "estado": "FAILURE",
+            "error": str(resultado.result),
+        }
 
     return {
         "task_id": task_id,
@@ -80,7 +92,8 @@ def read_reports(
     # Se mantiene acceso general para poder listar en el Generador
     current_user=Depends(deps.get_current_user),
 ):
-    reports = db.query(Report).offset(skip).limit(limit).all() # type: ignore
+    # type: ignore
+    reports = db.query(Report).offset(skip).limit(limit).all()
     return reports
 
 
@@ -94,7 +107,7 @@ def read_report(
     current_user=Depends(deps.get_current_user),
 ):
     # type: ignore - Pylance se confunde con .first()
-    report = db.query(Report).filter(Report.id == report_id).first() # type: ignore - Pylance se confunde con .first()
+    report = db.query(Report).filter(Report.id == report_id).first()
     if not report:
         raise HTTPException(status_code=404, detail="Reporte no encontrado")
     return report
@@ -141,7 +154,7 @@ def update_report(
     Actualiza un reporte existente.
     """
     # type: ignore - Pylance se confunde con .first()
-    report = db.query(Report).filter(Report.id == report_id).first() # type: ignore - Pylance se confunde con .first()
+    report = db.query(Report).filter(Report.id == report_id).first()
     if not report:
         raise HTTPException(status_code=404, detail="Reporte no encontrado")
 
@@ -169,7 +182,7 @@ def delete_report(
     Elimina un reporte de la base de datos.
     """
     # type: ignore - Pylance se confunde con .first()
-    report = db.query(Report).filter(Report.id == report_id).first() # type: ignore - Pylance se confunde con .first()
+    report = db.query(Report).filter(Report.id == report_id).first()
     if not report:
         raise HTTPException(status_code=404, detail="Reporte no encontrado")
 
