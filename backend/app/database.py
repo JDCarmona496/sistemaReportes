@@ -20,3 +20,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+import app.models  # noqa: F401, E402 — registra modelos en Base.metadata
+Base.metadata.create_all(bind=engine)

@@ -1,0 +1,139 @@
+2026-05-27 13:00:04,649 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 2.00 seconds... (1/100)
+
+2026-05-27 13:00:08,698 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 4.00 seconds... (2/100)
+
+2026-05-27 13:00:14,743 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 6.00 seconds... (3/100)
+
+2026-05-27 13:00:22,794 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 8.00 seconds... (4/100)
+
+2026-05-27 13:00:32,831 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 10.00 seconds... (5/100)
+
+2026-05-27 13:00:44,886 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 12.00 seconds... (6/100)
+
+2026-05-27 13:00:58,936 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 14.00 seconds... (7/100)
+
+2026-05-27 13:01:14,967 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 16.00 seconds... (8/100)
+
+2026-05-27 13:01:33,018 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 18.00 seconds... (9/100)
+
+2026-05-27 13:01:53,058 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 20.00 seconds... (10/100)
+
+2026-05-27 13:02:15,119 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 22.00 seconds... (11/100)
+
+2026-05-27 13:02:39,209 - celery.worker.consumer.consumer - ERROR - consumer: Cannot connect to redis://localhost:6379/0: Error 10061 connecting to localhost:6379. No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión..
+Trying again in 24.00 seconds... (12/100)
+
+2026-05-27 13:03:03,236 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-05-27 13:03:03,241 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-05-27 13:03:04,279 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-05-27 13:03:04,312 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-05-27 13:11:32,079 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-05-27 13:11:32,090 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-05-27 13:11:33,123 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-05-27 13:11:33,144 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-05-27 13:32:20,875 - celery.beat - INFO - beat: Starting...
+2026-05-27 13:32:20,883 - celery_sqlalchemy_scheduler.schedulers - INFO - setup_schedule
+2026-05-27 13:32:20,884 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 13:32:22,624 - celery_sqlalchemy_scheduler.schedulers - ERROR - Cannot add entry 'celery.backend_cleanup' to database schedule: AttributeError("'zoneinfo.ZoneInfo' object has no attribute 'zone'"). Contents: {'task': 'celery.backend_cleanup', 'schedule': <crontab: 0 4 * * * (m/h/dM/MY/d)>, 'options': {'expires': 43200}}
+
+2026-05-27 13:32:23,059 - celery.beat - INFO - Scheduler: Sending due task Mantenimiento: Limpieza Archivos (app.worker.limpiar_reportes_antiguos_task)
+2026-05-27 13:32:23,114 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 13:32:23,116 - celery.worker.consumer.consumer - ERROR - Received unregistered task of type 'app.worker.limpiar_reportes_antiguos_task'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+https://docs.celeryq.dev/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+b'[[], {}, {"callbacks": null, "errbacks": null, "chain": null, "chord": null}]' (77b)
+
+The full contents of the message headers:
+{'lang': 'py', 'task': 'app.worker.limpiar_reportes_antiguos_task', 'id': 'b2ca8b2c-9edd-4225-a0df-f6e86e03500f', 'shadow': None, 'eta': None, 'expires': None, 'group': None, 'group_index': None, 'retries': 0, 'timelimit': [None, None], 'root_id': 'b2ca8b2c-9edd-4225-a0df-f6e86e03500f', 'parent_id': None, 'argsrepr': '()', 'kwargsrepr': '{}', 'origin': 'gen4552@ASUSF15', 'ignore_result': False, 'replaced_task_nesting': 0, 'stamped_headers': None, 'stamps': {}}
+
+The delivery info for this task is:
+{'exchange': '', 'routing_key': 'celery'}
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 668, in on_task_received
+    strategy = strategies[type_]
+               ~~~~~~~~~~^^^^^^^
+KeyError: 'app.worker.limpiar_reportes_antiguos_task'
+2026-05-27 13:32:42,068 - celery.worker.consumer.connection - INFO - Connected to redis://localhost:6379/0
+2026-05-27 13:32:42,074 - celery.worker.consumer.mingle - INFO - mingle: searching for neighbors
+2026-05-27 13:32:43,120 - celery.worker.consumer.mingle - INFO - mingle: all alone
+2026-05-27 13:32:43,156 - celery.apps.worker - INFO - celery@ASUSF15 ready.
+2026-05-27 13:35:25,494 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 13:38:27,935 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 13:41:31,558 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 13:44:34,742 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 13:47:37,348 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 13:50:39,903 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 13:53:43,101 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 13:56:46,064 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 13:59:48,528 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 14:02:50,586 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 14:05:53,456 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 14:08:55,961 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 14:10:07,157 - celery.worker.consumer.consumer - ERROR - Received unregistered task of type 'app.worker.generar_reporte_pesado_task'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+https://docs.celeryq.dev/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+b'[[5, 3, {"lista_pacientes": ["80007070", "80007071", "80007075", "80007072"], "ultimo_id": "0"}, "PDF", "BIOLAB"], {}, {"callbacks": null, "errbacks": null, "chain": null, "chord": null}]' (187b)
+
+The full contents of the message headers:
+{'lang': 'py', 'task': 'app.worker.generar_reporte_pesado_task', 'id': '71ad2b9d-e632-43b7-b535-1cb3de296c87', 'shadow': None, 'eta': None, 'expires': None, 'group': None, 'group_index': None, 'retries': 0, 'timelimit': [None, None], 'root_id': '71ad2b9d-e632-43b7-b535-1cb3de296c87', 'parent_id': None, 'argsrepr': "(5, 3, {'lista_pacientes': ['80007070', '80007071', '80007075', '80007072'], 'ultimo_id': '0'}, 'PDF', 'BIOLAB')", 'kwargsrepr': '{}', 'origin': 'gen21668@ASUSF15', 'ignore_result': False, 'replaced_task_nesting': 0, 'stamped_headers': None, 'stamps': {}}
+
+The delivery info for this task is:
+{'exchange': '', 'routing_key': 'celery'}
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 668, in on_task_received
+    strategy = strategies[type_]
+               ~~~~~~~~~~^^^^^^^
+KeyError: 'app.worker.generar_reporte_pesado_task'
+2026-05-27 14:11:58,298 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 14:13:38,765 - celery.worker.consumer.consumer - ERROR - Received unregistered task of type 'app.worker.generar_reporte_pesado_task'.
+The message has been ignored and discarded.
+
+Did you remember to import the module containing this task?
+Or maybe you're using relative imports?
+
+Please see
+https://docs.celeryq.dev/en/latest/internals/protocol.html
+for more information.
+
+The full contents of the message body was:
+b'[[5, 3, {"lista_pacientes": ["80007070"], "ultimo_id": "0"}, "PDF", "BIOLAB"], {}, {"callbacks": null, "errbacks": null, "chain": null, "chord": null}]' (151b)
+
+The full contents of the message headers:
+{'lang': 'py', 'task': 'app.worker.generar_reporte_pesado_task', 'id': '129eab68-5e10-41d8-a15e-58c6612e1a52', 'shadow': None, 'eta': None, 'expires': None, 'group': None, 'group_index': None, 'retries': 0, 'timelimit': [None, None], 'root_id': '129eab68-5e10-41d8-a15e-58c6612e1a52', 'parent_id': None, 'argsrepr': "(5, 3, {'lista_pacientes': ['80007070'], 'ultimo_id': '0'}, 'PDF', 'BIOLAB')", 'kwargsrepr': '{}', 'origin': 'gen21668@ASUSF15', 'ignore_result': False, 'replaced_task_nesting': 0, 'stamped_headers': None, 'stamps': {}}
+
+The delivery info for this task is:
+{'exchange': '', 'routing_key': 'celery'}
+Traceback (most recent call last):
+  File "D:\Trabajo\BIOLAB\desarrollo\sistemaReportes\backend\venv\Lib\site-packages\celery\worker\consumer\consumer.py", line 668, in on_task_received
+    strategy = strategies[type_]
+               ~~~~~~~~~~^^^^^^^
+KeyError: 'app.worker.generar_reporte_pesado_task'
+2026-05-27 14:15:00,622 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...
+2026-05-27 14:18:03,256 - celery_sqlalchemy_scheduler.schedulers - INFO - Writing entries...

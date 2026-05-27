@@ -47,7 +47,7 @@
         async function login() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            const API_URL = "http://127.0.0.1:8000/api/v1";
+            const API_URL = "http://localhost:8000/api/v1";
 
             const formData = new URLSearchParams();
             formData.append('username', email);
